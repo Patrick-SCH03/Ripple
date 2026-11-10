@@ -1,0 +1,80 @@
+# 엑셀 열 매핑 보정 산출물 column-v2 — 형식: ripple/contracts/decision.py, 설계: docs/input.md(엑셀 양식) 4절
+# scripts/calibrate_columns.py가 만든다(손으로 고치지 않는다). 목표값(targets)은 decision_v0.yaml과 같다.
+# 합성 변형 엑셀 기준 보정. 자료 해시(학습·온도·τ·집합): COL-cf295ea9a16daa41, COL-5f108ce3d3c99ab2, COL-31c1f69c9ebc436c, COL-1716dc8b3f742fc0
+version: column-v2
+updated: '2026-10-24'
+targets:
+  alpha: 0.05
+  delta: 0.1
+  epsilon:
+    request: 0.03
+    column: 0.03
+    intent: 0.03
+  max_choices: 7
+  coverage_levels:
+  - 0.2
+  - 0.3
+  - 0.4
+  - 0.5
+  - 0.55
+  - 0.6
+  - 0.65
+  - 0.7
+  - 0.75
+  - 0.8
+  - 0.85
+  - 0.9
+  - 0.95
+scorers:
+- topic: excel_column
+  backend: local
+  weights:
+    bigram: 2.510871
+    contains: 0.760228
+    dict: 1.004965
+    empty: 0.280687
+    id_word: 0.497142
+    id_word_other: -1.311362
+    integral: -0.066199
+    none: 1.735155
+    none_best: -1.204189
+    none_empty: -0.280687
+    none_memo: 3.047582
+    none_seq: 2.911638
+    parse:bool: -0.074887
+    parse:code: 1.43132
+    parse:date: 1.136975
+    parse:float: 0.274962
+    parse:int: -0.066085
+    parse:list: -0.47355
+    parse:text: -1.160772
+    parse_all: 1.175437
+    parse_fail: -2.676695
+    pk_unique: -0.52693
+    range_out: -1.445035
+    ratio: 3.41433
+    ref_cover: 1.780827
+    ref_miss: -1.036818
+    shape_fit: 0.905712
+    shape_miss: -2.327789
+    text_numeric: -2.418044
+    token: 1.486495
+    unit_absent: -0.750304
+    unit_conflict: -1.014181
+    unit_same: 1.632714
+  n_train: 1057
+  train_split: COL-cf295ea9a16daa41
+topics:
+- topic: excel_column
+  backend: local
+  temperature: 0.7680800597298345
+  set_qhat: 0.7982485105937336
+  n_temperature: 777
+  n_set: 325
+  temperature_split: COL-5f108ce3d3c99ab2
+  set_split: COL-1716dc8b3f742fc0
+gates:
+- kind: column
+  auto_threshold: 0.8214940830411813
+  n_units: 1697
+  split: COL-31c1f69c9ebc436c

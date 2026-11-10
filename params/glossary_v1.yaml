@@ -1,0 +1,188 @@
+# 현장 통보문 번역 초안(계약 1.36.0, ripple/contracts/translation.py · ripple/explain/translate.py, docs/records.md(통보) 6절).
+# 결재 뒤 사내 협력사 작업반에 보내는 통보 메일만 번역한다. 외부 AI 호출 없이 이 파일의 고정 문장·용어만 쓴다(real 모드도 같음).
+#
+# 언어 더하기: languages에 코드(영문 소문자 2~3자) 하나를 넣고, sentences · metrics · terms의 모든 줄에 그 코드 값을 넣는다.
+#   빠진 줄이 있으면 앱이 시작하지 않는다(계약 검증 + 템플릿 자리 수 검사, tests/checks/translate.py).
+# 문장 규칙: 숫자를 쓰지 않는다(값은 {0} 자리로만 들어온다). {0} 자리 수는 한국어 템플릿(ripple/explain/templates.py)과 같게.
+# 용어: 엔터티 이름(공정·부재·작업반)의 한국어 조선 용어를 바꾼다. 길게 맞는 말이 먼저다(판넬조립 > 판). 없는 말은 한국어 그대로.
+#   위에서부터의 순서가 메일 끝 '주요 용어' 순서다(두 글자 이상만 싣는다).
+# 표기: 번역 머리에 원문 우선 문장만 둔다(번역 보기에 한국어 원문을 덧붙이지 않음 — 11-04)(11-03 사용자 결정 — '초안' 표기 없음).
+version: glossary-v1
+notice_ko: 번역과 한국어 원문이 다르면 원문이 우선합니다.
+languages:
+  en:
+    name: English
+    notice: >-
+      If this translation differs from the Korean original, the Korean original prevails.
+    original_mark: "[Korean]"
+  vi:
+    name: Tiếng Việt
+    notice: >-
+      Nếu bản dịch khác với bản gốc tiếng Hàn, bản gốc tiếng Hàn được ưu tiên.
+    original_mark: "[Tiếng Hàn]"
+
+sentences:
+  # 메일 머리·끝(템플릿 밖)
+  frame.subject.crew:
+    en: "[Design change review] {0} {1} – advance notice of work change"
+    vi: "[Xem xét thay đổi thiết kế] {0} {1} – thông báo trước về thay đổi công việc"
+  frame.salutation:
+    en: "Dear Foreman of {0},"
+    vi: "Kính gửi Tổ trưởng {0},"
+  frame.reference:
+    en: Reference
+    vi: Liên quan
+  frame.hull:
+    en: "Hull {0}"
+    vi: "Tàu {0}"
+  frame.source:
+    en: "Original document {0}"
+    vi: "Văn bản gốc {0}"
+  frame.cause:
+    en: "Cause of change: {0}"
+    vi: "Nguyên nhân thay đổi: {0}"
+  frame.sign_off:
+    en: Best regards,
+    vi: Trân trọng,
+  frame.terms:
+    en: ■ Key terms (Korean – English)
+    vi: ■ Thuật ngữ chính (tiếng Hàn – tiếng Việt)
+  # 작업반 메일 본문(ripple/explain/templates.py의 같은 ID)
+  mail.crew.intro:
+    en: A design change is under review for the work below that your crew has carried out, so we are sharing it in advance.
+    vi: Một thay đổi thiết kế đang được xem xét đối với các công đoạn dưới đây mà tổ của quý vị đã thực hiện, vì vậy chúng tôi xin thông báo trước.
+  mail.heading.activity:
+    en: ■ Affected work stages
+    vi: ■ Công đoạn liên quan
+  mail.heading.part:
+    en: ■ Members being changed
+    vi: ■ Cấu kiện thay đổi
+  mail.heading.schedule:
+    en: ■ Confirmation schedule
+    vi: ■ Lịch xác nhận
+  mail.heading.request:
+    en: ■ Requests
+    vi: ■ Yêu cầu
+  mail.item.activity:
+    en: "- {0}"
+    vi: "- {0}"
+  mail.item.part:
+    en: "- {0}"
+    vi: "- {0}"
+  mail.crew.status:
+    en: "- Please reply with the current status of that work (what is completed and what is in progress)."
+    vi: "- Vui lòng phản hồi tình trạng hiện tại của công đoạn đó (phần đã hoàn thành và phần đang thực hiện)."
+  mail.crew.subcontract:
+    en: "- The changed work will be instructed again in writing after confirmation, and payment for the additional work will be agreed in advance (Korean Subcontracting Act)."
+    vi: "- Phần việc thay đổi sẽ được chỉ thị lại bằng văn bản sau khi xác nhận, và chi phí cho phần việc phát sinh sẽ được thỏa thuận trước (Luật thầu phụ Hàn Quốc)."
+  mail.crew.closing:
+    en: Once the change is confirmed, we will send you a new work order.
+    vi: Khi thay đổi được xác nhận, chúng tôi sẽ gửi lại phiếu giao việc mới.
+  mail.thanks:
+    en: Thank you for your cooperation.
+    vi: Cảm ơn quý vị đã hợp tác.
+
+metrics:
+  timing.deadline:
+    en: Decision deadline
+    vi: Hạn quyết định
+
+terms:
+  # 요청에서 짚은 핵심 용어
+  블록: {en: block, vi: block (phân đoạn)}
+  판 두께: {en: plate thickness, vi: độ dày tấm}
+  보강재: {en: stiffener, vi: nẹp gia cường}
+  용접: {en: welding, vi: hàn}
+  재작업: {en: rework, vi: làm lại}
+  탑재: {en: erection, vi: lắp dựng phân đoạn}
+  도면 개정: {en: drawing revision, vi: sửa đổi bản vẽ}
+  발주: {en: purchase order, vi: đơn đặt hàng}
+  설계변경: {en: design change, vi: thay đổi thiết kế}
+  # 공정
+  판넬조립: {en: panel assembly, vi: lắp ráp tấm panel}
+  소조립: {en: sub-assembly, vi: lắp ráp nhỏ}
+  대조립: {en: block assembly, vi: lắp ráp phân đoạn}
+  선행의장: {en: pre-outfitting, vi: lắp đặt thiết bị trước}
+  의장: {en: outfitting, vi: lắp đặt thiết bị}
+  도장: {en: painting, vi: sơn}
+  취부: {en: fit-up, vi: gá lắp}
+  화기작업: {en: hot work, vi: công việc có lửa}
+  공정: {en: work stage, vi: công đoạn}
+  # 사람·문서
+  작업반장: {en: foreman, vi: tổ trưởng}
+  작업반: {en: work crew, vi: tổ đội}
+  사내 협력사: {en: in-house subcontractor, vi: nhà thầu phụ nội bộ}
+  사외 협력사: {en: external subcontractor, vi: nhà thầu phụ bên ngoài}
+  협력사: {en: subcontractor, vi: nhà thầu phụ}
+  공급사: {en: supplier, vi: nhà cung cấp}
+  사외: {en: external, vi: bên ngoài}
+  제작: {en: fabrication, vi: chế tạo}
+  단품: {en: single part, vi: chi tiết đơn}
+  제강사: {en: steel mill, vi: nhà máy thép}
+  제조사: {en: manufacturer, vi: nhà sản xuất}
+  작업 지시서: {en: work order, vi: phiếu giao việc}
+  하도급법: {en: Subcontracting Act, vi: Luật thầu phụ}
+  설계팀: {en: design team, vi: nhóm thiết kế}
+  구조도: {en: structural drawing, vi: bản vẽ kết cấu}
+  배관도: {en: piping drawing, vi: bản vẽ đường ống}
+  도면: {en: drawing, vi: bản vẽ}
+  개정: {en: revision, vi: sửa đổi}
+  호선: {en: hull number, vi: số tàu}
+  # 구조·위치
+  횡격벽: {en: transverse bulkhead, vi: vách ngang}
+  종격벽: {en: longitudinal bulkhead, vi: vách dọc}
+  중심선: {en: centerline, vi: đường tâm}
+  이중저: {en: double bottom, vi: đáy đôi}
+  선측: {en: side shell, vi: mạn tàu}
+  기관실: {en: engine room, vi: buồng máy}
+  펌프룸: {en: pump room, vi: buồng bơm}
+  펌프: {en: pump, vi: bơm}
+  갑판: {en: deck, vi: boong}
+  선수루: {en: forecastle, vi: thượng tầng mũi}
+  선수부: {en: bow section, vi: phần mũi}
+  선수: {en: bow, vi: mũi tàu}
+  화물탱크: {en: cargo tank, vi: két hàng}
+  평형수탱크: {en: ballast water tank, vi: két nước dằn}
+  탱크: {en: tank, vi: két}
+  구역: {en: zone, vi: khu vực}
+  브라켓: {en: bracket, vi: mã liên kết}
+  서포트: {en: support, vi: giá đỡ}
+  측부: {en: side, vi: mạn bên}
+  플랫: {en: flat, vi: sàn phẳng}
+  구상선수: {en: bulbous bow, vi: mũi quả lê}
+  선미: {en: stern, vi: đuôi tàu}
+  프로펠러 보스: {en: propeller boss, vi: củ chân vịt}
+  프로펠러: {en: propeller, vi: chân vịt}
+  러더: {en: rudder, vi: bánh lái}
+  이음부: {en: joint, vi: mối nối}
+  관통부: {en: penetration, vi: lỗ xuyên}
+  관통: {en: penetration, vi: xuyên}
+  칼라: {en: collar, vi: vành gia cường}
+  부재: {en: member, vi: cấu kiện}
+  판: {en: plate, vi: tấm}
+  두께: {en: thickness, vi: độ dày}
+  강재: {en: steel, vi: thép}
+  우: {en: starboard, vi: mạn phải}
+  좌: {en: port, vi: mạn trái}
+  # 배관·의장품
+  평형수: {en: ballast water, vi: nước dằn}
+  화물: {en: cargo, vi: hàng hóa}
+  스트리핑: {en: stripping, vi: vét cạn}
+  게이트 밸브: {en: gate valve, vi: van cổng}
+  버터플라이 밸브: {en: butterfly valve, vi: van bướm}
+  체크 밸브: {en: check valve, vi: van một chiều}
+  글로브 밸브: {en: globe valve, vi: van cầu}
+  볼 밸브: {en: ball valve, vi: van bi}
+  밸브: {en: valve, vi: van}
+  스풀: {en: spool, vi: đoạn ống}
+  배관재: {en: piping material, vi: vật tư đường ống}
+  배관: {en: piping, vi: đường ống}
+  # 변경 원인(ripple/explain/mail.py CAUSE_LABELS)
+  선주 요청: {en: owner's request, vi: yêu cầu của chủ tàu}
+  선급·규정: {en: class and regulations, vi: đăng kiểm và quy định}
+  설계 오류·간섭: {en: design error or interference, vi: lỗi thiết kế hoặc va chạm}
+  현장 오작·변형: {en: production error or deformation, vi: lỗi thi công hoặc biến dạng}
+  기자재 사양: {en: equipment specification, vi: thông số thiết bị}
+  # 상태
+  재고: {en: stock, vi: tồn kho}
+  확정: {en: confirmation, vi: xác nhận}

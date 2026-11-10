@@ -1,0 +1,191 @@
+# 엑셀 필드 사전 — 형식: ripple/ingest/fields.py, 설계: docs/input.md(엑셀 양식) 4절
+# 회사마다 다른 엑셀 머리글·시트 이름을 지정 양식 열로 맞출 때 쓰는 제품 지식이다(열 자동 매핑의 '사전 일치' 특징).
+# 일반 조선·구매 용어로 만든 가정이고, 현업 엑셀 머리글을 받으면 더한다. 변형 생성기 어휘
+# (generator/excel_variants.yaml)와 따로 쓴다 — 평가에서 사전에 없는 머리글의 비율과 정확도를 따로 본다.
+# 비공개 현업 구매·재고 엑셀에서 본 일반 용어(블럭번호·발주일자·자재번호·Mark No)와 SAP 필드명(별칭 후보:
+#   IDNRK·MENGE·MEINS·EBELN·EBELP)은 동의어로, 양식에 없는 흔한 열(납기·미납·금액·담당·적치장 등)은 other_headers로 둔다.
+#   회사 자료 자체는 저장소에 넣지 않는다.
+# 값으로 가를 수 없는 열(늘 비어 있는 가공일(확인), 같은 모양의 ID 두 열인 선후행)은 영어·약어 머리글(Processing Date·
+#   Successor·SUCC·PRED 등)도 동의어로 둔다 — 관문 변형(V1)이 지도·난수에 따라 우연히 통과하지 않게.
+# range: 양식 단위 기준 상식 범위[하한, 상한]. 이상값 검출에만 쓴다(단위를 모르는 열을 범위로 정하지 않는다).
+#        넉넉하게 잡아 실제 값은 막지 않고 단위 착오(1000배)를 잡는다. 벗어나면 가져오기 오류.
+# shape: 글자 항목의 값 모양(id 식별자 · code 짧은 표기 · text 글). 열 매핑의 값 모양 특징에만 쓴다(가정, 현업 엑셀로 확인).
+# 규격 시트의 원산지 구분·운송 방식(외자재): 발주대장에 같은 뜻의 열(내외자·운송)이 있어도 계산은
+#   규격 시트 값만 쓴다(발주의 '입고까지'는 이미 운송을 포함한 리드타임).
+version: excel-fields-v4
+
+memo_headers: [비고, 메모, 작성자, 확인자, 담당, 담당자, 작성일, 수정일, 특이사항, 참고, Remark, Remarks, Note, Notes, Comment, Comments, Checked By]
+
+# 현업 엑셀에 흔하지만 양식에 없는 열: 메모성 머리글처럼 '해당 없음' 쪽 특징을 켠다(엉뚱한 양식 항목 제안을 줄임).
+# 어느 시트의 동의어와도 겹치면 읽을 때 오류다. 납기·필요일은 리드타임(일)과 뜻이 달라 일부러 넣는다.
+other_headers: [
+  납기, 납기일, 계약납기, 계약납기일, 요구납기, 요구납기일, 수정요구납기, 납품예정일, 입고요구일, 필요일, PND, M/R요구일, EINDT,
+  중일정가공일, 발주당시가공일, 중일정시작일, 중일정종료일, 절단착수일, 최근전처리일, W/O발행일, W/O확정일, DATUV,
+  미납수량, 미입고수량, 미납중량, 미입고중량, 미납금액, 미입고금액, 발주금액, 입고금액, 재고금액, 환율, 화폐단위, 통화, 중량단위,
+  체고일수, 재고일수, 입고번호, 바코드, 긴급, 긴급여부, 수정유무, 수정구분, 냉간교정유무, AENNR,
+  지불조건, 인도조건, 보증조건, 검사조건, 비용조건, 기타조건,
+  구매부서, 구매담당, 구매담당자, 발주자, 입고자, 인수부서, 인수부서명, 물류업체, 적치장, 물류적치장, 도착적치장, 경유지, 경유지명]
+
+sheets:
+  ships:
+    names: [호선, 선박, 호선 목록, 호선정보, Ship, Ships, Hull]
+    columns:
+      ship_id: {synonyms: [호선번호, 호선 번호, 호선 No, 선번, Hull No, Ship No, Ship ID], shape: id}
+      ship_type: {synonyms: [선종, 선형, Ship Type]}
+      dwt: {synonyms: [재화중량톤, 재화중량, DWT, Deadweight], range: [100, 1000000]}
+      contract_price_krw: {synonyms: [계약가, 계약금액, 선가, Contract Price], range: [10000000, 10000000000000]}
+      delivery_date: {synonyms: [계약 인도일, 인도일, 인도 예정일, Delivery Date, Delivery]}
+      ld_grace_days: {synonyms: [지체상금 유예일, 지체상금 유예, LD Grace Days, Grace Days], range: [0, 3650]}
+      ld_rate_per_day_of_price: {synonyms: [지체상금 일률, 지체상금률, LD Rate, LD Rate per Day], range: [0, 0.01]}
+      ld_max_days: {synonyms: [지체상금 최대일, 지체상금 상한일, LD Max Days, LD Cap Days], range: [1, 3650]}
+  zones:
+    names: [구역, 구획, 구역 목록, Zone, Zones]
+    columns:
+      zone_id: {synonyms: [구역ID, 구역코드, 구역 코드, 구역 번호, Zone ID, Zone Code], shape: id}
+      ship_id: {synonyms: [호선번호, 호선, Hull No, Ship No], shape: id}
+      name: {synonyms: [구역명, 구역 이름, Zone Name], shape: text}
+  boundaries:
+    names: [구역 경계, 구역경계, 인도 경로, Zone Boundary, Boundaries]
+    columns:
+      zone_id: {synonyms: [구역ID, 구역코드, Zone ID], shape: id}
+      exit_activity_id: {synonyms: [출구 공정ID, 출구 공정, 구역 출구 공정, Exit Activity], shape: id}
+      float_to_delivery_days: {synonyms: [인도까지 여유, 인도 여유일, 여유일, Float to Delivery], range: [0, 3650]}
+      forecast_delivery_delay_days: {synonyms: [예상 인도 지연, 인도 지연 예상, Forecast Delay], range: [0, 3650]}
+  blocks:
+    names: [블록, 블록 목록, 블록리스트, Block, Blocks, Block List]
+    columns:
+      block_id: {synonyms: [블록ID, 블록번호, 블록 번호, 블록 No, 블럭번호, 블럭 No, Block No, Block ID], shape: id}
+      ship_id: {synonyms: [호선번호, 호선, Hull No, Ship No], shape: id}
+      zone_id: {synonyms: [구역ID, 구역코드, 구역, Zone], shape: id}
+      name: {synonyms: [블록명, 블록 이름, Block Name], shape: text}
+      steel_weight_t: {synonyms: [강재 중량, 강재중량, 블록 중량, Steel Weight], range: [0.1, 20000]}
+      fabricator_id: {synonyms: [제작 협력사ID, 제작 협력사, 제작사, 제작 업체, Fabricator], shape: id}
+      shape: {synonyms: [블록 형상, 블록형상, 형상, Block Shape]}  # 1.32.0
+      outfit_items: {synonyms: [의장품 수, 의장품수, 의장 수량, Outfit Items], range: [0, 100000]}  # 1.32.0
+      electric_items: {synonyms: [전장품 수, 전장품수, 전장 수량, Electrical Items], range: [0, 100000]}  # 1.32.0
+  specs:
+    names: [규격, 자재 규격, 자재규격, 자재 마스터, Spec, Specs, Material Spec]
+    columns:
+      spec_id: {synonyms: [규격ID, 규격코드, 규격 코드, 자재코드, 자재번호, Spec ID, Spec Code, Material Code], shape: id}
+      category: {synonyms: [분류, 자재 분류, 자재분류, Category, Class]}
+      description: {synonyms: [규격 설명, 규격명, 사양, Description], shape: text}
+      grade: {synonyms: [강종, 재질, Grade, Material Grade], shape: code}
+      thickness_mm: {synonyms: [두께, 판두께, THK, Thickness], range: [1, 300]}
+      unit: {synonyms: [단위, 자재단위, Unit, UOM, MEINS]}
+      unit_price_krw: {synonyms: [단가, 자재 단가, Unit Price], range: [1, 10000000000]}
+      std_lead_time_days: {synonyms: [표준 리드타임, 리드타임, 조달 기간, Lead Time, LT], range: [1, 1000]}
+      nominal_diameter_dn: {synonyms: [호칭 구경, 호칭경, 구경, DN, Nominal Size], range: [5, 3000]}
+      pressure_class: {synonyms: [압력 등급, 압력등급, Pressure Class, Rating], shape: code}
+      origin: {synonyms: [원산지 구분, 원산지, 내외자 구분, 내외자구분, 내외자, 국산/외자, Origin, Domestic/Import]}  # 1.33.0
+      transport: {synonyms: [운송 방식, 운송방식, 운송 수단, 운송수단, 선적 방법, Transport, Shipment Mode, Ship Via]}  # 1.33.0
+  parts:
+    names: [부재, 부재 목록, 부재목록, 부재 리스트, BOM, 자재 명세, Part, Parts, Part List]
+    columns:
+      part_id: {synonyms: [부재ID, 부재번호, 부재 번호, 부재코드, 마크번호, Mark No, Part No, Part ID, Piece No], shape: id}
+      ship_id: {synonyms: [호선번호, 호선, Hull No, Ship No], shape: id}
+      block_id: {synonyms: [블록ID, 블록번호, 블록, 블럭번호, 블럭, Block, Block No], shape: id}
+      kind: {synonyms: [부재 종류, 부재종류, 종류, Part Type]}
+      name: {synonyms: [부재명, 품명, 부재 이름, Part Name], shape: text}
+      spec_id: {synonyms: [규격ID, 규격코드, 규격, 자재코드, 자재번호, Spec, Spec ID, IDNRK], shape: id}
+      qty: {synonyms: [수량, Qty, Quantity, MENGE]}
+      drawing_no: {synonyms: [도면번호, 도면 번호, 도번, DWG No, Drawing No], shape: id}
+      revision: {synonyms: [개정, 리비전, Rev, Revision], shape: code}
+      system: {synonyms: [배관 계통, 계통, System]}
+      pid_class: {synonyms: [배관 부품 분류, P&ID 분류, PID Class]}
+      thickness_mm: {synonyms: [두께, 판두께, THK, Thickness], range: [1, 300]}
+      grade: {synonyms: [강종, 재질, Grade], shape: code}
+      stiffener_spacing_m: {synonyms: [보강재 간격, 론지 간격, Stiffener Spacing, Spacing], range: [0.05, 10]}
+      span_m: {synonyms: [스팬, 지간, Span], range: [0.1, 100]}
+      head_m: {synonyms: [설계 수두, 수두, Design Head, Head], range: [0.01, 100]}
+      weight_kg: {synonyms: [중량, 부재 중량, Weight, Wt], range: [0.001, 1000000]}
+      secondary_drawing_ids: {synonyms: [다른 분야 도면, 타 분야 도면, 관련 도면, Related Drawings]}  # 1.32.0
+  suppliers:
+    names: [협력사, 공급사, 업체, 협력업체, Supplier, Suppliers, Vendor, Vendors]
+    columns:
+      supplier_id: {synonyms: [협력사ID, 협력사코드, 업체코드, 업체 코드, Supplier ID, Vendor Code], shape: id}
+      name: {synonyms: [협력사명, 업체명, 공급사명, Supplier Name, Vendor Name], shape: text}
+      kind: {synonyms: [구분, 업종, 협력사 구분, Supplier Type]}
+  purchase_orders:
+    names: [발주, 발주대장, 발주 대장, 구매발주, PO, PO List, Purchase Order, Purchase Orders]
+    columns:
+      po_id: {synonyms: [발주번호, 발주 번호, 발주 No, PO No, PO Number, EBELN], shape: id}
+      ship_id: {synonyms: [호선번호, 호선, Hull No, Ship No], shape: id}
+      supplier_id: {synonyms: [협력사ID, 협력사코드, 업체코드, Vendor Code, Supplier ID], shape: id}
+      planned_order_date: {synonyms: [계획 발주일, 발주 예정일, 발주계획일, Planned PO Date]}
+      material_secured_days: {synonyms: [자재 확보까지, 자재확보 일수, 자재 확보 일수, Material Days], range: [0, 1000]}
+      fabrication_start_days: {synonyms: [제작 착수까지, 제작착수 일수, 제작 착수 일수, Fab Start Days], range: [0, 1000]}
+      lead_time_days: {synonyms: [입고까지, 입고 일수, 리드타임, Lead Time], range: [1, 1000]}
+      entered_ordered: {synonyms: [발주일(확인), 발주일, 발주일자, 실발주일, PO Date]}
+      entered_material_secured: {synonyms: [자재 확보일(확인), 자재 확보일, 자재확보일]}
+      entered_in_fabrication: {synonyms: [제작 착수일(확인), 제작 착수일, 제작착수일]}
+      entered_received: {synonyms: [입고일(확인), 입고일, 입고 일자, Receipt Date]}
+      entered_processed: {synonyms: [가공일(확인), 가공일, 가공 착수일, Processing Date]}
+  po_lines:
+    names: [발주 품목, 발주품목, 발주 상세, 발주상세, PO Line, PO Lines, PO Item, PO Items]
+    columns:
+      po_id: {synonyms: [발주번호, 발주 번호, 발주 No, PO No, PO Number, EBELN], shape: id}
+      line_no: {synonyms: [품목번호, 품목 번호, 항번, Line No, Item No, EBELP]}
+      spec_id: {synonyms: [규격ID, 규격코드, 자재코드, 자재번호, Spec ID, Material Code], shape: id}
+      qty: {synonyms: [수량, 발주 수량, Qty, Quantity, MENGE]}
+      unit_price_krw: {synonyms: [단가, 발주 단가, Unit Price], range: [1, 10000000000]}
+      part_ids: {synonyms: [공급 부재, 대상 부재, 부재 목록, Parts]}
+      consumed_by_activity_id: {synonyms: [소비 공정ID, 소비 공정, 사용 공정, Consuming Activity], shape: id}
+  observations:
+    names: [발주 관측, 발주 현황, 발주현황, 진행 현황, PO Status, Status Log]
+    columns:
+      po_id: {synonyms: [발주번호, 발주 번호, PO No], shape: id}
+      status: {synonyms: [상태, 진행 상태, 발주 상태, Status]}
+      observed_on: {synonyms: [관측일, 확인일, 기준일, Observed On, As Of]}
+  activities:
+    names: [공정, 공정표, 일정, 공정 계획, Schedule, Activity, Activities]
+    columns:
+      activity_id: {synonyms: [공정ID, 공정코드, 공정 코드, 작업 번호, Activity ID], shape: id}
+      ship_id: {synonyms: [호선번호, 호선, Hull No, Ship No], shape: id}
+      block_id: {synonyms: [블록ID, 블록번호, 블록, 블럭번호, 블럭, Block], shape: id}
+      kind: {synonyms: [공정 종류, 공종, 작업 종류, Activity Type]}
+      duration_days: {synonyms: [기간, 공기, 작업 일수, 소요일, Duration], range: [0, 3650]}
+      planned_start: {synonyms: [계획 착수일, 착수 예정일, 계획착수일, Planned Start]}
+      actual_start: {synonyms: [실적 착수일, 실착수일, 착수일(실적), Actual Start]}
+      actual_finish: {synonyms: [실적 완료일, 실완료일, 완료일(실적), Actual Finish]}
+      performer: {synonyms: [수행 주체, 수행 작업반, 수행, Performer]}  # 1.32.0
+  crews:  # 1.32.0 사내 협력사 작업반
+    names: [작업반, 작업반 목록, 사내 협력사, Crew, Crews]
+    columns:
+      crew_id: {synonyms: [작업반ID, 작업반 코드, 작업반코드, 작업반 번호, Crew ID], shape: id}
+      name: {synonyms: [작업반명, 작업반 이름, Crew Name], shape: text}
+      processes: {synonyms: [담당 공정, 담당 공종, Processes]}
+      contact: {synonyms: [작업반 연락처, 연락처, Contact]}
+  precedences:
+    names: [선후행, 선후행 관계, 선행 관계, 공정 관계, Precedence, Dependencies]
+    columns:
+      activity_id: {synonyms: [공정ID, 후행 공정ID, 후행 공정, 후행 공정 코드, Activity ID, Successor, SUCC], shape: id}
+      predecessor_id: {synonyms: [선행 공정ID, 선행 공정, 선행공정, 선행 공정 코드, Predecessor, PRED], shape: id}
+      lag_days: {synonyms: [지연, 래그, 지연 일수, Lag], range: [0, 3650]}
+  connections:
+    names: [연결, 접합, 용접 연결, 부재 연결, Connection, Connections]
+    columns:
+      a: {synonyms: [부재 A, 부재A, 부재1, Part A], shape: id}
+      b: {synonyms: [부재 B, 부재B, 부재2, Part B], shape: id}
+      kind: {synonyms: [연결 종류, 접합 종류, 연결 방식, Connection Type]}
+      length_m: {synonyms: [길이, 용접 길이, 연결 길이, Length], range: [0.001, 1000]}
+  stock:
+    names: [재고, 재고 현황, 재고현황, 잉여 자재, Stock, Inventory]
+    columns:
+      lot_id: {synonyms: [로트ID, 로트번호, 로트 번호, Lot No], shape: id}
+      spec_id: {synonyms: [규격ID, 규격코드, 자재코드, 자재번호, Spec ID], shape: id}
+      qty: {synonyms: [수량, 재고 수량, Qty]}
+      received_date: {synonyms: [입고일, 입고 일자, Receipt Date]}
+      processed: {synonyms: [가공 여부, 가공, 가공여부, Processed]}
+      reserved_block_id: {synonyms: [예약 블록ID, 예약 블록, 배정 블록, Reserved Block], shape: id}
+  drawings:
+    names: [도면, 도면 목록, 도면목록, 도면대장, Drawing, Drawings, DWG List]
+    columns:
+      drawing_no: {synonyms: [도면번호, 도면 번호, 도번, DWG No, Drawing No], shape: id}
+      revision: {synonyms: [개정, 리비전, Rev, Revision], shape: code}
+      discipline: {synonyms: [분야, 공종, 설계 분야, Discipline]}
+      title: {synonyms: [도면명, 도면 제목, 도면 이름, Title], shape: text}
+  pipe_systems:
+    names: [배관 계통, 배관계통, 계통, 계통 목록, Pipe System, Pipe Systems]
+    columns:
+      system: {synonyms: [계통 키, 계통 코드, 계통코드, System Code]}
+      name: {synonyms: [계통명, 계통 이름, System Name], shape: text}

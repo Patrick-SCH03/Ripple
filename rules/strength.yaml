@@ -1,0 +1,52 @@
+# 강도 사전검사 규칙(docs/engine.md(대안) 2절) — 형식: ripple/contracts/strength.py
+# 요청안 대비 상대 비교에만 쓴다(선급 판정 아님). 선급 규칙 원문·표는 싣지 않고 조항 번호만 인용한다.
+# 값을 바꾸면 version을 올린다(분석 ID의 버전 묶음에 들어감).
+version: strength-v1
+updated: 2026-10-08
+
+material_factor:  # 항복 강도(MPa) → 재료 계수 k. 판 요구 두께 t ∝ s·√(h·k) + t_c 형태에 쓴다
+  status: evidence
+  source: "IACS UR S4(고장력강 사용 기준): 315 → 0.78, 355 → 0.72, 390 → 0.68, 연강 235 → 1.0"
+  values: {235: 1.0, 315: 0.78, 355: 0.72, 390: 0.68}
+
+yield_strength:  # 강종 → 최소 항복 강도(MPa)
+  status: evidence
+  source: "IACS UR W11(선체 구조용 연강·고장력강 등급)"
+  values:
+    A: 235
+    B: 235
+    D: 235
+    E: 235
+    AH32: 315
+    DH32: 315
+    EH32: 315
+    AH36: 355
+    DH36: 355
+    EH36: 355
+    AH40: 390
+    DH40: 390
+    EH40: 390
+
+upgrade:  # 강종 상향 템플릿(T2): 항복 강도가 다음으로 높은 같은 인성 등급
+  status: assumption
+  values:
+    A: AH32
+    B: AH32
+    D: DH32
+    E: EH32
+    AH32: AH36
+    DH32: DH36
+    EH32: EH36
+    AH36: AH40
+    DH36: DH40
+    EH36: EH40
+
+plate_corrosion_addition_mm:  # 판 부식 여유 t_c(식의 부식 여유 항 형태만 참고)
+  status: assumption
+  mentor_question: 18
+  value: 2.5
+
+max_plate_thickness_mm:  # 대안이 이보다 두꺼우면 설계자 확인
+  status: assumption
+  mentor_question: 18
+  value: 25.0

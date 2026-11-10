@@ -1,0 +1,226 @@
+# 비용 파라미터 v1 — 형식: ripple/contracts/params.py, 쓰는 곳: docs/engine.md(비용·일정)
+# 모든 값은 가정 범위의 대표값이다. status: evidence(근거 있음, 출처 필수) / assumption(가정) / mentor(현업 확인값)
+# status·source·mentor_question은 묶음에 적으면 아래 값들이 물려받는다.
+# mentor_question은 docs/data.md(현업 확인 질문)의 질문 번호다. 값을 바꾸면 version을 올린다.
+# 파일 이름은 설정·검사 경로(RIPPLE_PARAMS_PATH 기본값) 호환 때문에 cost_v1.yaml 그대로 두고, 판은 version으로 센다.
+# 강종 단가 비율·후판 참고 단가는 비공개 현업 강재 재고 집계로 보정한 값이다(원자료·집계 노트는 저장소 밖). 현업에서 확인한
+# 톤당 30MH · 5만원/MH · 하루 80MH(10명) · 재작업 배수 1~5는 status mentor, 그 밖의 새 가정값은 현업 확인 질문(Q22)으로 확인한다.
+version: cost-v8
+updated: 2026-10-30
+currency: KRW
+
+steel:
+  plate_price_per_t:
+    value: 875000
+    range: [800000, 1015000]
+    status: evidence
+    source: "비공개 현업 강재 재고 자료 집계(2026-10-24) 판 AH36 재고금액 ÷ 중량 중앙 87.5만원/t(p10 80.1만·p90 101.4만), 아주경제 2026-05-14 조선용 후판 협상가 t당 80만원 중반(원문 확인), 철강금속신문 2026-09-29 유통가 90만원 후반(부분 검증), 삼성중공업 2026 1분기 분기보고서 주요 원재료 가격 후판 909·914·908천원/t(2026 1Q·2025·2024, 포스코 유통가 SS275 Base, 원문 확인)"
+  grade_price_ratio:  # 강종별 단가 비율(AH36 = 1). 자재비 차이(C-01)에만 쓴다. 비율의 비를 쓰므로 범위 없이 대표값만 둔다
+    status: evidence
+    source: "비공개 현업 강재 재고 자료 집계(2026-10-24): 판 재고금액 ÷ 중량을 두께(mm)·생산업체가 같은 묶음 안에서 AH36과 비교한 가중 중앙값 A 0.916(사분위 0.885~0.932)·AH32 0.964(0.954~0.971)·DH36 1.024(1.010~1.030). 생산업체를 맞추지 않으면 DH36이 1.18로 부풀어(업체 구성 차이) 업체까지 맞춘 값을 쓴다"
+    mentor_question: 16
+    A: {value: 0.92, range: [0.92, 0.92]}
+    AH32: {value: 0.96, range: [0.96, 0.96]}
+    AH36: {value: 1.0, range: [1.0, 1.0]}
+    DH36: {value: 1.02, range: [1.02, 1.02]}
+    EH36: {value: 1.06, range: [1.06, 1.06], status: assumption, source: "집계 자료에 일반 EH36 판이 없어 가정 그대로(DH36보다 높게)"}
+  max_cancel_loss_ratio:  # 강재(판·형강) 품목의 취소·변경률 상한: 고철로 팔아 잔존가치를 건지므로 po_cancel_ratio가 이보다 크면 이 값(명세 4-2)
+    value: 0.5
+    range: [0.45, 0.6]
+    status: evidence
+    source: "하나증권 철강금속 Weekly 2026-05-18(원문 확인) 철스크랩 생철A 45만원/t, 조선용 후판 협상가 80만 중반·유통가 99만원/t → 잔존가치 45~53%, 손실 0.47~0.55에 분류·운반 공제를 더해 0.5(0.45~0.6). 주문 제작 기자재는 잔존가치가 거의 없어 상한을 두지 않는다"
+
+po_cancel_ratio:  # 발주 단계별 취소·변경 비용(발주가 대비). 발주 단계와 1:1(docs/domain.md 3절)
+  status: assumption
+  mentor_question: 1
+  source: "하도급법 8조 취지, 대우조선해양 사외 발주 취소·변경 사례(공정위 2020), 삼성중공업 2015~2018 사외 142개사 6,161건을 설계변경·선주 요구로 취소·변경(공정위 2020-04-23, 원문 확인), 공개 공급사 취소 약관(비조선, 원문 확인): KSB GIW 장납기 도면 배포 20%·제작 착수 30%·첫 주물 40%·가공 75%·조립 준비 95%·출하 준비 100%, Haynes(합금 소재) 용해 전 10%·잉곳 50%·가공 중 70%·최종 공정 95%"
+  not_ordered: {value: 0.0, range: [0.0, 0.0]}
+  ordered: {value: 0.03, range: [0.0, 0.05]}
+  material_secured: {value: 0.3, range: [0.2, 0.4]}
+  in_fabrication: {value: 0.6, range: [0.4, 0.8]}
+  received: {value: 0.7, range: [0.5, 0.9]}  # 남는 가치(전매·다른 호선 사용)를 뺀 손실
+  processed: {value: 0.8, range: [0.55, 1.0]}  # 100% − 폐기 잔존가치
+
+reorder:
+  expedite_premium_ratio: {value: 0.2, range: [0.1, 0.3], status: assumption, mentor_question: 1}
+  # 급발주 리드타임 배율: 발주 이상으로 정해진 품목(판단 불가 제외)을 새 규격으로 다시 발주할 때 리드타임 × 배율(명세 5절). 현업 확인 전이라
+  # 결과를 바꾸지 않는 1.0으로 둔다. 일정 위험(6-6)도 이 대표값만 쓴다
+  expedite_lead_time_ratio: {value: 1.0, range: [1.0, 1.0], status: assumption, mentor_question: 3}
+
+lead_time_days:  # 규격 분류별 표준 리드타임. 규격에 std_lead_time_days가 있으면 그 값을 쓴다
+  status: assumption
+  mentor_question: 3
+  plate:  # 대표값 70일은 미확인. 범위 끝(+14일)은 실제 입고 지연 p90과 같다
+    value: 70
+    range: [56, 84]
+    source: "비공개 현업 강재 재고 자료 집계(2026-10-24): 판 입고일 − 계약납기일 중앙 +2일·p90 +14일·p95 +16일(14일 이상 늦음 11.1%)"
+  section:  # 대표값은 계약 리드타임과 같은 크기. 형강 입고 지연은 양봉이라 범위 근거로 쓰지 않는다
+    value: 70
+    range: [56, 84]
+    source: "비공개 현업 강재 재고 자료 집계(2026-10-24): 형강 계약 연월 → 계약납기일 중앙 73일(계약 연월 15일 가정, ±15일)"
+  pipe: {value: 60, range: [30, 90]}
+  valve: {value: 90, range: [30, 270]}
+  fitting: {value: 45, range: [20, 90]}
+  equipment: {value: 180, range: [90, 270]}
+
+transport_days:  # cost-v7 외자재 운송 일수(명세 5절): 외자재 규격의 LT'가 규격 표준·파라미터(생산 리드타임)일 때만 더한다.
+  # 원래 발주의 리드타임은 이미 운송을 포함해 더하지 않는다. 일정 위험(6-6)은 배율을 곱하지 않고 범위 끝을 더한다
+  status: assumption
+  mentor_question: 3
+  source: "현업 서면 의견: 외자재는 운반 시간 추가 — 항공 1~2주, 선박 1달. 범위는 그 말을 일로 옮긴 가정(현업 확인 예정)"
+  air: {value: 10, range: [7, 14]}
+  sea: {value: 30, range: [25, 35]}
+
+lead_time_reference:  # 특수 규격의 std_lead_time_days를 정할 때 쓰는 참고값
+  special_steel:
+    value: 140
+    range: [120, 160]
+    status: evidence
+    source: "포스코 뉴스룸 2020-03-06 특수 해양강재 통상 5개월"
+  main_engine:
+    value: 600
+    range: [540, 730]
+    status: evidence
+    source: "MTN 2026-05-06 주기관 평균 18개월, 적체 시 2년 이상"
+
+labor_rate_per_hour:
+  status: assumption
+  mentor_question: 17
+  source: "노임단가 2026 하반기 제조부문 평균 일급 120,610원(부분 검증), 한국노동연구원 임금정보브리프 87호(2023 조선업 시장임금, 69개사) 생산직 연 총급여 숙련 1~4단계 평균 3,715만~5,800만원(원문 확인, 보험·관리비 제외)에 주휴·보험·관리비 가산"
+  subcontractor: {value: 30000, range: [25000, 35000]}
+  prime:
+    value: 50000
+    range: [40000, 60000]
+    status: mentor
+    source: "현업 의견: 인건비 5만원/MH '크게 차이 나지 않음'(범위는 가정 그대로), 노임단가·한국노동연구원 임금정보브리프 87호(위)"
+  crew:  # 사내 협력사 작업반(명세 4-4-1): 확인 전까지 직영과 같은 단가 — 재작업 줄만 작업반 몫으로 나누고 금액은 같다
+    value: 50000
+    range: [40000, 60000]
+    mentor_question: 22
+    source: "사내 협력사 작업반 단가는 확인 전이라 직영과 같게 둠(가정) — 현업 확인 예정"
+  design:  # 엔지니어링 노임단가는 기본급·수당·상여·퇴직급여충당금·회사부담 사회보험료를 넣은 값(관리비·제경비 제외)
+    value: 42000
+    range: [38000, 46000]
+    status: evidence
+    source: "한국엔지니어링협회 2024 임금실태조사 보고서 기계·설비 고급기술자 2025 적용 327,056원/일(원문 확인, 8시간 = 40,882원), 2026 적용 335,379원/일(대한건설협회 게시, 8시간 = 41,922원)"
+
+base_work_hours_per_t:  # 블록 강재 t당 공정별 원 작업 공수(재작업 계산의 기준). 블록 공정과 1:1
+  status: mentor
+  mentor_question: 2
+  source: "현업 의견: 톤당 작업공수 30MH/t '크게 차이 나지 않음' — 선행의장까지 누적 30시간/t(13~46)를 보여 드림. 공정별 나눔·범위는 가정 그대로(cost-v4 근거: Krishnan 2012 표 환산 강재 작업 약 11~31 M/H/t)"
+  # cost-v4: 대표값 그대로, 하한만 약 0.65배로 넓힘 — 공개 생산성 지표 환산(한국 16~21 M/H/CGT·강재 33~56 t/인·년,
+  # Krishnan 2012 Maritime Affairs 표(Lamb 2007 재인용) 원문 확인, 강재 작업 30~45%)으로 강재 작업 약 11~31 M/H/t라
+  # 지금 합(강재 공정 28 h/t)이 범위 위쪽. 정의(선박 전체 vs 블록 단계)가 달라 대표값은 바꾸지 않는다
+  sub_assembly: {value: 8, range: [3, 12]}
+  panel: {value: 6, range: [3, 9]}
+  assembly: {value: 10, range: [4, 15]}
+  pre_outfitting: {value: 6, range: [3, 10]}
+  pre_painting: {value: 3, range: [1, 5]}
+  pre_erection:  # cost-v6 PE(그랜드 블록 세팅·취부·용접·사상)
+    value: 2
+    range: [1, 4]
+    status: assumption
+    mentor_question: 22
+    source: "PE 공수는 확인 전 가정(탑재 공수의 절반 크기) — 현업 확인 예정"
+  erection: {value: 4, range: [1, 6]}
+
+rework_multiplier:  # 확정일 블록 단계별 재작업 공수 배수(원 작업 대비). 블록 단계와 1:1
+  status: mentor
+  mentor_question: 2
+  source: "현업 의견: 재작업 배수 1~5배(대조립 이후 단계의 대표·범위를 이 안에 둠, 단계별 값은 가정). GAO-05-183(착공 후 변경이 재시공 유발), Iakymenko 외 2020(변경 시점이 비용 최대 요인), GAO-09-322(2009) 조선소 경험칙 1-3-8: 작업장 1시간 일이 패널 용접 뒤 3시간·블록 탑재나 진수 뒤 8시간, 미룬 의장은 최대 5배(LPD 17, 조선소 진술), GAO-24-105503(2024) 인도 약 6개월 전 설계 변경이 처음 설계에 넣을 때의 약 3배(Royal Caribbean) — 원문 확인, 배수 정의(원 작업 대비 재작업)와 1:1이 아니라 단계가 늦을수록 커진다는 근거로만"
+  not_started: {value: 0.0, range: [0.0, 0.0], status: assumption}
+  steel_received: {value: 0.0, range: [0.0, 0.0], status: assumption}  # 자재 손실은 발주 단계 비용으로 계산
+  sub_assembly: {value: 0.2, range: [0.1, 0.3], status: assumption}  # 절단·소조립 착수(현업 범위 1~5배 밖 — 초기 공정은 원 작업보다 적게 다시 함, 가정)
+  panel: {value: 0.75, range: [0.5, 1.0], status: assumption}  # 판넬조립 뒤(같은 가정)
+  assembly: {value: 1.5, range: [1.0, 2.0]}
+  pre_outfitting: {value: 1.5, range: [1.0, 2.0]}
+  pre_painting: {value: 2.0, range: [1.5, 3.0]}  # cost-v6: 상한 2.5 → 3.0(도장 뒤 고정 항목은 after_paint.*로 따로)
+  pre_erection: {value: 2.5, range: [2.0, 3.5]}  # cost-v6 PE
+  erected: {value: 3.0, range: [2.0, 5.0]}  # cost-v6: 2.5[2.0,4.0] → 3.0[2.0,5.0](현업 범위 위 끝 5배)
+
+minor_work_hours:
+  status: assumption
+  drawing_revision_per_drawing: {value: 16, range: [8, 40], mentor_question: 4}  # 배관도가 아닌 도면(선체 구조도 등)
+  drawing_revision_piping:  # cost-v8 배관도 하나의 개정(경로·구경 수정)
+    value: 3
+    range: [2, 8]
+    status: mentor
+    mentor_question: 4
+    source: "현업 설계변경 사례 의견: 배관 경로를 바꾼 개정도 작업 3 MH(사례 1건, 범위는 가정)"
+  taper_per_joint: {value: 2, range: [1, 4]}
+  weld_recheck_per_joint: {value: 0.5, range: [0.25, 1]}
+  collar_resize_each: {value: 1.5, range: [1, 3]}
+  modify_part_each: {value: 4, range: [2, 8], mentor_question: 16}  # 플랜지·서포트 교체 같은 배관 부재 수정
+
+rework:  # 재작업 일정 환산과 중량 없는 부재의 환산 중량(docs/engine.md(비용·일정) 3절·4-4)
+  status: assumption
+  mentor_question: 16
+  crew_hours_per_day:  # 일정은 대표값만 쓴다
+    value: 80
+    range: [60, 120]
+    status: mentor
+    source: "현업 의견: 하루 투입공수 80MH(평균 10명) '크게 차이 나지 않음'(범위는 가정 그대로)"
+  equivalent_weight_t:  # 중량(weight_kg)이 없는 부재의 재작업 기준 중량
+    plate: {value: 0.5, range: [0.5, 0.5]}
+    stiffener: {value: 0.2, range: [0.2, 0.2]}
+    bracket: {value: 0.05, range: [0.05, 0.05]}
+    collar: {value: 0.01, range: [0.01, 0.01]}
+    pipe_spool: {value: 0.15, range: [0.15, 0.15]}
+    valve: {value: 0.1, range: [0.1, 0.1]}
+    pipe_support: {value: 0.02, range: [0.02, 0.02]}
+    equipment: {value: 1.0, range: [1.0, 1.0]}
+
+outfitting:  # 의장품 선상 설치(요청 outfit_on_board, 명세 4-1-3·6-3)
+  # 블록 단계(선행의장)에서 하던 설치를 탑재 뒤 배 위에서 할 때의 공수 배수. 할증은 (배수 − 1)만, 설치 일수는 배수 전체
+  on_board_ratio:
+    value: 2.7
+    range: [1.6, 3.0]
+    status: assumption
+    mentor_question: 16
+    source: "GAO-09-322(2009) 조선소 경험칙 1-3-8(원문 확인): 패널 용접 뒤 3시간 일이 블록 탑재나 진수 뒤 8시간 → 8/3 ≈ 2.7, Pribadi 외 2023 선행의장 생산성(초록 2차 인용) 블록 단계 작업 효율이 배 위의 약 1.6배. 정의(재작업 대 정상 설치)가 달라 가정으로 둔다"
+
+difficulty:  # cost-v6 블록 난이도 계수(명세 4-4): 재작업 공수에만 곱하고 배수와 따로 보인다. 범위 없이 대표값만(방향이 섞여서)
+  status: assumption
+  mentor_question: 22
+  source: "현업 의견: 블록 재작업비는 톤수보다 형상에 따른 작업 난이도·선행의장 배치·전장품 배치를 크게 본다 — 계수 값은 가정, 현업 확인 예정"
+  shape:
+    flat: {value: 1.0, range: [1.0, 1.0]}
+    curved: {value: 1.3, range: [1.3, 1.3]}
+    bow_stern: {value: 1.5, range: [1.5, 1.5]}
+  outfit_max: {value: 1.4, range: [1.4, 1.4]}  # 의장 밀도 계수 최댓값
+  outfit_full_per_t: {value: 0.5, range: [0.5, 0.5]}  # 의장품 수 ÷ 강재 중량(개/t)이 이 값 이상이면 최댓값
+  electric_max: {value: 1.2, range: [1.2, 1.2]}  # 전장품 계수 최댓값
+  electric_full_per_t: {value: 0.2, range: [0.2, 0.2]}
+  cap: {value: 2.0, range: [2.0, 2.0]}  # 세 계수 곱의 상한
+
+after_paint:  # cost-v6 도장 뒤 재작업 고정 항목(명세 4-4-2, 비용 항목 C-04, 총액 안): 선행도장 이후 단계 블록의 재작업마다 한 번
+  status: assumption
+  mentor_question: 22
+  source: "현업 사례: 도장 작업이 끝난 뒤 추가 시공으로 화기 작업과 추가 공수 발생 — 항목(재도장·족장·화기작업 안전 조치)은 사례, 시간 값은 가정, 현업 확인 예정"
+  repaint_hours: {value: 16, range: [8, 32]}  # 재도장(블라스팅·도장 보수)
+  scaffold_hours: {value: 24, range: [12, 48]}  # 족장 설치·해체
+  hot_work_hours: {value: 8, range: [4, 16]}  # 화기작업 안전 조치(가스 프리·화재 감시)
+
+delay_ripple:  # cost-v6 지연 파급 비용(명세 4-11): 공정 여유를 넘어 구역 출구가 실제로 밀린 날 × 하루 비용, 총액·판정·결정 기한·대안·평가에 넣지 않는 별도 금액(가정)
+  cost_per_day_krw:
+    value: 4000000
+    range: [2000000, 8000000]
+    status: assumption
+    mentor_question: 22
+    source: "현업 확인 상수 80 MH/일 × 5만원/MH로 계산한 가정(400만원 — 구역 출구가 실제로 밀린 날 묶인 작업반 한 반(10명)의 하루 대기·재배치, 범위 0.5~2배). 현업 확인 예정"
+
+piping:
+  new_spool_qty: {value: 3.0, range: [3.0, 3.0], status: assumption, mentor_question: 16}  # 빼는 스풀이 없을 때 새 스풀 하나의 수량(m)
+
+stock:
+  reallocation_handling_per_t: {value: 50000, range: [30000, 100000], status: assumption, mentor_question: 8}
+
+liquidated_damages:  # 호선별 계약 조건(Ship.ld_terms)이 없을 때의 기본값
+  status: evidence
+  source: "SEC 공시 건조계약(원문 확인) — 대표: 158,000 DWT 원유운반선(SWS, 2026-03, 선가 US$81.5M) 30일 유예 후 하루 US$18,000(0.022%/일)·최대 180일분(US$3.24M)·210일 지연 시 해제권. 범위: VLCC(SWS 2013·2014) 하루 US$16,000(0.016~0.017%)·180일, 75k 제품선(YZJ 2024) US$13,000·180일, 50k 제품선(SPP 2013, 선가 US$37M) US$10,000~12,000(0.027~0.032%), 현대미포 5만 DWT 제품선(2017) US$7,200(0.020%)·165일, 18만 DWT 벌크선(2006) US$20,000(0.026%)·240일. 유예는 모두 30일"
+  grace_days: {value: 30, range: [30, 30]}
+  rate_per_day_of_price: {value: 0.00022, range: [0.00016, 0.00031]}
+  max_days: {value: 180, range: [165, 240]}
+
+verdict:  # 요약 판정 문턱(docs/engine.md(비용·일정) 8-4)
+  approve_max_total_krw: {value: 5000000, range: [5000000, 5000000], status: assumption, mentor_question: 16}

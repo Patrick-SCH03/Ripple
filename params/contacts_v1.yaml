@@ -1,0 +1,74 @@
+# 시연용 가상 연락처(ripple/contracts/contacts.py, docs/records.md(통보)) — 지어낸 회사·사람이다.
+# 합성 데이터 지도에만 붙이고 실데이터 지도에는 붙이지 않는다. 이메일은 모두 예약 도메인 .example(배달되지 않음)만 쓴다(로더가 강제).
+# 열쇠: 협력사는 지도의 supplier_id(ripple/generator/procurement.py SUPPLIERS), 도면은 분야(design은 분야를 모를 때).
+version: contacts-v1
+organization: 가람조선
+sender: 가람조선 설계팀
+procurement:
+  organization: 가람조선
+  department: 구매팀
+  name: 정하늘
+  title: 대리
+  email: haneul.jung@garam-ship.example
+production:
+  organization: 가람조선
+  department: 생산관리팀
+  name: 한지우
+  title: 과장
+  email: jiwoo.han@garam-ship.example
+suppliers:
+  SUP-ST1:  # 제강사 A
+    organization: 누리스틸
+    department: 영업팀
+    name: 김도윤
+    title: 과장
+    email: doyun.kim@nuri-steel.example
+  SUP-ST2:  # 제강사 B
+    organization: 새솔강재
+    department: 영업팀
+    name: 이서준
+    title: 대리
+    email: seojun.lee@saesol-steel.example
+  SUP-PP1:  # 배관재 협력사
+    organization: 다온배관
+    department: 영업팀
+    name: 박지민
+    title: 차장
+    email: jimin.park@daon-pipe.example
+  SUP-VL1:  # 밸브 제조사
+    organization: 한결밸브
+    department: 영업팀
+    name: 최유진
+    title: 과장
+    email: yujin.choi@hangyeol-valve.example
+drawing:
+  hull:
+    organization: 가람조선
+    department: 선체설계팀
+    name: 윤서연
+    title: 책임
+    email: seoyeon.yoon@garam-ship.example
+  piping:
+    organization: 가람조선
+    department: 배관설계팀
+    name: 강민재
+    title: 책임
+    email: minjae.kang@garam-ship.example
+  outfitting:
+    organization: 가람조선
+    department: 의장설계팀
+    name: 오하린
+    title: 선임
+    email: harin.oh@garam-ship.example
+  machinery:
+    organization: 가람조선
+    department: 기관설계팀
+    name: 임태현
+    title: 책임
+    email: taehyun.lim@garam-ship.example
+  design:
+    organization: 가람조선
+    department: 설계팀
+    name: 서지후
+    title: 책임
+    email: jihoo.seo@garam-ship.example

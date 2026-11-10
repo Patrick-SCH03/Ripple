@@ -1,0 +1,39 @@
+# 작업별 외부 생성 모델 경로(ripple/llm/route.py). RIPPLE_LLM으로 켠 제공자 중 키가 있는 모델만 쓴다.
+# 첫 모델이 hedge_after_s 안에 받아들일 만한 답을 못 주면(실패하면 바로) 다음 모델을 함께 시작해 먼저 온 답을 쓰고,
+# budget_s가 지나면 더 기다리지 않는다(규칙 기반 해석·기본 설명으로).
+# 숫자·판정은 엔진만 만든다 — 모델은 해석 보조(다시 쓰기)·문서 항목 뽑기·설명 고르기·결정 도우미 고르기만.
+# 1순위는 비교 측정(scripts/compare_llm.py → eval/llm/llm_v1_selection.json, docs/input.md(외부 AI) 4절)의 사전 등록 채택 규칙으로
+# 정하고, 2순위는 같은 측정 표의 Claude Haiku 5.5다. 헤지 시간은 1순위 p95보다 길게(정확도 우선 — 1순위가 느릴 때만 2순위가 끼어든다).
+# 파일 이름은 설정·검사 경로 호환 때문에 llm_v1.yaml 그대로 두고, 판은 version으로 센다.
+version: llm-v2
+# 외부 AI 사용량 한도(ripple/llm/quota.py)는 끔(실제 서비스 운영 단계가 아님).
+# 켜려면 아래 절을 넣는다 — 하루(KST) 실제 외부 모델 호출 수, 헤지로 두 모델을 부르면 2회, 넘으면 서버 규칙·기본 설명.
+# quota:
+#   daily_total: 200
+#   daily_per_account: 30
+routes:
+  rewrite:  # 해석 보조: 규칙 기반이 못 읽은 요청을 정규 문장으로(다시 쓴 해석은 항상 사용자 확인). 1순위 '이해 못 함'은 최종
+    hedge_after_s: 6   # Sonnet 5.5 low 단독 p95 4.7초
+    budget_s: 12
+    models:
+      - {provider: claude, model: claude-sonnet-5-5, effort: low}  # 틀림 6.1%(가장 낮음, 대신 거절이 많아 되물음)
+      - {provider: claude, model: claude-haiku-5-5, effort: low}   # 틀림 7.4%, p95 5.1초
+  extract:  # 문서 접수(1.27.0): 설계변경 문서에서 항목 여러 개 뽑기(원문 인용 필수, 값은 인용 안 숫자만, 항상 사람 확인)
+    # 문서 조각(3,000자 이하)마다 한 번 부르고 조각들은 함께 보낸다. E9 AI 경로 측정은 docs/evaluation.md 3절.
+    hedge_after_s: 25
+    budget_s: 45
+    models:
+      - {provider: claude, model: claude-sonnet-5-5, effort: low}  # E9 AI 경로 30문서: 변경 항목 102/104 정확
+      - {provider: claude, model: claude-haiku-5-5}                # 같은 30문서 99/104(low 98/104), 틀린 5건 모두 막힘
+  explain:  # 설명 고르기: 앞머리(판정·이유·총비용·마감일) 뒤에 올 블록(사실 검사를 통과한 것만)
+    hedge_after_s: 5   # Opus 5.5 low 단독 p95 4.2초
+    budget_s: 11       # 헤지 뒤 2순위 Haiku 5.5(p95 5.7초)가 끝날 자리
+    models:
+      - {provider: claude, model: claude-opus-5-5, effort: low}     # 사실 검사 위반 0.2%, 남는 블록 평균 6.2
+      - {provider: claude, model: claude-haiku-5-5}                 # 위반 11.0%(앱이 버림), p95 5.7초
+  brief:  # 결정 도우미(1.31.0): 서명 전 확인할 것 후보의 선택·순서만(세 줄·숫자는 서버 규칙). 1순위는 설명 고르기와 같게
+    hedge_after_s: 3
+    budget_s: 6        # 6초 안에 못 고르면 규칙 순서(팀장 결재 화면을 오래 기다리게 하지 않음)
+    models:
+      - {provider: claude, model: claude-opus-5-5, effort: low}
+      - {provider: claude, model: claude-haiku-5-5}

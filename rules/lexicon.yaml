@@ -1,0 +1,80 @@
+# 해석기 사전 v1 — 형식: ripple/contracts/lexicon.py, 쓰는 곳: ripple/nl
+# 현장 용어·영문 약어 → 지도 어휘. 문장 생성기(ripple/generator)는 이 사전을 보지 않는다.
+# 별칭은 대소문자를 가리지 않고 찾는다. 바꾸면 version을 올린다.
+version: lexicon-v1
+
+part_kinds:
+  plate: [판, 철판, 강판, 후판, 플레이트, PL, PLT, PLATE]
+  stiffener: [보강재, 스티프너, 스티프나, STF, STIFF, 론지, 롱지, LONGI, 종통재]
+  bracket: [브라켓, 브래킷, 브라킷, 브라켙, BKT, BRKT, BRACKET]
+  collar: [칼라, 컬러, 슬리브, COLLAR]
+  pipe_spool: [스풀, 배관 스풀, 파이프 스풀, 파이프, SPOOL, PIPE]
+  valve: [밸브, 벨브, 발브, V/V, VLV, VALVE]
+  pipe_support: [서포트, 파이프 서포트, 배관 서포트, 행거, 써포트, SUPPORT, SUPP]
+  equipment: [EQUIPMENT]
+
+# 블록 이름(지도 표기) 속 단어 → 현장 별칭. 블록은 이름 단어·화물탱크 번호·좌우·코드로 찾는다.
+block_words:
+  횡격벽: [횡격벽, 횡 격벽, 횡벌크헤드, 트랜스 벌크헤드, 트랜스버스 벌크헤드, T.BHD, T/BHD, TBHD, T BHD, TRANS BHD]
+  종격벽: [종격벽, 종 격벽, 종벌크헤드, 롱 벌크헤드, 롱기 벌크헤드, L.BHD, L/BHD, LBHD, LONG BHD]
+  중심선: [중심선, 센터라인, 센터 라인, C.L, CL]
+  이중저: [이중저, 이중 저, 2중저, 더블바텀, 더블 바텀, D/B, DB, D.B]
+  선측: [선측, 사이드 쉘, 사이드쉘, 선측 외판, S/S, SIDE SHELL]
+  갑판: [갑판, 데크, 덱, DK, DECK]
+  펌프룸: [펌프룸, 펌프 룸, 펌프실, P/R, PR, PUMP ROOM]
+  기관실: [기관실, 엔진룸, 엔진 룸, E/R, ER, ENGINE ROOM]
+  측부: [측부, 사이드]
+  플랫: [플랫, 플랫폼, FLAT]
+  선미: [선미, 스턴, AFT, 선미부]
+  구상선수: [구상선수, 벌보스 바우, 벌버스 바우, 구상 선수, BULBOUS BOW]
+  선수: [선수, 바우, FORE, 선수부]
+  평형수탱크: [평형수탱크, 평형수 탱크, 밸러스트 탱크, 발라스트 탱크, WBT, W.B.T]
+  선수루: [선수루, 포캐슬, 포크슬, FORECASTLE]
+  좌: [좌, 좌현, 포트, P, PORT]
+  우: [우, 우현, 스타보드, S, STBD]
+
+systems:
+  cargo_stripping: [화물 스트리핑, 화물스트리핑, 카고 스트리핑, 카고스트리핑, 스트리핑, 스트립핑, C/S, CS, STRIPPING]
+  ballast: [평형수, 밸러스트, 발라스트, 벨러스트, B/W, BW, BALLAST]
+
+valve_types:
+  gate: [게이트, 게이트밸브, 슬루스, GV, G/V, GATE]
+  ball: [볼, 볼밸브, BV, B/V, BALL]
+  butterfly: [버터플라이, 버터 플라이, 나비, BFV, BF, BUTTERFLY]
+  check: [체크, 역지, 역류방지, NRV, CV, CHECK]
+  globe: [글로브, 글러브, 글로우브, GLV, GLOBE]
+
+ops:
+  thickness: [두께, 판두께, 판 두께, 판후, 증후, 감후, 두껍게, 얇게, 두꺼운, 얇은]
+  grade: [강종, 재질, 그레이드, 강재 등급, 강재 종류, 고장력강, GRADE]
+  dimension: [치수, 길이, 폭, 너비, 높이, 지름, 직경, 사이즈, 연장, 단축, 길게, 짧게]
+  add_part: [추가, 신설, 덧대, 보강재 추가, 브라켓 추가, 설치, 붙여, 부착]
+  remove_part: [삭제, 제거, 철거, 빼, 없애, 삭감, 들어내]
+  reroute_pipe: [경로 변경, 경로변경, 경로, 라우팅, 리라우팅, 재배치, 우회, 루트 변경, 배관 변경]
+  equipment_spec: [사양 변경, 사양변경, 사양, 스펙, 모델 변경, 교체, 대체, 메이커 변경]
+  add_penetration: [관통부, 관통 홀, 관통홀, 관통구, 관통, 페네트레이션, 홀 추가, 슬리브 추가]
+
+intents:
+  strength: [강도, 보강, 좌굴, 응력, 피로, 구조 강화, 강성, 처짐]
+  interference: [간섭, 충돌, 클래시, 겹침, 겹쳐, 닿아, 공간 부족, 간격 부족]
+  weight: [중량, 무게, 경량화, 경량, 중량 절감, 무게 절감, 감량]
+  owner_request: [선주, 선주사, 오너, 선주 요청, 선주 코멘트, OWNER]
+  rule_change: [선급, 규칙, 룰, 규정, 협약, KR, DNV, ABS, LR, BV, CCS, 승인 코멘트, 선급 지적]
+  equipment: [장비 변경, 메이커, 제조사, 공급사 사양, 벤더, 장비 사양, 단종, 납기 문제]
+
+increase: [올려, 올림, 올리, 증가, 늘려, 늘림, 늘리, 키워, 키움, 두껍게, 증후, 상향, 업, 크게, 길게, 넓게, 높게]
+decrease: [내려, 내림, 내리, 감소, 줄여, 줄임, 줄이, 얇게, 감후, 하향, 다운, 작게, 짧게, 좁게, 낮게]
+
+dimensions:
+  length_mm: [길이, 길게, 짧게, 연장, 단축, 전장, LENGTH]
+  width_mm: [폭, 너비, 넓게, 좁게, WIDTH]
+  height_mm: [높이, 높게, 낮게, HEIGHT]
+  diameter_mm: [지름, 직경, 구경, 관경, Ø, DIA]
+
+grades: [A, B, D, E, AH32, AH36, AH40, DH32, DH36, DH40, EH32, EH36, EH40, FH36]
+
+roles:
+  crosses: [관통, 지나, 통과]
+  attach: [붙여, 붙이, 부착, 덧대, 용접]
+  remove: [빼, 제거, 삭제, 철거, 기존]
+  add: [새, 신규, 추가, 신설, 더해]
