@@ -1,0 +1,14 @@
+.git
+.venv
+.env
+.env.*
+**/__pycache__
+.mypy_cache
+.ruff_cache
+.claude
+data
+docs
+tests
+scripts
+!scripts/generate.py
+web/node_modules

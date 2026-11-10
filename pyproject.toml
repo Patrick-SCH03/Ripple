@@ -1,0 +1,57 @@
+[project]
+name = "ripple"
+version = "0.1.0"
+description = "설계변경(ECN) 영향 판단 에이전트 — 2026 K-조선 해커톤 팀 Ripple"
+readme = "README.md"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+    "fastapi==0.142.2",
+    "httpx==0.28.1",
+    "neo4j==6.4.0",
+    "openpyxl==3.1.5",
+    "pydantic==2.13.5",
+    "pyyaml==6.0.3",
+    "uvicorn==0.54.0",
+]
+
+[dependency-groups]
+dev = [
+    "mypy>=2.4.0",
+    "ruff>=0.16.10",
+    "types-openpyxl>=3.1.5",
+    "types-pyyaml>=6.0.12.20260906",
+]
+
+[build-system]
+requires = ["uv_build>=0.12.5,<0.13"]
+build-backend = "uv_build"
+
+[tool.uv.build-backend]
+module-name = "ripple"
+module-root = ""
+
+[tool.ruff]
+line-length = 120
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP", "SIM", "RUF", "C901"]
+# 한국어 주석·문자열의 전각 기호(·, ×, −, ≤)를 혼동 문자로 보지 않는다
+ignore = ["RUF001", "RUF002", "RUF003"]
+
+[tool.ruff.lint.mccabe]
+# 함수 하나의 분기 수 상한(ripple/ 전부 지킴). 검사 코드·일회성 스크립트는 아래에서 뺀다
+max-complexity = 12
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["C901"]
+"scripts/compare_llm.py" = ["C901"]
+"scripts/gate_cases.py" = ["C901"]
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
+plugins = ["pydantic.mypy"]
+files = ["ripple", "tests", "scripts"]
+mypy_path = "tests"
+explicit_package_bases = true
