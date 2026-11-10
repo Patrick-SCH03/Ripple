@@ -1,0 +1,62 @@
+# 로컬·시연(오프라인 노트북) 구성: Neo4j + API + 화면(Caddy). 라이브 배포(Railway)는 같은 이미지로 화면·API만(docs/operations.md(배포)).
+# 실행: docker compose up -d --build   (.env에 NEO4J_PASSWORD, 처음이면 RIPPLE_ADMIN_ID·RIPPLE_ADMIN_PASSWORD)
+# 화면은 http://127.0.0.1:8080 (RIPPLE_WEB_PORT), API만 볼 때는 http://127.0.0.1:8010 (RIPPLE_API_PORT)
+# Neo4j Community는 GPLv3이므로 별도 컨테이너로만 쓰고 서버 플러그인은 넣지 않는다.
+name: ripple
+
+services:
+  neo4j:
+    image: neo4j:2026.09.0-community
+    environment:
+      NEO4J_AUTH: neo4j/${NEO4J_PASSWORD:?NEO4J_PASSWORD를 .env에 넣어 주세요}
+    ports:
+      - "127.0.0.1:7474:7474"
+      - "127.0.0.1:7687:7687"
+    volumes:
+      - neo4j-data:/data
+    healthcheck:
+      test: ["CMD-SHELL", "wget -q --spider http://localhost:7474 || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 18
+
+  api:
+    build:
+      context: .
+      args:
+        RIPPLE_BUILD: ${RIPPLE_BUILD:-local}
+    environment:
+      RIPPLE_DATA_MODE: ${RIPPLE_DATA_MODE:-synthetic}
+      RIPPLE_GRAPH_STORE: neo4j  # 시작할 때 지도를 Neo4j에도 저장(http://127.0.0.1:7474에서 볼 수 있음)
+      NEO4J_URI: bolt://neo4j:7687
+      NEO4J_PASSWORD: ${NEO4J_PASSWORD}
+      # 첫 관리자(계정이 하나도 없을 때만 만들고, 첫 로그인 때 비밀번호를 바꾸게 한다). 만든 뒤에는 .env에서 지워도 된다
+      RIPPLE_ADMIN_ID: ${RIPPLE_ADMIN_ID:-}
+      RIPPLE_ADMIN_PASSWORD: ${RIPPLE_ADMIN_PASSWORD:-}
+      RIPPLE_DEMO_LOGIN: ${RIPPLE_DEMO_LOGIN:-off}
+      # 노트북은 http://127.0.0.1이라 Secure 쿠키를 끈다(https인 라이브 배포는 켠 그대로)
+      RIPPLE_COOKIE_SECURE: "off"
+    ports:
+      - "127.0.0.1:${RIPPLE_API_PORT:-8010}:8000"
+    volumes:
+      - ripple-data:/app/.data  # 가져온 지도·활성 지도·계정·세션(컨테이너를 다시 만들어도 남음, 실데이터 — 백업·삭제 주의)
+    depends_on:
+      neo4j:
+        condition: service_healthy
+
+  web:
+    build:
+      context: ./web
+      args:
+        RIPPLE_BUILD: ${RIPPLE_BUILD:-local}
+    environment:
+      RIPPLE_API_UPSTREAM: api:8000
+    ports:
+      - "127.0.0.1:${RIPPLE_WEB_PORT:-8080}:8080"
+    depends_on:
+      api:
+        condition: service_healthy
+
+volumes:
+  neo4j-data:
+  ripple-data:
