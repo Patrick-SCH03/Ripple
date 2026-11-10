@@ -1,0 +1,33 @@
+case_id: G1-002
+stage: 1
+title: P11C 화물 스트리핑 글로브 밸브 1 사양 변경(기준일 확정)
+snapshot:
+  generator_seed: 20261020
+  snapshot_id: G-1fdcbf59d84dcc2d
+request:
+  change:
+    ecn_id: GC-002
+    title: P11C 화물 스트리핑 글로브 밸브 1 사양 변경(기준일 확정)
+    ship_ids:
+    - S-001
+    intent: equipment
+    ops:
+    - op: equipment_spec
+      part_ids:
+      - S-001:P11C-VLCS-001
+      from_spec_id: VL-GLOBE-DN100-16K
+      to_spec_id: VL-BALL-DN100-16K
+    raw_text: null
+    requested_by: null
+    requested_on: null
+    effectivity: null
+    design_status: unknown
+    source: null
+    cause: null
+  as_of: '2026-10-20'
+  confirm_on: null
+  horizon_days: 60
+  holds: []
+  include_alternatives: false
+  outfit_on_board: false
+focus: 미착수 블록, 발주 전 품목, 연결 규격 같음

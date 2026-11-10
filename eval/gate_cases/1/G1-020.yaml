@@ -1,0 +1,59 @@
+case_id: G1-020
+stage: 1
+title: A11C 선미(프로펠러 보스·러더) 브라켓 1 삭제(입고된 자재)
+snapshot:
+  generator_seed: 20261020
+  snapshot_id: G-1fdcbf59d84dcc2d
+request:
+  change:
+    ecn_id: GC-020
+    title: A11C 선미(프로펠러 보스·러더) 브라켓 1 삭제(입고된 자재)
+    ship_ids:
+    - S-001
+    intent: weight
+    ops:
+    - op: remove_part
+      part_ids:
+      - S-001:A11C-BR-001
+    raw_text: null
+    requested_by: null
+    requested_on: null
+    effectivity: null
+    design_status: unknown
+    source: null
+    cause: null
+  as_of: '2026-10-20'
+  confirm_on: null
+  horizon_days: 60
+  holds: []
+  include_alternatives: false
+  outfit_on_board: false
+focus: R-M01 (나) 남는 자재의 다른 블록 수요, R-M02
+expected:
+  impacts:
+  - entity_id: PO-0033#2
+    impact_type: po_change
+    rule_id: R-M02
+  - entity_id: DWG-A11C-H01@A
+    impact_type: drawing_revision
+    rule_id: R-D01
+  forbidden_impacts:
+  - entity_id: PO-0033#2
+    impact_type: reorder
+    rule_id: null
+  - entity_id: S-001:A11C
+    impact_type: rework
+    rule_id: null
+  - entity_id: PO-0106#1
+    impact_type: reallocate_stock
+    rule_id: null
+  unresolved: []
+  cost_lines: []
+  total: null
+  timing: null
+  verdict: null
+  alternatives: null
+computed_by: 독립 계산자 A(G1-001~015)·B(G1-016~030) — 엔진 코드를 읽지 않은 AI 에이전트, 2026-10-27
+computed_on: '2026-10-27'
+checked_by: null
+notes: ''

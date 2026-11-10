@@ -1,0 +1,107 @@
+case_id: G2-004
+stage: 2
+title: P11C 화물 스트리핑 글로브 밸브 1 사양 변경(2026-12-05 확정)
+snapshot:
+  generator_seed: 20261020
+  snapshot_id: G-1fdcbf59d84dcc2d
+request:
+  change:
+    ecn_id: GC2-004
+    title: P11C 화물 스트리핑 글로브 밸브 1 사양 변경(2026-12-05 확정)
+    ship_ids:
+    - S-001
+    intent: equipment
+    ops:
+    - op: equipment_spec
+      part_ids:
+      - S-001:P11C-VLCS-001
+      from_spec_id: VL-GLOBE-DN100-16K
+      to_spec_id: VL-BALL-DN100-16K
+    raw_text: null
+    requested_by: null
+    requested_on: null
+    effectivity: null
+    design_status: unknown
+    source: null
+    cause: null
+  as_of: '2026-10-20'
+  confirm_on: '2026-12-05'
+  horizon_days: 60
+  holds: []
+  include_alternatives: false
+  outfit_on_board: false
+focus: '계획 발주일 뒤 확정: 판정일 품목 단계 추정, 발주 변경·할증, 바로 승인 기준'
+expected:
+  impacts: []
+  forbidden_impacts: []
+  unresolved: []
+  cost_lines:
+  - line_id: C-01:material:S-001:P11C-VLCS-001
+    amount:
+      value_krw: 3109000
+      low_krw: null
+      high_krw: null
+    determinacy: known
+    formula: q'×P' − q×P = 1 × 10,968,000(VL-BALL-DN100-16K 규격 단가) − 1 × 7,859,000(PO-0130#3 단가) = 3,109,000 (지도 값이라 범위 없음)
+  - line_id: R-T01:po_change:PO-0130#3
+    amount:
+      value_krw: 235770
+      low_krw: 0
+      high_krw: 392950
+    determinacy: known
+    formula: r[발주] × (q − 전용 0) × 단가 = 0.03(0.0~0.05) × 1 × 7,859,000 = 235,770 (0 / 392,950). 판정일 2026-12-05 품목 단계 '발주'(대표
+      진입일 2026-11-30 = 계획 발주일), 밸브라 강재 상한 없음
+  - line_id: R-T01:reorder:PO-0130#3
+    amount:
+      value_krw: 2193600
+      low_krw: 1096800
+      high_krw: 3290400
+    determinacy: known
+    formula: expedite_premium_ratio × (q' − c) × P' = 0.2(0.1~0.3) × (1 − 0) × 10,968,000 = 2,193,600 (1,096,800 / 3,290,400)
+  - line_id: R-D01:drawing_revision:DWG-P11C-CS-P01@A
+    amount:
+      value_krw: 126000
+      low_krw: 76000
+      high_krw: 368000
+    determinacy: known
+    formula: 배관도(discipline piping) 개정 공수 drawing_revision_piping 3h(2~8) × 설계 단가 42,000(38,000~46,000) = 126,000 (76,000
+      / 368,000)
+  total:
+    value_krw: 5664370
+    low_krw: 4281800
+    high_krw: 7160350
+  timing:
+    zone_exit_delays: {}
+    delivery_added_days: 0
+    delivery_exposure: null
+    onboard: null
+    delay_ripple: null
+    deadline:
+      kind: by_date
+      last_day: '2026-11-29'
+    deadline_total:
+      value_krw: 3235000
+      low_krw: 3185000
+      high_krw: 3477000
+    next_day_total:
+      value_krw: 5664370
+      low_krw: 4281800
+      high_krw: 7160350
+    holds:
+    - po_id: PO-0130
+      max_hold_days: 24
+      hold_until: '2026-11-13'
+      deadline_after:
+        kind: none_in_horizon
+        last_day: '2026-12-19'
+  verdict:
+    level: review
+    reasons:
+    - 발주된 자재 변경·취소 필요
+    - 총변경비용 바로 승인 기준 초과
+    - 자재 납기 지연 시 구역 출구 지연 가능
+  alternatives: null
+computed_by: 독립 계산자 D(G2-003·004) — 엔진 코드를 읽지 않은 AI 에이전트, 2026-10-31 (엔진 0.12.0·cost-v8 재계산)
+computed_on: '2026-10-31'
+checked_by: null
+notes: ''

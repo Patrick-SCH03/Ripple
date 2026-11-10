@@ -1,0 +1,34 @@
+case_id: G3-003
+stage: 3
+title: B31S No.3 COT 이중저 우 판 1·No.3 COT 이중저 우 판 2 강종 AH32→AH36(조립 중)
+snapshot:
+  generator_seed: 20261020
+  snapshot_id: G-1fdcbf59d84dcc2d
+request:
+  change:
+    ecn_id: GC3-003
+    title: B31S No.3 COT 이중저 우 판 1·No.3 COT 이중저 우 판 2 강종 AH32→AH36(조립 중)
+    ship_ids:
+    - S-001
+    intent: strength
+    ops:
+    - op: grade
+      part_ids:
+      - S-001:B31S-PL-001
+      - S-001:B31S-PL-002
+      from_grade: AH32
+      to_grade: AH36
+    raw_text: null
+    requested_by: null
+    requested_on: null
+    effectivity: null
+    design_status: unknown
+    source: null
+    cause: null
+  as_of: '2026-10-20'
+  confirm_on: null
+  horizon_days: 60
+  holds: []
+  include_alternatives: true
+  outfit_on_board: false
+focus: '판 강종 상향(나): 강종 대신 두께안 T3의 두께(0.5mm 올림, 판 두께별 연산)와 판정 비율, 조립 중 블록의 재작업'

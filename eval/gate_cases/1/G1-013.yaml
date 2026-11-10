@@ -1,0 +1,76 @@
+case_id: G1-013
+stage: 1
+title: B31P No.3 COT 이중저 좌 판 11 두께 15→19mm(이웃 15mm, 차 4)
+snapshot:
+  generator_seed: 20261020
+  snapshot_id: G-1fdcbf59d84dcc2d
+request:
+  change:
+    ecn_id: GC-013
+    title: B31P No.3 COT 이중저 좌 판 11 두께 15→19mm(이웃 15mm, 차 4)
+    ship_ids:
+    - S-001
+    intent: strength
+    ops:
+    - op: thickness
+      part_ids:
+      - S-001:B31P-PL-011
+      from_mm: 15.0
+      to_mm: 19.0
+    raw_text: null
+    requested_by: null
+    requested_on: null
+    effectivity: null
+    design_status: unknown
+    source: null
+    cause: null
+  as_of: '2026-10-20'
+  confirm_on: null
+  horizon_days: 60
+  holds: []
+  include_alternatives: false
+  outfit_on_board: false
+focus: R-T02 문턱 경계(얇은 쪽 10mm 초과 → 4.0)
+expected:
+  impacts:
+  - entity_id: PO-0035#1
+    impact_type: po_change
+    rule_id: R-T01
+  - entity_id: PO-0035#1
+    impact_type: reorder
+    rule_id: R-T01
+  - entity_id: S-001:B31P-PL-006
+    impact_type: taper
+    rule_id: R-T02
+  - entity_id: S-001:B31P-BR-006
+    impact_type: weld_recheck
+    rule_id: R-T03
+  - entity_id: S-001:B31P-ST-004
+    impact_type: weld_recheck
+    rule_id: R-T03
+  - entity_id: S-001:B31P-ST-018
+    impact_type: weld_recheck
+    rule_id: R-T03
+  - entity_id: S-001:B31P
+    impact_type: rework
+    rule_id: R-B01
+  - entity_id: DWG-B31P-H01@A
+    impact_type: drawing_revision
+    rule_id: R-D01
+  forbidden_impacts:
+  - entity_id: LOT-04
+    impact_type: reallocate_stock
+    rule_id: null
+  - entity_id: S-001:B31P-PL-011
+    impact_type: needs_confirmation
+    rule_id: null
+  unresolved: []
+  cost_lines: []
+  total: null
+  timing: null
+  verdict: null
+  alternatives: null
+computed_by: 독립 계산자 A(G1-001~015)·B(G1-016~030) — 엔진 코드를 읽지 않은 AI 에이전트, 2026-10-27
+computed_on: '2026-10-27'
+checked_by: null
+notes: ''

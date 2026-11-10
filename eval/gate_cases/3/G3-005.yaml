@@ -1,0 +1,199 @@
+case_id: G3-005
+stage: 3
+title: D31C 판 3장 두께 13.5→15.5mm(미착수)
+snapshot:
+  generator_seed: 20261020
+  snapshot_id: G-1fdcbf59d84dcc2d
+request:
+  change:
+    ecn_id: GC3-005
+    title: D31C 판 3장 두께 13.5→15.5mm(미착수)
+    ship_ids:
+    - S-001
+    intent: strength
+    ops:
+    - op: thickness
+      part_ids:
+      - S-001:D31C-PL-002
+      - S-001:D31C-PL-008
+      - S-001:D31C-PL-009
+      from_mm: 13.5
+      to_mm: 15.5
+    raw_text: null
+    requested_by: null
+    requested_on: null
+    effectivity: null
+    design_status: unknown
+    source: null
+    cause: null
+  as_of: '2026-10-20'
+  confirm_on: null
+  horizon_days: 60
+  holds: []
+  include_alternatives: true
+  outfit_on_board: false
+focus: '판 여러 장(가): 범위 축소안 T5(뺄 판 고르기, 설계자 확인), 보강재 추가안 T1의 판마다 연산, 강종 상향안 T2 부족, 날짜별 가장 싼 대안 구간'
+expected:
+  impacts: []
+  forbidden_impacts: []
+  unresolved: []
+  cost_lines: []
+  total: null
+  timing: null
+  verdict: null
+  alternatives:
+    alternatives:
+    - alt_id: ALT-REQ
+      ops:
+      - op: thickness
+        part_ids:
+        - S-001:D31C-PL-002
+        - S-001:D31C-PL-008
+        - S-001:D31C-PL-009
+        from_mm: 13.5
+        to_mm: 15.5
+      scope_reduced: false
+      eligibility:
+        status: meets
+        ratio_vs_request: 1.0
+      total:
+        value_krw: 3001640
+        low_krw: 1993549
+        high_krw: 4958232
+      max_exit_delay_days: 0
+      deadline:
+        kind: confirm_now
+        last_day: '2026-10-20'
+      best:
+        confirm_on: '2026-10-20'
+        holds: []
+        total:
+          value_krw: 3001640
+          low_krw: 1993549
+          high_krw: 4958232
+      rank: 1
+      formula: 요청안(비교 기준, ρ=1). 확정일 2026-10-20 총액(대표값) = C-01:material×3 354,201 + R-T01:po_change 1,195,428 + R-T01:reorder
+        549,011 + R-T03:weld_recheck×11 231,000 + R-D01:drawing_revision 672,000 = 3,001,640; 블록 단계 D31C not_started; 품목 단계
+        PO-0088#1 in_fabrication; 출구 지연 0일
+    - alt_id: ALT-T1
+      ops:
+      - op: add_part
+        block_id: S-001:D31C
+        kind: stiffener
+        spec_id: HP280x10-AH32
+        qty: 0.376
+        attach_to_part_id: S-001:D31C-PL-002
+      - op: add_part
+        block_id: S-001:D31C
+        kind: stiffener
+        spec_id: HP280x12-AH32
+        qty: 0.661
+        attach_to_part_id: S-001:D31C-PL-008
+      - op: add_part
+        block_id: S-001:D31C
+        kind: stiffener
+        spec_id: HP200x12-AH32
+        qty: 0.324
+        attach_to_part_id: S-001:D31C-PL-009
+      scope_reduced: false
+      eligibility:
+        status: meets
+        ratio_vs_request: 1.692
+      total:
+        value_krw: 4713865
+        low_krw: 2562955
+        high_krw: 8209175
+      max_exit_delay_days: 0
+      deadline:
+        kind: by_date
+        last_day: '2026-11-07'
+      best:
+        confirm_on: '2026-10-20'
+        holds: []
+        total:
+          value_krw: 4713865
+          low_krw: 2562955
+          high_krw: 8209175
+      rank: 2
+      formula: ρ = min_p G_alt/G_req = 1.6923 (G_alt 2.0000 / G_req 1.1818) → meets. 확정일 2026-10-20 총액(대표값) = C-01:material×3
+        1,387,915 + C-02:new_work×3 2,653,950 + R-D01:drawing_revision 672,000 = 4,713,865; 블록 단계 D31C not_started; 출구 지연
+        0일
+    - alt_id: ALT-T2
+      ops:
+      - op: grade
+        part_ids:
+        - S-001:D31C-PL-002
+        - S-001:D31C-PL-008
+        - S-001:D31C-PL-009
+        from_grade: AH32
+        to_grade: AH36
+      scope_reduced: false
+      eligibility:
+        status: short
+        ratio_vs_request: 0.881
+      total:
+        value_krw: 2465142
+        low_krw: 1609009
+        high_krw: 4121276
+      max_exit_delay_days: 0
+      deadline:
+        kind: confirm_now
+        last_day: '2026-10-20'
+      best: null
+      rank: null
+      formula: ρ = min_p G_alt/G_req = 0.8807 (G_alt 1.0408 / G_req 1.1818) → short. 확정일 2026-10-20 총액(대표값) = C-01:material×3
+        99,619 + R-T01:po_change 1,195,428 + R-T01:reorder 498,095 + R-D01:drawing_revision 672,000 = 2,465,142; 블록 단계 D31C
+        not_started; 품목 단계 PO-0088#1 in_fabrication; 출구 지연 0일
+    - alt_id: ALT-T5
+      ops:
+      - op: thickness
+        part_ids:
+        - S-001:D31C-PL-008
+        - S-001:D31C-PL-009
+        from_mm: 13.5
+        to_mm: 15.5
+      scope_reduced: true
+      eligibility:
+        status: designer
+        ratio_vs_request: null
+      total:
+        value_krw: 2459089
+        low_krw: 1583774
+        high_krw: 4282904
+      max_exit_delay_days: 0
+      deadline:
+        kind: confirm_now
+        last_day: '2026-10-20'
+      best: null
+      rank: null
+      formula: 설계자 확인(적용 범위를 줄인 대안은 설계자 확인). 확정일 2026-10-20 총액(대표값) = C-01:material×2 262,631 + R-T01:po_change 886,380 +
+        R-T01:reorder 407,078 + R-T03:weld_recheck×11 231,000 + R-D01:drawing_revision 672,000 = 2,459,089; 블록 단계 D31C not_started;
+        품목 단계 PO-0088#1 in_fabrication; 출구 지연 0일
+    recommendation:
+      alt_id: ALT-REQ
+      confirm_on: '2026-10-20'
+      holds: []
+      total:
+        value_krw: 3001640
+        low_krw: 1993549
+        high_krw: 4958232
+    cheapest_by_date:
+    - alt_id: ALT-REQ
+      start: '2026-10-20'
+      end: '2026-12-03'
+      total:
+        value_krw: 3001640
+        low_krw: 1993549
+        high_krw: 4958232
+    - alt_id: ALT-T1
+      start: '2026-12-04'
+      end: '2026-12-19'
+      total:
+        value_krw: 7605978
+        low_krw: 3205648
+        high_krw: 15150248
+    omitted: []
+computed_by: 독립 계산자(G3-001~005) — 엔진 코드를 읽지 않은 AI 에이전트, 2026-10-27
+computed_on: '2026-10-27'
+checked_by: null
+notes: ''

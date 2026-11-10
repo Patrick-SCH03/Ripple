@@ -1,0 +1,127 @@
+case_id: G3-001
+stage: 3
+title: E11C 기관실 이중저 판 1 두께 12→13.5mm(선행의장)
+snapshot:
+  generator_seed: 20261020
+  snapshot_id: G-1fdcbf59d84dcc2d
+request:
+  change:
+    ecn_id: GC3-001
+    title: E11C 기관실 이중저 판 1 두께 12→13.5mm(선행의장)
+    ship_ids:
+    - S-001
+    intent: strength
+    ops:
+    - op: thickness
+      part_ids:
+      - S-001:E11C-PL-001
+      from_mm: 12.0
+      to_mm: 13.5
+    raw_text: null
+    requested_by: null
+    requested_on: null
+    effectivity: null
+    design_status: unknown
+    source: null
+    cause: null
+  as_of: '2026-10-20'
+  confirm_on: null
+  horizon_days: 60
+  holds: []
+  include_alternatives: true
+  outfit_on_board: false
+focus: '판 두께 증가(가): 보강재 추가안 T1의 보강재 수·중량과 판정 비율, 상향 강종 단가가 없어 강종 대안을 만들지 않는 이유, 선행의장 블록의 재작업과 새 부재 제작 공수(C-02)'
+expected:
+  impacts: []
+  forbidden_impacts: []
+  unresolved: []
+  cost_lines: []
+  total: null
+  timing: null
+  verdict: null
+  alternatives:
+    alternatives:
+    - alt_id: ALT-REQ
+      ops:
+      - op: thickness
+        part_ids:
+        - S-001:E11C-PL-001
+        from_mm: 12.0
+        to_mm: 13.5
+      scope_reduced: false
+      eligibility:
+        status: meets
+        ratio_vs_request: 1.0
+      total:
+        value_krw: 6905379
+        low_krw: 2312512
+        high_krw: 15957955
+      max_exit_delay_days: 0
+      deadline:
+        kind: confirm_now
+        last_day: '2026-10-20'
+      best:
+        confirm_on: '2026-10-20'
+        holds: []
+        total:
+          value_krw: 6905379
+          low_krw: 2312512
+          high_krw: 15957955
+      rank: 2
+      formula: 요청안(비교 기준, ρ=1). 확정일 2026-10-20 총액(대표값) = C-01:material 142,198 + R-T01:po_change 568,793 + R-T01:reorder 255,957
+        + R-B01:rework×3 5,224,431 + R-T03:weld_recheck×2 42,000 + R-D01:drawing_revision 672,000 = 6,905,379; 블록 단계 E11C
+        pre_outfitting; 품목 단계 PO-0002#2 processed; 출구 지연 0일
+    - alt_id: ALT-T1
+      ops:
+      - op: add_part
+        block_id: S-001:E11C
+        kind: stiffener
+        spec_id: HP200x11-AH36
+        qty: 0.564
+        attach_to_part_id: S-001:E11C-PL-001
+      scope_reduced: false
+      eligibility:
+        status: meets
+        ratio_vs_request: 1.727
+      total:
+        value_krw: 4654747
+        low_krw: 1745815
+        high_krw: 10193455
+      max_exit_delay_days: 0
+      deadline:
+        kind: confirm_now
+        last_day: '2026-10-20'
+      best:
+        confirm_on: '2026-10-20'
+        holds: []
+        total:
+          value_krw: 4654747
+          low_krw: 1745815
+          high_krw: 10193455
+      rank: 1
+      formula: ρ = min_p G_alt/G_req = 1.7273 (G_alt 2.0000 / G_req 1.1579) → meets. 확정일 2026-10-20 총액(대표값) = C-01:material
+        539,184 + C-02:new_work 1,099,800 + R-B01:rework×3 2,343,763 + R-D01:drawing_revision 672,000 = 4,654,747; 블록 단계 E11C
+        pre_outfitting; 출구 지연 0일
+    recommendation:
+      alt_id: ALT-T1
+      confirm_on: '2026-10-20'
+      holds: []
+      total:
+        value_krw: 4654747
+        low_krw: 1745815
+        high_krw: 10193455
+    cheapest_by_date:
+    - alt_id: ALT-T1
+      start: '2026-10-20'
+      end: '2026-12-19'
+      total:
+        value_krw: 4654747
+        low_krw: 1745815
+        high_krw: 10193455
+    omitted:
+    - alt_id: ALT-T2
+      reason: no_upper_grade
+computed_by: 독립 계산자(G3-001~005) — 엔진 코드를 읽지 않은 AI 에이전트, 2026-10-27
+computed_on: '2026-10-27'
+checked_by: null
+notes: ''

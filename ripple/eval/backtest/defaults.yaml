@@ -1,0 +1,35 @@
+# 백테스트 변환 기본값 — 형식: ripple/eval/backtest/defaults.py, 설명: docs/backtest.md 3·4절
+# 사례 양식에 없거나 빈 값을 채우는 가정이다. 결과의 '가정' 시트에 어떤 값을 썼는지 남는다. 값을 바꾸면 version을 올린다.
+# 공정 기간·간격·발주 리드타임·단가·선가는 여기 두지 않고 생성기 설정(generator/config.yaml) 범위의 가운데 값을 쓴다.
+# 재제작 방식·지연 기준은 양식 열이 먼저(빈 칸만 여기 값), 확정일 = 기준일 + 결정까지 걸린 일수, 공수는 모든 공수 줄과 비교,
+#   사내 협력사도 직영 단가(엔진 작업반 단가 = 직영과 같음).
+version: backtest-v2
+
+block_weight_t:  # 블록 무게가 비었을 때(블록 종류별, 종류도 비면 unknown)
+  flat: 300  # 평
+  curved: 250  # 곡
+  bow_stern: 200  # 선수미
+  unknown: 300
+
+member:
+  weight_t: 0.2  # 바뀐 부재 1개 무게(t). 엔진 환산 중량의 보강재 값과 같은 크기
+  count: 1  # 바뀐 부재 수와 재제작 스풀 수가 모두 비었을 때의 바뀐 부재 수
+
+spool:
+  # 재제작 방식이 비었을 때(재제작 스풀이 있을 때만 씀):
+  # in_house(사내 재제작) | outside(사외 재발주) — 둘 다 옛 스풀을 빼고 같은 규격 새 스풀(발주 변경·취소 + 새 스풀 리드타임 관문),
+  # dimension(치수 변경) — 같은 자재를 다시 가공(발주·리드타임 없음, 재작업·도면만)
+  method: in_house
+  in_house_lead_days: 14  # 사내 재제작 새 스풀 리드타임(일). 사외 재발주는 엔진 파라미터 lead_time_days.pipe
+  weight_t: 0.15  # 옛 스풀 1개 무게(t). 새 스풀은 엔진 환산 중량(rework.equivalent_weight_t.pipe_spool)
+  length_m: 4.0  # 스풀 1개 길이(m) — 발주 수량·자재비
+  po_lines: 1  # 발주 변경 건수가 비었을 때 스풀을 나눠 담는 발주 품목 수
+
+delay_basis: exit  # 지연 기준이 비었을 때(실제 지연이 있을 때만 씀): erection(탑재) | exit(구역 출구) | delivery(인도)
+
+schedule:
+  erection_start: 2026-06-01  # 대상 블록 탑재 계획 착수일. 날짜 자체는 결과(금액·일수)에 영향이 없다
+  stage_position: 0.5  # 발견 단계 안에서 기준일의 위치(0 = 단계 첫날, 1 = 마지막 날)
+  exit_slack_days: 0  # 블록 탑재 완료 → 구역 출구 이정표 여유(0 = 이 블록이 구역 출구를 정함)
+  float_to_delivery_days: 30  # 구역 출구 → 계약 인도 여유(경계 조건)
+  post_exit_days: 270  # 구역 출구 뒤 인도까지 모델 밖 공정 기간(인도일 표시용)

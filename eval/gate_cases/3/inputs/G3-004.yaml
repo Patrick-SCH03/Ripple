@@ -1,0 +1,34 @@
+case_id: G3-004
+stage: 3
+title: L31C 중심선 종격벽 판 1에 보강재 추가(HP200x12-A)
+snapshot:
+  generator_seed: 20261020
+  snapshot_id: G-1fdcbf59d84dcc2d
+request:
+  change:
+    ecn_id: GC3-004
+    title: L31C 중심선 종격벽 판 1에 보강재 추가(HP200x12-A)
+    ship_ids:
+    - S-001
+    intent: strength
+    ops:
+    - op: add_part
+      block_id: S-001:L31C
+      kind: stiffener
+      spec_id: HP200x12-A
+      qty: 0.117
+      attach_to_part_id: S-001:L31C-PL-001
+    raw_text: null
+    requested_by: null
+    requested_on: null
+    effectivity: null
+    design_status: unknown
+    source: null
+    cause: null
+  as_of: '2026-10-20'
+  confirm_on: null
+  horizon_days: 60
+  holds: []
+  include_alternatives: true
+  outfit_on_board: false
+focus: '판에 보강재 추가(다): 보강재를 붙인 패널 기준 비교, 보강재 대신 두께안 T4의 두께 상한(설계자 확인), 강종 상향안 T2의 부족 판정, 새 부재 제작 공수(C-02)'

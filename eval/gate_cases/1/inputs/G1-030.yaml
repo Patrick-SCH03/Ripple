@@ -1,0 +1,31 @@
+case_id: G1-030
+stage: 1
+title: F11C 구상선수 보강재 3 삭제(2026-12-19 확정, 입고된 자재 → 다른 블록 수요)
+snapshot:
+  generator_seed: 20261020
+  snapshot_id: G-1fdcbf59d84dcc2d
+request:
+  change:
+    ecn_id: GC-030
+    title: F11C 구상선수 보강재 3 삭제(2026-12-19 확정, 입고된 자재 → 다른 블록 수요)
+    ship_ids:
+    - S-001
+    intent: weight
+    ops:
+    - op: remove_part
+      part_ids:
+      - S-001:F11C-ST-003
+    raw_text: null
+    requested_by: null
+    requested_on: null
+    effectivity: null
+    design_status: unknown
+    source: null
+    cause: null
+  as_of: '2026-10-20'
+  confirm_on: '2026-12-19'
+  horizon_days: 60
+  holds: []
+  include_alternatives: false
+  outfit_on_board: false
+focus: 'R-M01 (나) 양성: 남는 자재를 쓸 다른 블록 수요가 탐색 기간 안에 있음'

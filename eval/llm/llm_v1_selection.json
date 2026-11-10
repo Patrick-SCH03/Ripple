@@ -1,0 +1,574 @@
+{
+  "candidates": [
+    "claude:claude-haiku-5-5",
+    "claude:claude-haiku-5-5@low",
+    "claude:claude-sonnet-5-5",
+    "claude:claude-sonnet-5-5@low",
+    "claude:claude-opus-5-5",
+    "claude:claude-opus-5-5@low",
+    "gemini:gemini-3.8-flash"
+  ],
+  "samples": {
+    "rule_fail": 29,
+    "forced": 200,
+    "explain": 100
+  },
+  "order": {
+    "rewrite": [
+      "claude-sonnet-5-5@low",
+      "claude-sonnet-5-5",
+      "claude-haiku-5-5@low",
+      "claude-haiku-5-5",
+      "gemini-3.8-flash",
+      "claude-opus-5-5@low",
+      "claude-opus-5-5"
+    ],
+    "explain": [
+      "claude-opus-5-5@low",
+      "gemini-3.8-flash",
+      "claude-sonnet-5-5",
+      "claude-sonnet-5-5@low",
+      "claude-haiku-5-5",
+      "claude-haiku-5-5@low",
+      "claude-opus-5-5"
+    ]
+  },
+  "report": {
+    "rewrite": [
+      {
+        "model": "claude-haiku-5-5",
+        "n": 229,
+        "outcomes": {
+          "incomplete": 23,
+          "unaccepted": 44,
+          "wrong": 19,
+          "exact": 143
+        },
+        "by_group": {
+          "rule_fail:incomplete": 15,
+          "rule_fail:unaccepted": 12,
+          "rule_fail:wrong": 2,
+          "forced:exact": 143,
+          "forced:wrong": 17,
+          "forced:unaccepted": 32,
+          "forced:incomplete": 8
+        },
+        "detail": {
+          "rule_fail": 29,
+          "incomplete:rule_fail:from_value,to_value": 2,
+          "incomplete:rule_fail:part_ids,from_mm": 5,
+          "unaccepted:rule_fail:understood=false": 12,
+          "wrong:rule_fail:other": 2,
+          "incomplete:rule_fail:part_ids": 3,
+          "incomplete:rule_fail:to_mm": 1,
+          "incomplete:rule_fail:part_ids,from_spec_id,to_spec_id": 2,
+          "incomplete:rule_fail:to_spec_id": 2,
+          "forced": 200,
+          "exact:forced:intent 다름": 143,
+          "wrong:forced:other": 15,
+          "unaccepted:forced:understood=false": 32,
+          "wrong:forced:numeric": 2,
+          "incomplete:forced:to_mm": 1,
+          "incomplete:forced:part_ids": 2,
+          "incomplete:forced:part_ids,from_spec_id,to_spec_id": 3,
+          "incomplete:forced:kind": 1,
+          "incomplete:forced:part_ids,from_spec_id": 1
+        },
+        "violation_rate": null,
+        "p50_s": 3.7,
+        "p95_s": 5.56,
+        "mean_s": 3.83,
+        "cost_usd": 0.0805,
+        "tokens_in": 197995,
+        "tokens_out": 121335,
+        "wall_s": 113.2
+      },
+      {
+        "model": "claude-haiku-5-5@low",
+        "n": 229,
+        "outcomes": {
+          "incomplete": 29,
+          "exact": 141,
+          "wrong": 17,
+          "unaccepted": 42
+        },
+        "by_group": {
+          "rule_fail:incomplete": 17,
+          "rule_fail:exact": 1,
+          "rule_fail:wrong": 1,
+          "rule_fail:unaccepted": 10,
+          "forced:exact": 140,
+          "forced:wrong": 16,
+          "forced:unaccepted": 32,
+          "forced:incomplete": 12
+        },
+        "detail": {
+          "rule_fail": 29,
+          "incomplete:rule_fail:from_value,to_value": 2,
+          "incomplete:rule_fail:part_ids,from_mm": 4,
+          "incomplete:rule_fail:to_grade": 2,
+          "exact:rule_fail:intent 다름": 1,
+          "wrong:rule_fail:other": 1,
+          "incomplete:rule_fail:part_ids": 3,
+          "unaccepted:rule_fail:understood=false": 10,
+          "incomplete:rule_fail:to_mm": 1,
+          "incomplete:rule_fail:to_spec_id": 3,
+          "incomplete:rule_fail:part_ids,from_spec_id,to_spec_id": 2,
+          "forced": 200,
+          "exact:forced:intent 다름": 140,
+          "wrong:forced:other": 16,
+          "unaccepted:forced:understood=false": 31,
+          "incomplete:forced:part_ids,from_spec_id,to_spec_id": 4,
+          "incomplete:forced:kind": 2,
+          "incomplete:forced:qty": 1,
+          "incomplete:forced:to_mm": 1,
+          "incomplete:forced:pipe_part_id": 1,
+          "incomplete:forced:part_ids,from_spec_id": 1,
+          "unaccepted:forced:검사 불통과": 1,
+          "incomplete:forced:field": 1,
+          "incomplete:forced:part_ids": 1
+        },
+        "violation_rate": null,
+        "p50_s": 3.48,
+        "p95_s": 5.14,
+        "mean_s": 3.54,
+        "cost_usd": 0.0715,
+        "tokens_in": 197995,
+        "tokens_out": 103423,
+        "wall_s": 104.9
+      },
+      {
+        "model": "claude-sonnet-5-5",
+        "n": 229,
+        "outcomes": {
+          "incomplete": 29,
+          "wrong": 18,
+          "unaccepted": 36,
+          "exact": 146
+        },
+        "by_group": {
+          "rule_fail:incomplete": 19,
+          "rule_fail:wrong": 3,
+          "rule_fail:unaccepted": 6,
+          "rule_fail:exact": 1,
+          "forced:exact": 145,
+          "forced:unaccepted": 30,
+          "forced:wrong": 15,
+          "forced:incomplete": 10
+        },
+        "detail": {
+          "rule_fail": 29,
+          "incomplete:rule_fail:from_value,to_value": 1,
+          "incomplete:rule_fail:part_ids,from_mm": 6,
+          "incomplete:rule_fail:field,from_value,to_value": 1,
+          "incomplete:rule_fail:to_grade": 2,
+          "wrong:rule_fail:other": 3,
+          "incomplete:rule_fail:part_ids": 4,
+          "incomplete:rule_fail:to_mm": 1,
+          "incomplete:rule_fail:to_spec_id": 2,
+          "incomplete:rule_fail:part_ids,from_spec_id,to_spec_id": 2,
+          "unaccepted:rule_fail:understood=false": 6,
+          "exact:rule_fail:intent 다름": 1,
+          "forced": 200,
+          "exact:forced:intent 다름": 145,
+          "unaccepted:forced:understood=false": 29,
+          "wrong:forced:other": 14,
+          "incomplete:forced:part_ids,from_spec_id,to_spec_id": 3,
+          "incomplete:forced:qty": 5,
+          "incomplete:forced:part_ids,from_spec_id": 1,
+          "unaccepted:forced:검사 불통과": 1,
+          "incomplete:forced:pipe_part_id": 1,
+          "wrong:forced:numeric": 1
+        },
+        "violation_rate": null,
+        "p50_s": 4.69,
+        "p95_s": 7.74,
+        "mean_s": 4.88,
+        "cost_usd": 1.4006,
+        "tokens_in": 197995,
+        "tokens_out": 100460,
+        "wall_s": 142.1
+      },
+      {
+        "model": "claude-sonnet-5-5@low",
+        "n": 229,
+        "outcomes": {
+          "incomplete": 21,
+          "unaccepted": 114,
+          "wrong": 14,
+          "exact": 80
+        },
+        "by_group": {
+          "rule_fail:incomplete": 8,
+          "rule_fail:unaccepted": 20,
+          "rule_fail:wrong": 1,
+          "forced:exact": 80,
+          "forced:unaccepted": 94,
+          "forced:incomplete": 13,
+          "forced:wrong": 13
+        },
+        "detail": {
+          "rule_fail": 29,
+          "incomplete:rule_fail:field,from_value,to_value": 1,
+          "unaccepted:rule_fail:understood=false": 20,
+          "wrong:rule_fail:other": 1,
+          "incomplete:rule_fail:part_ids,from_mm": 2,
+          "incomplete:rule_fail:spec_id,qty": 1,
+          "incomplete:rule_fail:part_ids,from_spec_id,to_spec_id": 2,
+          "incomplete:rule_fail:part_ids": 2,
+          "forced": 200,
+          "exact:forced:intent 다름": 80,
+          "unaccepted:forced:understood=false": 91,
+          "incomplete:forced:pipe_part_id": 1,
+          "wrong:forced:other": 13,
+          "incomplete:forced:kind": 1,
+          "incomplete:forced:spec_id,qty": 2,
+          "incomplete:forced:kind,qty": 1,
+          "unaccepted:forced:검사 불통과": 3,
+          "incomplete:forced:qty": 3,
+          "incomplete:forced:part_ids,from_spec_id": 1,
+          "incomplete:forced:to_spec_id": 1,
+          "incomplete:forced:part_ids,from_spec_id,to_spec_id": 1,
+          "incomplete:forced:diameter_mm": 1,
+          "incomplete:forced:plate_part_id,pipe_part_id,diameter_mm": 1
+        },
+        "violation_rate": null,
+        "p50_s": 2.18,
+        "p95_s": 4.7,
+        "mean_s": 2.6,
+        "cost_usd": 0.6418,
+        "tokens_in": 197995,
+        "tokens_out": 24576,
+        "wall_s": 75.5
+      },
+      {
+        "model": "claude-opus-5-5",
+        "n": 229,
+        "outcomes": {
+          "incomplete": 33,
+          "unaccepted": 31,
+          "wrong": 37,
+          "exact": 128
+        },
+        "by_group": {
+          "rule_fail:incomplete": 22,
+          "rule_fail:unaccepted": 5,
+          "rule_fail:wrong": 1,
+          "rule_fail:exact": 1,
+          "forced:exact": 127,
+          "forced:unaccepted": 26,
+          "forced:wrong": 36,
+          "forced:incomplete": 11
+        },
+        "detail": {
+          "rule_fail": 29,
+          "incomplete:rule_fail:from_value,to_value": 2,
+          "incomplete:rule_fail:part_ids,from_mm": 6,
+          "incomplete:rule_fail:to_grade": 2,
+          "unaccepted:rule_fail:understood=false": 5,
+          "wrong:rule_fail:other": 1,
+          "incomplete:rule_fail:part_ids": 5,
+          "incomplete:rule_fail:to_mm": 1,
+          "incomplete:rule_fail:to_spec_id": 4,
+          "incomplete:rule_fail:part_ids,from_spec_id,to_spec_id": 2,
+          "exact:rule_fail:intent 다름": 1,
+          "forced": 200,
+          "exact:forced:intent 다름": 127,
+          "unaccepted:forced:understood=false": 18,
+          "wrong:forced:other": 35,
+          "incomplete:forced:part_ids,from_spec_id,to_spec_id": 8,
+          "unaccepted:forced:검사 불통과": 8,
+          "incomplete:forced:part_ids,from_spec_id": 1,
+          "wrong:forced:numeric": 1,
+          "incomplete:forced:part_ids,from_grade": 1,
+          "incomplete:forced:part_ids,from_mm": 1
+        },
+        "violation_rate": null,
+        "p50_s": 3.93,
+        "p95_s": 7.88,
+        "mean_s": 4.4,
+        "cost_usd": 1.9701,
+        "tokens_in": 197995,
+        "tokens_out": 58908,
+        "wall_s": 132.9
+      },
+      {
+        "model": "claude-opus-5-5@low",
+        "n": 229,
+        "outcomes": {
+          "incomplete": 28,
+          "unaccepted": 32,
+          "wrong": 28,
+          "exact": 141
+        },
+        "by_group": {
+          "rule_fail:incomplete": 20,
+          "rule_fail:unaccepted": 6,
+          "rule_fail:wrong": 2,
+          "rule_fail:exact": 1,
+          "forced:exact": 140,
+          "forced:unaccepted": 26,
+          "forced:wrong": 26,
+          "forced:incomplete": 8
+        },
+        "detail": {
+          "rule_fail": 29,
+          "incomplete:rule_fail:from_value,to_value": 2,
+          "incomplete:rule_fail:part_ids,from_mm": 6,
+          "incomplete:rule_fail:to_grade": 2,
+          "unaccepted:rule_fail:understood=false": 5,
+          "wrong:rule_fail:other": 2,
+          "incomplete:rule_fail:part_ids": 4,
+          "incomplete:rule_fail:to_mm": 1,
+          "incomplete:rule_fail:to_spec_id": 3,
+          "incomplete:rule_fail:part_ids,from_spec_id,to_spec_id": 2,
+          "exact:rule_fail:intent 다름": 1,
+          "unaccepted:rule_fail:검사 불통과": 1,
+          "forced": 200,
+          "exact:forced:intent 다름": 140,
+          "unaccepted:forced:understood=false": 19,
+          "wrong:forced:other": 24,
+          "incomplete:forced:part_ids,from_spec_id,to_spec_id": 5,
+          "unaccepted:forced:검사 불통과": 7,
+          "incomplete:forced:part_ids,from_spec_id": 3,
+          "wrong:forced:numeric": 2
+        },
+        "violation_rate": null,
+        "p50_s": 2.87,
+        "p95_s": 5.59,
+        "mean_s": 3.31,
+        "cost_usd": 1.4834,
+        "tokens_in": 197995,
+        "tokens_out": 34571,
+        "wall_s": 97.6
+      },
+      {
+        "model": "gemini-3.8-flash",
+        "n": 229,
+        "outcomes": {
+          "incomplete": 90,
+          "unaccepted": 15,
+          "wrong": 21,
+          "exact": 103
+        },
+        "by_group": {
+          "rule_fail:incomplete": 24,
+          "rule_fail:unaccepted": 4,
+          "rule_fail:wrong": 1,
+          "forced:exact": 103,
+          "forced:wrong": 20,
+          "forced:incomplete": 66,
+          "forced:unaccepted": 11
+        },
+        "detail": {
+          "rule_fail": 29,
+          "incomplete:rule_fail:field,from_value,to_value": 2,
+          "incomplete:rule_fail:part_ids,from_mm": 6,
+          "incomplete:rule_fail:to_grade": 2,
+          "unaccepted:rule_fail:understood=false": 4,
+          "incomplete:rule_fail:qty": 1,
+          "incomplete:rule_fail:part_ids": 4,
+          "incomplete:rule_fail:to_mm": 1,
+          "incomplete:rule_fail:to_spec_id": 3,
+          "incomplete:rule_fail:part_ids,from_spec_id,to_spec_id": 2,
+          "incomplete:rule_fail:part_ids,from_grade": 1,
+          "incomplete:rule_fail:field": 1,
+          "wrong:rule_fail:other": 1,
+          "incomplete:rule_fail:part_ids,from_mm,to_mm": 1,
+          "forced": 200,
+          "exact:forced:intent 다름": 103,
+          "wrong:forced:other": 20,
+          "incomplete:forced:qty": 24,
+          "incomplete:forced:to_mm": 5,
+          "incomplete:forced:pipe_part_id": 4,
+          "incomplete:forced:field": 19,
+          "unaccepted:forced:understood=false": 9,
+          "unaccepted:forced:검사 불통과": 2,
+          "incomplete:forced:spec_id,qty": 6,
+          "incomplete:forced:field,from_value,to_value": 1,
+          "incomplete:forced:pipe_part_id,diameter_mm": 3,
+          "incomplete:forced:to_spec_id": 3,
+          "incomplete:forced:to_grade": 1
+        },
+        "violation_rate": null,
+        "p50_s": 2.3,
+        "p95_s": 5.84,
+        "mean_s": 2.7,
+        "cost_usd": 0.1333,
+        "tokens_in": 107015,
+        "tokens_out": 14154,
+        "wall_s": 88.7
+      }
+    ],
+    "explain": [
+      {
+        "model": "claude-haiku-5-5",
+        "n": 100,
+        "outcomes": {
+          "used": 100
+        },
+        "by_group": {
+          "dev:used": 100
+        },
+        "detail": {
+          "blocks": 634,
+          "fact": 70,
+          "kept_rest": 546,
+          "used:dev": 100
+        },
+        "violation_rate": 0.1104,
+        "p50_s": 4.37,
+        "p95_s": 5.72,
+        "mean_s": 4.49,
+        "cost_usd": 0.0547,
+        "tokens_in": 143520,
+        "tokens_out": 80761,
+        "wall_s": 58.7
+      },
+      {
+        "model": "claude-haiku-5-5@low",
+        "n": 100,
+        "outcomes": {
+          "used": 100
+        },
+        "by_group": {
+          "dev:used": 100
+        },
+        "detail": {
+          "blocks": 606,
+          "fact": 90,
+          "kept_rest": 496,
+          "used:dev": 100
+        },
+        "violation_rate": 0.1485,
+        "p50_s": 3.77,
+        "p95_s": 4.87,
+        "mean_s": 3.67,
+        "cost_usd": 0.0457,
+        "tokens_in": 143520,
+        "tokens_out": 62761,
+        "wall_s": 48.2
+      },
+      {
+        "model": "claude-sonnet-5-5",
+        "n": 100,
+        "outcomes": {
+          "used": 100
+        },
+        "by_group": {
+          "dev:used": 100
+        },
+        "detail": {
+          "blocks": 684,
+          "fact": 4,
+          "kept_rest": 670,
+          "used:dev": 100
+        },
+        "violation_rate": 0.0058,
+        "p50_s": 5.56,
+        "p95_s": 7.88,
+        "mean_s": 5.77,
+        "cost_usd": 0.8969,
+        "tokens_in": 143520,
+        "tokens_out": 60986,
+        "wall_s": 74.0
+      },
+      {
+        "model": "claude-sonnet-5-5@low",
+        "n": 100,
+        "outcomes": {
+          "used": 100
+        },
+        "by_group": {
+          "dev:used": 100
+        },
+        "detail": {
+          "blocks": 680,
+          "fact": 53,
+          "kept_rest": 620,
+          "used:dev": 100
+        },
+        "violation_rate": 0.0779,
+        "p50_s": 2.47,
+        "p95_s": 3.45,
+        "mean_s": 2.67,
+        "cost_usd": 0.487,
+        "tokens_in": 143520,
+        "tokens_out": 19998,
+        "wall_s": 35.4
+      },
+      {
+        "model": "claude-opus-5-5",
+        "n": 100,
+        "outcomes": {
+          "used": 100
+        },
+        "by_group": {
+          "dev:used": 100
+        },
+        "detail": {
+          "blocks": 638,
+          "fact": 1,
+          "kept_rest": 630,
+          "used:dev": 100
+        },
+        "violation_rate": 0.0016,
+        "p50_s": 3.4,
+        "p95_s": 15.29,
+        "mean_s": 4.66,
+        "cost_usd": 1.0665,
+        "tokens_in": 143520,
+        "tokens_out": 24622,
+        "wall_s": 63.8
+      },
+      {
+        "model": "claude-opus-5-5@low",
+        "n": 100,
+        "outcomes": {
+          "used": 100
+        },
+        "by_group": {
+          "dev:used": 100
+        },
+        "detail": {
+          "blocks": 628,
+          "fact": 1,
+          "kept_rest": 620,
+          "used:dev": 100
+        },
+        "violation_rate": 0.0016,
+        "p50_s": 2.84,
+        "p95_s": 4.19,
+        "mean_s": 3.05,
+        "cost_usd": 0.9582,
+        "tokens_in": 143520,
+        "tokens_out": 19205,
+        "wall_s": 42.1
+      },
+      {
+        "model": "gemini-3.8-flash",
+        "n": 100,
+        "outcomes": {
+          "used": 100
+        },
+        "by_group": {
+          "dev:used": 100
+        },
+        "detail": {
+          "blocks": 518,
+          "fact": 5,
+          "kept_rest": 513,
+          "used:dev": 100
+        },
+        "violation_rate": 0.0097,
+        "p50_s": 2.81,
+        "p95_s": 4.58,
+        "mean_s": 3.13,
+        "cost_usd": 0.1093,
+        "tokens_in": 75439,
+        "tokens_out": 14066,
+        "wall_s": 41.7
+      }
+    ]
+  }
+}

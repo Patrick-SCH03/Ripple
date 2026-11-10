@@ -1,0 +1,214 @@
+{
+  "split": "dev",
+  "path": "llm",
+  "seed": 20261020,
+  "docs": 30,
+  "extractors": {
+    "rule+llm": 30
+  },
+  "outcomes": {
+    "change": {
+      "exact_ready": 100,
+      "exact_flagged": 2,
+      "wrong_blocked": 2
+    },
+    "duplicate": {
+      "exact_flagged": 3,
+      "wrong_blocked": 1
+    },
+    "missing_target": {
+      "safe": 6
+    },
+    "unsupported": {
+      "safe": 9
+    }
+  },
+  "expected_flags": {
+    "duplicate": [
+      4,
+      4
+    ],
+    "from_mismatch": [
+      5,
+      5
+    ],
+    "revision_mismatch": [
+      15,
+      15
+    ]
+  },
+  "items": 123,
+  "stray_items": 0,
+  "stray_blocking": 0,
+  "by_tag": {
+    "abbreviation": {
+      "exact_ready": 35,
+      "exact_flagged": 2,
+      "wrong_blocked": 1,
+      "safe": 1
+    },
+    "case": {
+      "exact_ready": 9
+    },
+    "duplicate": {
+      "exact_flagged": 3,
+      "wrong_blocked": 1
+    },
+    "joined": {
+      "exact_ready": 22,
+      "exact_flagged": 1,
+      "safe": 1
+    },
+    "order": {
+      "exact_ready": 23,
+      "safe": 1
+    },
+    "plain": {
+      "exact_ready": 14,
+      "safe": 4,
+      "wrong_blocked": 1
+    },
+    "revision": {
+      "exact_ready": 13,
+      "exact_flagged": 1,
+      "safe": 1
+    },
+    "spacing": {
+      "exact_ready": 24,
+      "exact_flagged": 2,
+      "wrong_blocked": 1,
+      "safe": 1
+    },
+    "stale_before": {
+      "exact_ready": 5
+    },
+    "typo": {
+      "exact_ready": 10,
+      "safe": 1
+    },
+    "unsupported": {
+      "safe": 9
+    },
+    "wrapped": {
+      "exact_ready": 7
+    }
+  },
+  "by_style": {
+    "form": {
+      "exact_ready": 34,
+      "exact_flagged": 3,
+      "safe": 4,
+      "wrong_blocked": 1
+    },
+    "mail": {
+      "exact_ready": 32,
+      "safe": 5,
+      "exact_flagged": 1
+    },
+    "table": {
+      "exact_ready": 34,
+      "safe": 6,
+      "exact_flagged": 1,
+      "wrong_blocked": 2
+    }
+  },
+  "criteria": [
+    {
+      "name": "사람에게 보이지 않은 정답 0건",
+      "ok": true,
+      "value": "0건"
+    },
+    {
+      "name": "문제 표시 재현율(지금 값·개정) ≥ 0.95",
+      "ok": true,
+      "value": "20/20 (100.0%)"
+    },
+    {
+      "name": "지원 안 함이 경고 없이 8종으로 0건",
+      "ok": true,
+      "value": "0건"
+    },
+    {
+      "name": "AI 경로 항목 재현율 ≥ 0.9",
+      "ok": true,
+      "value": "98.1%"
+    }
+  ],
+  "failures": [
+    {
+      "doc": "E9-dev-0003",
+      "style": "form",
+      "kind": "change",
+      "outcome": "exact_flagged",
+      "tags": [
+        "abbreviation",
+        "spacing",
+        "joined"
+      ],
+      "missed_flags": [],
+      "codes": [
+        "conflict"
+      ],
+      "text": "P11C V/V 002  VL-GATE-DN200-10K로요청"
+    },
+    {
+      "doc": "E9-dev-0009",
+      "style": "form",
+      "kind": "duplicate",
+      "outcome": "exact_flagged",
+      "tags": [
+        "duplicate"
+      ],
+      "missed_flags": [],
+      "codes": [
+        "duplicate"
+      ],
+      "text": "S31S-PL-002 길이 치수 변경 5200mm에서 약 14.2% 늘려 5940mm로 클래시 해소 사유로"
+    },
+    {
+      "doc": "E9-dev-0022",
+      "style": "mail",
+      "kind": "duplicate",
+      "outcome": "exact_flagged",
+      "tags": [
+        "duplicate"
+      ],
+      "missed_flags": [],
+      "codes": [
+        "duplicate"
+      ],
+      "text": "간섭 해소 때문에 3번 탱크 선측 P 판 3번  길이 변경 2700→2220mm 변경 바랍니다"
+    },
+    {
+      "doc": "E9-dev-0024",
+      "style": "form",
+      "kind": "change",
+      "outcome": "exact_flagged",
+      "tags": [
+        "abbreviation",
+        "spacing",
+        "revision"
+      ],
+      "missed_flags": [],
+      "codes": [
+        "conflict",
+        "revision_mismatch"
+      ],
+      "text": "P/R 판 009  증후 15mm로 선급 지적 사유로 해 주세요 (도면 DWG-P11C-CS-P01 Rev.C)"
+    },
+    {
+      "doc": "E9-dev-0026",
+      "style": "table",
+      "kind": "duplicate",
+      "outcome": "exact_flagged",
+      "tags": [
+        "duplicate"
+      ],
+      "missed_flags": [],
+      "codes": [
+        "duplicate"
+      ],
+      "text": "VL-BUTTERFLY-DN200-10K로 p11c-vlcs-006 사양 변경 (장비 변경) 검토 바람"
+    }
+  ]
+}

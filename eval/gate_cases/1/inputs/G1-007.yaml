@@ -1,0 +1,40 @@
+case_id: G1-007
+stage: 1
+title: T31C No.3 COT 횡격벽 판 1에 보강재 추가, F11C에 브라켓 추가(위치 미정)
+snapshot:
+  generator_seed: 20261020
+  snapshot_id: G-1fdcbf59d84dcc2d
+request:
+  change:
+    ecn_id: GC-007
+    title: T31C No.3 COT 횡격벽 판 1에 보강재 추가, F11C에 브라켓 추가(위치 미정)
+    ship_ids:
+    - S-001
+    intent: strength
+    ops:
+    - op: add_part
+      block_id: S-001:T31C
+      kind: stiffener
+      spec_id: HP200x10-A
+      qty: 0.2
+      attach_to_part_id: S-001:T31C-PL-001
+    - op: add_part
+      block_id: S-001:F11C
+      kind: bracket
+      spec_id: HP200x10-A
+      qty: 0.05
+      attach_to_part_id: null
+    raw_text: null
+    requested_by: null
+    requested_on: null
+    effectivity: null
+    design_status: unknown
+    source: null
+    cause: null
+  as_of: '2026-10-20'
+  confirm_on: null
+  horizon_days: 60
+  holds: []
+  include_alternatives: false
+  outfit_on_board: false
+focus: 새 부재(붙는 위치 있음·없음), 연산 두 개

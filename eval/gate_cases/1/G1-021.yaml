@@ -1,0 +1,62 @@
+case_id: G1-021
+stage: 1
+title: A11C 선미(프로펠러 보스·러더) 판 4 폭 변경(같은 규격 재고 있음)
+snapshot:
+  generator_seed: 20261020
+  snapshot_id: G-1fdcbf59d84dcc2d
+request:
+  change:
+    ecn_id: GC-021
+    title: A11C 선미(프로펠러 보스·러더) 판 4 폭 변경(같은 규격 재고 있음)
+    ship_ids:
+    - S-001
+    intent: interference
+    ops:
+    - op: dimension
+      part_ids:
+      - S-001:A11C-PL-004
+      field: width_mm
+      from_value: 2000.0
+      to_value: 2100.0
+    raw_text: null
+    requested_by: null
+    requested_on: null
+    effectivity: null
+    design_status: unknown
+    source: null
+    cause: null
+  as_of: '2026-10-20'
+  confirm_on: null
+  horizon_days: 60
+  holds: []
+  include_alternatives: false
+  outfit_on_board: false
+focus: R-M01 (가) 치수 변경 = 같은 규격 판정
+expected:
+  impacts:
+  - entity_id: LOT-04
+    impact_type: reallocate_stock
+    rule_id: R-M01
+  - entity_id: DWG-A11C-H01@A
+    impact_type: drawing_revision
+    rule_id: R-D01
+  forbidden_impacts:
+  - entity_id: PO-0026#3
+    impact_type: po_change
+    rule_id: null
+  - entity_id: S-001:A11C
+    impact_type: rework
+    rule_id: null
+  - entity_id: LOT-01
+    impact_type: reallocate_stock
+    rule_id: null
+  unresolved: []
+  cost_lines: []
+  total: null
+  timing: null
+  verdict: null
+  alternatives: null
+computed_by: 독립 계산자 A(G1-001~015)·B(G1-016~030) — 엔진 코드를 읽지 않은 AI 에이전트, 2026-10-27
+computed_on: '2026-10-27'
+checked_by: null
+notes: ''

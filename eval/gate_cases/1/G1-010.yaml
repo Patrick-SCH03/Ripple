@@ -1,0 +1,92 @@
+case_id: G1-010
+stage: 1
+title: S31S No.3 COT 선측 우 판 1·No.3 COT 선측 우 판 2 두께 16→20mm, No.3 COT 선측 우 판 1 길이 변경
+snapshot:
+  generator_seed: 20261020
+  snapshot_id: G-1fdcbf59d84dcc2d
+request:
+  change:
+    ecn_id: GC-010
+    title: S31S No.3 COT 선측 우 판 1·No.3 COT 선측 우 판 2 두께 16→20mm, No.3 COT 선측 우 판 1 길이 변경
+    ship_ids:
+    - S-001
+    intent: strength
+    ops:
+    - op: thickness
+      part_ids:
+      - S-001:S31S-PL-001
+      - S-001:S31S-PL-002
+      from_mm: 16.0
+      to_mm: 20.0
+    - op: dimension
+      part_ids:
+      - S-001:S31S-PL-001
+      field: length_mm
+      from_value: 4000.0
+      to_value: 4400.0
+    raw_text: null
+    requested_by: null
+    requested_on: null
+    effectivity: null
+    design_status: unknown
+    source: null
+    cause: null
+  as_of: '2026-10-20'
+  confirm_on: null
+  horizon_days: 60
+  holds: []
+  include_alternatives: false
+  outfit_on_board: false
+focus: 맞댄 두 판 동시 변경(최종 두께), 연산 여러 개
+expected:
+  impacts:
+  - entity_id: PO-0059#1
+    impact_type: po_change
+    rule_id: R-T01
+  - entity_id: PO-0059#1
+    impact_type: reorder
+    rule_id: R-T01
+  - entity_id: S-001:S31S-PL-006
+    impact_type: taper
+    rule_id: R-T02
+  - entity_id: S-001:S31S-ST-002
+    impact_type: weld_recheck
+    rule_id: R-T03
+  - entity_id: S-001:S31S-ST-004
+    impact_type: weld_recheck
+    rule_id: R-T03
+  - entity_id: S-001:S31S-ST-015
+    impact_type: weld_recheck
+    rule_id: R-T03
+  - entity_id: S-001:S31S
+    impact_type: rework
+    rule_id: R-B01
+  - entity_id: DWG-S31S-H01@A
+    impact_type: drawing_revision
+    rule_id: R-D01
+  forbidden_impacts:
+  - entity_id: S-001:S31S-PL-001
+    impact_type: taper
+    rule_id: null
+  - entity_id: S-001:S31S-PL-002
+    impact_type: taper
+    rule_id: null
+  - entity_id: S-001:S31S-PL-003
+    impact_type: taper
+    rule_id: null
+  - entity_id: S-001:S31S-PL-005
+    impact_type: taper
+    rule_id: null
+  - entity_id: LOT-04
+    impact_type: reallocate_stock
+    rule_id: null
+  unresolved: []
+  cost_lines: []
+  total: null
+  timing: null
+  verdict: null
+  alternatives: null
+computed_by: 독립 계산자 A(G1-001~015)·B(G1-016~030) — 엔진 코드를 읽지 않은 AI 에이전트, 2026-10-27
+computed_on: '2026-10-27'
+checked_by: null
+notes: ''

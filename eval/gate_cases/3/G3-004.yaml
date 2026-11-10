@@ -1,0 +1,143 @@
+case_id: G3-004
+stage: 3
+title: L31C 중심선 종격벽 판 1에 보강재 추가(HP200x12-A)
+snapshot:
+  generator_seed: 20261020
+  snapshot_id: G-1fdcbf59d84dcc2d
+request:
+  change:
+    ecn_id: GC3-004
+    title: L31C 중심선 종격벽 판 1에 보강재 추가(HP200x12-A)
+    ship_ids:
+    - S-001
+    intent: strength
+    ops:
+    - op: add_part
+      block_id: S-001:L31C
+      kind: stiffener
+      spec_id: HP200x12-A
+      qty: 0.117
+      attach_to_part_id: S-001:L31C-PL-001
+    raw_text: null
+    requested_by: null
+    requested_on: null
+    effectivity: null
+    design_status: unknown
+    source: null
+    cause: null
+  as_of: '2026-10-20'
+  confirm_on: null
+  horizon_days: 60
+  holds: []
+  include_alternatives: true
+  outfit_on_board: false
+focus: '판에 보강재 추가(다): 보강재를 붙인 패널 기준 비교, 보강재 대신 두께안 T4의 두께 상한(설계자 확인), 강종 상향안 T2의 부족 판정, 새 부재 제작 공수(C-02)'
+expected:
+  impacts: []
+  forbidden_impacts: []
+  unresolved: []
+  cost_lines: []
+  total: null
+  timing: null
+  verdict: null
+  alternatives:
+    alternatives:
+    - alt_id: ALT-REQ
+      ops:
+      - op: add_part
+        block_id: S-001:L31C
+        kind: stiffener
+        spec_id: HP200x12-A
+        qty: 0.117
+        attach_to_part_id: S-001:L31C-PL-001
+      scope_reduced: false
+      eligibility:
+        status: meets
+        ratio_vs_request: 1.0
+      total:
+        value_krw: 1236854
+        low_krw: 540882
+        high_krw: 2919389
+      max_exit_delay_days: 0
+      deadline:
+        kind: by_date
+        last_day: '2026-11-05'
+      best:
+        confirm_on: '2026-10-20'
+        holds: []
+        total:
+          value_krw: 1236854
+          low_krw: 540882
+          high_krw: 2919389
+      rank: 1
+      formula: 요청안(비교 기준, ρ=1). 확정일 2026-10-20 총액(대표값) = C-01:material 112,086 + C-02:new_work 228,150 + R-B01:rework×2 224,618
+        + R-D01:drawing_revision 672,000 = 1,236,854; 블록 단계 L31C assembly; 출구 지연 0일
+    - alt_id: ALT-T2
+      ops:
+      - op: grade
+        part_ids:
+        - S-001:L31C-PL-001
+        from_grade: A
+        to_grade: AH32
+      scope_reduced: false
+      eligibility:
+        status: short
+        ratio_vs_request: 0.566
+      total:
+        value_krw: 4669307
+        low_krw: 1768002
+        high_krw: 10299032
+      max_exit_delay_days: 0
+      deadline:
+        kind: by_date
+        last_day: '2026-11-05'
+      best: null
+      rank: null
+      formula: ρ = min_p G_alt/G_req = 0.5661 (G_alt 1.1323 / G_req 2.0000) → short. 확정일 2026-10-20 총액(대표값) = C-01:material
+        58,120 + R-T01:po_change 668,382 + R-T01:reorder 278,977 + R-B01:rework×2 2,991,828 + R-D01:drawing_revision 672,000
+        = 4,669,307; 블록 단계 L31C assembly; 품목 단계 PO-0069#1 processed; 출구 지연 0일
+    - alt_id: ALT-T4
+      ops:
+      - op: thickness
+        part_ids:
+        - S-001:L31C-PL-001
+        from_mm: 15.0
+        to_mm: 27.5
+      scope_reduced: false
+      eligibility:
+        status: designer
+        ratio_vs_request: null
+      total:
+        value_krw: 14442001
+        low_krw: 5037254
+        high_krw: 32303653
+      max_exit_delay_days: 0
+      deadline:
+        kind: by_date
+        last_day: '2026-10-31'
+      best: null
+      rank: null
+      formula: 설계자 확인(두께 27.5mm > 상한 25.0mm). 확정일 2026-10-20 총액(대표값) = C-01:material 1,113,970 + R-T01:po_change 668,382 +
+        R-T01:reorder 490,147 + R-B01:rework×4 10,483,502 + R-T02:taper×3 300,000 + R-T03:weld_recheck×2 42,000 + R-D01:drawing_revision×2
+        1,344,000 = 14,442,001; 블록 단계 L31C assembly, T31C assembly; 품목 단계 PO-0069#1 processed; 출구 지연 0일
+    recommendation:
+      alt_id: ALT-REQ
+      confirm_on: '2026-10-20'
+      holds: []
+      total:
+        value_krw: 1236854
+        low_krw: 540882
+        high_krw: 2919389
+    cheapest_by_date:
+    - alt_id: ALT-REQ
+      start: '2026-10-20'
+      end: '2026-12-19'
+      total:
+        value_krw: 1236854
+        low_krw: 540882
+        high_krw: 2919389
+    omitted: []
+computed_by: 독립 계산자(G3-001~005) — 엔진 코드를 읽지 않은 AI 에이전트, 2026-10-27
+computed_on: '2026-10-27'
+checked_by: null
+notes: ''

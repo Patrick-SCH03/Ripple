@@ -1,0 +1,138 @@
+case_id: G2-011
+stage: 2
+title: F11C 구상선수 판 1 두께 16.5→18.5mm(기준일 확정)
+snapshot:
+  generator_seed: 20261020
+  snapshot_id: G-1fdcbf59d84dcc2d
+request:
+  change:
+    ecn_id: GC2-011
+    title: F11C 구상선수 판 1 두께 16.5→18.5mm(기준일 확정)
+    ship_ids:
+    - S-001
+    intent: strength
+    ops:
+    - op: thickness
+      part_ids:
+      - S-001:F11C-PL-001
+      from_mm: 16.5
+      to_mm: 18.5
+    raw_text: null
+    requested_by: null
+    requested_on: null
+    effectivity: null
+    design_status: unknown
+    source: null
+    cause: null
+  as_of: '2026-10-20'
+  confirm_on: null
+  horizon_days: 60
+  holds: []
+  include_alternatives: false
+  outfit_on_board: false
+focus: '미발주 품목·미착수 블록의 규격 변경: 자재비 차이와 도면만, 바로 승인 기준, 발주 예정일 전 마감일과 보류 권고'
+expected:
+  impacts: []
+  forbidden_impacts: []
+  unresolved: []
+  cost_lines:
+  - line_id: C-01:material:S-001:F11C-PL-001
+    amount:
+      value_krw: 164756
+      low_krw: null
+      high_krw: null
+    determinacy: known
+    formula: q'×P' − q×P = 1.446×18.5/16.5=1.621273 × 940000 − 1.446 × 940000
+  - line_id: R-D01:drawing_revision:DWG-F11C-H01@A
+    amount:
+      value_krw: 672000
+      low_krw: 304000
+      high_krw: 1840000
+    determinacy: known
+    formula: 16h × 설계 단가
+  - line_id: R-T03:weld_recheck:S-001:F11C-BR-002
+    amount:
+      value_krw: 21000
+      low_krw: 9500
+      high_krw: 46000
+    determinacy: known
+    formula: 0.5h × 설계 단가
+  - line_id: R-T03:weld_recheck:S-001:F11C-BR-003
+    amount:
+      value_krw: 21000
+      low_krw: 9500
+      high_krw: 46000
+    determinacy: known
+    formula: 0.5h × 설계 단가
+  - line_id: R-T03:weld_recheck:S-001:F11C-BR-007
+    amount:
+      value_krw: 21000
+      low_krw: 9500
+      high_krw: 46000
+    determinacy: known
+    formula: 0.5h × 설계 단가
+  - line_id: R-T03:weld_recheck:S-001:F11C-BR-008
+    amount:
+      value_krw: 21000
+      low_krw: 9500
+      high_krw: 46000
+    determinacy: known
+    formula: 0.5h × 설계 단가
+  - line_id: R-T03:weld_recheck:S-001:F11C-ST-003
+    amount:
+      value_krw: 21000
+      low_krw: 9500
+      high_krw: 46000
+    determinacy: known
+    formula: 0.5h × 설계 단가
+  - line_id: R-T03:weld_recheck:S-001:F11C-ST-005
+    amount:
+      value_krw: 21000
+      low_krw: 9500
+      high_krw: 46000
+    determinacy: known
+    formula: 0.5h × 설계 단가
+  - line_id: R-T03:weld_recheck:S-001:F11C-ST-007
+    amount:
+      value_krw: 21000
+      low_krw: 9500
+      high_krw: 46000
+    determinacy: known
+    formula: 0.5h × 설계 단가
+  total:
+    value_krw: 983756
+    low_krw: 535256
+    high_krw: 2326756
+  timing:
+    zone_exit_delays: {}
+    delivery_added_days: 0
+    delivery_exposure: null
+    onboard: null
+    delay_ripple: null
+    deadline:
+      kind: by_date
+      last_day: '2026-10-23'
+    deadline_total:
+      value_krw: 983756
+      low_krw: 535256
+      high_krw: 2326756
+    next_day_total:
+      value_krw: 1329332
+      low_krw: 687656
+      high_krw: 2851917
+    holds:
+    - po_id: PO-0098
+      max_hold_days: 23
+      hold_until: '2026-11-12'
+      deadline_after:
+        kind: by_date
+        last_day: '2026-11-15'
+  verdict:
+    level: approve
+    reasons:
+    - 발주 변경·재작업 없는 도면·자재 수정 수준
+  alternatives: null
+computed_by: 독립 계산자 A(G2-001~005)·B(G2-006~009)·C(G2-010~013) — 엔진 코드를 읽지 않은 AI 에이전트, 2026-10-27
+computed_on: '2026-10-27'
+checked_by: null
+notes: ''

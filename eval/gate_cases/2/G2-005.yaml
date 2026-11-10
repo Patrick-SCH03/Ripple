@@ -1,0 +1,107 @@
+case_id: G2-005
+stage: 2
+title: F11C 구상선수 보강재 3 강종 변경(2026-12-19 확정)
+snapshot:
+  generator_seed: 20261020
+  snapshot_id: G-1fdcbf59d84dcc2d
+request:
+  change:
+    ecn_id: GC2-005
+    title: F11C 구상선수 보강재 3 강종 변경(2026-12-19 확정)
+    ship_ids:
+    - S-001
+    intent: rule_change
+    ops:
+    - op: grade
+      part_ids:
+      - S-001:F11C-ST-003
+      from_grade: AH36
+      to_grade: DH36
+    raw_text: null
+    requested_by: null
+    requested_on: null
+    effectivity: null
+    design_status: unknown
+    source: null
+    cause: null
+  as_of: '2026-10-20'
+  confirm_on: '2026-12-19'
+  horizon_days: 60
+  holds: []
+  include_alternatives: false
+  outfit_on_board: false
+focus: 발주한 품목의 규격 변경과 남는 자재의 다른 블록 전용(취급비), 발주 보류 권고
+expected:
+  impacts: []
+  forbidden_impacts: []
+  unresolved: []
+  cost_lines:
+  - line_id: C-01:material:S-001:F11C-ST-003
+    amount:
+      value_krw: 3339
+      low_krw: null
+      high_krw: null
+    determinacy: known
+    formula: q'×P' − q×P = 0.17 × (982,000 × 1.02/1.0 = 1,001,640) − 0.17 × 982,000 = 170,278.8 − 166,940 = 3,338.8 (4-0 강종
+      단가 비율 DH36 1.02 / AH36 1.0, 4-1)
+  - line_id: R-D01:drawing_revision:DWG-F11C-H01@A
+    amount:
+      value_krw: 672000
+      low_krw: 304000
+      high_krw: 1840000
+    determinacy: known
+    formula: 도면 개정 16h(8~40) × 설계 단가 42,000(38,000~46,000) (4-5)
+  - line_id: R-M01:handling:PO-0104#2:PO-0126#1
+    amount:
+      value_krw: 8500
+      low_krw: 5100
+      high_krw: 17000
+    determinacy: known
+    formula: 전용 수량 0.17 t(PO-0104#2 입고 → 같은 규격 HP320x12-AH36의 PO-0126#1, F31C 소조립 ES⁰ 2027-02-01이 탐색 기간 안) × 취급비 50,000(30,000~100,000)
+      (4-7 나)
+  - line_id: R-T01:po_change:PO-0104#2
+    amount:
+      value_krw: 0
+      low_krw: null
+      high_krw: null
+    determinacy: known
+    formula: r[입고]=min(0.7(0.5~0.9), 강재 상한 0.5(0.45~0.6)) = 0.5(0.45~0.6) × (q=0.17 − 전용 0.17 = 0) × 982,000 = 0 (4-2, 전량
+      다른 블록으로 돌린 0원 줄; 판정일 12-19 = 입고 대표 진입일 10-11+69)
+  - line_id: R-T01:reorder:PO-0104#2
+    amount:
+      value_krw: 34056
+      low_krw: 17028
+      high_krw: 51084
+    determinacy: known
+    formula: 할증률 0.2(0.1~0.3) × (q'=0.17 − c=0) × P'=1,001,640 = 34,055.76 (4-3, 형강 재고 로트 없음)
+  total:
+    value_krw: 717895
+    low_krw: 329467
+    high_krw: 1911423
+  timing:
+    zone_exit_delays: {}
+    delivery_added_days: 0
+    delivery_exposure: null
+    onboard: null
+    delay_ripple: null
+    deadline:
+      kind: by_date
+      last_day: '2026-10-30'
+    deadline_total:
+      value_krw: 714403
+      low_krw: 324367
+      high_krw: 1902770
+    next_day_total:
+      value_krw: 759477
+      low_krw: 357755
+      high_krw: 1961199
+    holds: []
+  verdict:
+    level: review
+    reasons:
+    - 발주된 자재 변경·취소 필요
+  alternatives: null
+computed_by: 독립 계산자 A(G2-001~005)·B(G2-006~009)·C(G2-010~013) — 엔진 코드를 읽지 않은 AI 에이전트, 2026-10-27
+computed_on: '2026-10-27'
+checked_by: null
+notes: ''

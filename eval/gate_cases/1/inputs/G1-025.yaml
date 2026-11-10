@@ -1,0 +1,38 @@
+case_id: G1-025
+stage: 1
+title: S31P No.3 COT 선측 좌 판 1 두께 +2mm와 강종 AH36→EH36
+snapshot:
+  generator_seed: 20261020
+  snapshot_id: G-1fdcbf59d84dcc2d
+request:
+  change:
+    ecn_id: GC-025
+    title: S31P No.3 COT 선측 좌 판 1 두께 +2mm와 강종 AH36→EH36
+    ship_ids:
+    - S-001
+    intent: strength
+    ops:
+    - op: thickness
+      part_ids:
+      - S-001:S31P-PL-001
+      from_mm: 16.5
+      to_mm: 18.5
+    - op: grade
+      part_ids:
+      - S-001:S31P-PL-001
+      from_grade: AH36
+      to_grade: EH36
+    raw_text: null
+    requested_by: null
+    requested_on: null
+    effectivity: null
+    design_status: unknown
+    source: null
+    cause: null
+  as_of: '2026-10-20'
+  confirm_on: null
+  horizon_days: 60
+  holds: []
+  include_alternatives: false
+  outfit_on_board: false
+focus: 같은 부재 두 연산의 병합(같은 키 하나)

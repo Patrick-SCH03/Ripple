@@ -1,0 +1,61 @@
+case_id: G1-027
+stage: 1
+title: D31C No.3 COT 갑판 브라켓 1 삭제(발주 단계 모름)
+snapshot:
+  generator_seed: 20261020
+  snapshot_id: G-1fdcbf59d84dcc2d
+request:
+  change:
+    ecn_id: GC-027
+    title: D31C No.3 COT 갑판 브라켓 1 삭제(발주 단계 모름)
+    ship_ids:
+    - S-001
+    intent: weight
+    ops:
+    - op: remove_part
+      part_ids:
+      - S-001:D31C-BR-001
+    raw_text: null
+    requested_by: null
+    requested_on: null
+    effectivity: null
+    design_status: unknown
+    source: null
+    cause: null
+  as_of: '2026-10-20'
+  confirm_on: null
+  horizon_days: 60
+  holds: []
+  include_alternatives: false
+  outfit_on_board: false
+focus: R-M02 단계 모름(영향 + 이유), R-M01 (나) 찾지 않음
+expected:
+  impacts:
+  - entity_id: PO-0096#1
+    impact_type: po_change
+    rule_id: R-M02
+  - entity_id: DWG-D31C-H01@A
+    impact_type: drawing_revision
+    rule_id: R-D01
+  forbidden_impacts:
+  - entity_id: S-001:D31C
+    impact_type: rework
+    rule_id: null
+  - entity_id: PO-0096#1
+    impact_type: reorder
+    rule_id: null
+  - entity_id: S-001:D31C-BR-001
+    impact_type: needs_confirmation
+    rule_id: null
+  unresolved:
+  - kind: po_state
+    entity_id: PO-0096#1
+  cost_lines: []
+  total: null
+  timing: null
+  verdict: null
+  alternatives: null
+computed_by: 독립 계산자 A(G1-001~015)·B(G1-016~030) — 엔진 코드를 읽지 않은 AI 에이전트, 2026-10-27
+computed_on: '2026-10-27'
+checked_by: null
+notes: ''

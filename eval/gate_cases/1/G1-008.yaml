@@ -1,0 +1,75 @@
+case_id: G1-008
+stage: 1
+title: L31C 중심선 종격벽 판 1에 관통부 추가(P11C 스풀)
+snapshot:
+  generator_seed: 20261020
+  snapshot_id: G-1fdcbf59d84dcc2d
+request:
+  change:
+    ecn_id: GC-008
+    title: L31C 중심선 종격벽 판 1에 관통부 추가(P11C 스풀)
+    ship_ids:
+    - S-001
+    intent: interference
+    ops:
+    - op: add_penetration
+      plate_part_id: S-001:L31C-PL-001
+      pipe_part_id: S-001:P11C-SPCS-001
+      diameter_mm: 200.0
+    raw_text: null
+    requested_by: null
+    requested_on: null
+    effectivity: null
+    design_status: unknown
+    source: null
+    cause: null
+  as_of: '2026-10-20'
+  confirm_on: null
+  horizon_days: 60
+  holds: []
+  include_alternatives: false
+  outfit_on_board: false
+focus: 새 관통 연결, 칼라를 받는 배관과 그 블록·도면
+expected:
+  impacts:
+  - entity_id: S-001:P11C-SPCS-001
+    impact_type: collar_resize
+    rule_id: R-T04
+  - entity_id: S-001:L31C
+    impact_type: rework
+    rule_id: R-B01
+  - entity_id: DWG-L31C-H01@A
+    impact_type: drawing_revision
+    rule_id: R-D01
+  - entity_id: DWG-P11C-CS-P01@A
+    impact_type: drawing_revision
+    rule_id: R-D01
+  forbidden_impacts:
+  - entity_id: S-001:P11C
+    impact_type: rework
+    rule_id: null
+  - entity_id: S-001:L31C-PL-001
+    impact_type: collar_resize
+    rule_id: null
+  - entity_id: S-001:L31C-PL-001
+    impact_type: modify_part
+    rule_id: null
+  - entity_id: S-001:L31C-PL-001
+    impact_type: needs_confirmation
+    rule_id: null
+  - entity_id: PO-0069#1
+    impact_type: po_change
+    rule_id: null
+  - entity_id: PO-0128#1
+    impact_type: po_change
+    rule_id: null
+  unresolved: []
+  cost_lines: []
+  total: null
+  timing: null
+  verdict: null
+  alternatives: null
+computed_by: 독립 계산자 A(G1-001~015)·B(G1-016~030) — 엔진 코드를 읽지 않은 AI 에이전트, 2026-10-27
+computed_on: '2026-10-27'
+checked_by: null
+notes: ''

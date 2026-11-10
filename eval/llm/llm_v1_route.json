@@ -1,0 +1,116 @@
+{
+  "candidates": [
+    "route"
+  ],
+  "samples": {
+    "rule_fail": 29,
+    "forced": 200,
+    "explain": 100
+  },
+  "order": {
+    "rewrite": [
+      "route"
+    ],
+    "explain": [
+      "route"
+    ]
+  },
+  "report": {
+    "rewrite": [
+      {
+        "model": "route",
+        "n": 229,
+        "outcomes": {
+          "unaccepted": 113,
+          "wrong": 16,
+          "incomplete": 18,
+          "exact": 82
+        },
+        "by_group": {
+          "rule_fail:unaccepted": 21,
+          "rule_fail:wrong": 1,
+          "rule_fail:incomplete": 7,
+          "forced:exact": 82,
+          "forced:unaccepted": 92,
+          "forced:wrong": 15,
+          "forced:incomplete": 11
+        },
+        "detail": {
+          "rule_fail": 29,
+          "unaccepted:rule_fail:understood=false": 21,
+          "wrong:rule_fail:other": 1,
+          "incomplete:rule_fail:part_ids,from_mm": 2,
+          "incomplete:rule_fail:qty": 1,
+          "incomplete:rule_fail:part_ids,from_spec_id,to_spec_id": 2,
+          "incomplete:rule_fail:part_ids": 2,
+          "forced": 200,
+          "exact:forced:intent 다름": 82,
+          "unaccepted:forced:understood=false": 92,
+          "wrong:forced:other": 15,
+          "incomplete:forced:kind,qty": 1,
+          "incomplete:forced:part_ids,from_spec_id": 1,
+          "incomplete:forced:part_ids,from_spec_id,to_spec_id": 2,
+          "incomplete:forced:to_spec_id": 1,
+          "incomplete:forced:qty": 3,
+          "incomplete:forced:field": 1,
+          "incomplete:forced:part_ids": 1,
+          "incomplete:forced:plate_part_id,pipe_part_id,diameter_mm": 1
+        },
+        "violation_rate": null,
+        "p50_s": 2.11,
+        "p95_s": 3.31,
+        "mean_s": 2.22,
+        "cost_usd": 0.0,
+        "tokens_in": 0,
+        "tokens_out": 0,
+        "wall_s": 65.0
+      }
+    ],
+    "explain": [
+      {
+        "model": "route",
+        "n": 100,
+        "outcomes": {
+          "used": 99,
+          "error": 1
+        },
+        "by_group": {
+          "dev:used": 99,
+          "dev:error": 1
+        },
+        "detail": {
+          "blocks": 630,
+          "fact": 2,
+          "kept_rest": 621,
+          "used:dev": 99,
+          "error:받아들일 만한 답이 없어요(시간 초과)": 1
+        },
+        "violation_rate": 0.0032,
+        "p50_s": 2.74,
+        "p95_s": 4.38,
+        "mean_s": 2.98,
+        "cost_usd": 0.0,
+        "tokens_in": 0,
+        "tokens_out": 0,
+        "wall_s": 40.2
+      }
+    ]
+  },
+  "route_records": {
+    "claude-sonnet-5-5@low": {
+      "calls": 229,
+      "ok": 229,
+      "cost_usd": 0.6418
+    },
+    "gemini-3.8-flash": {
+      "calls": 6,
+      "ok": 6,
+      "cost_usd": 0.0046
+    },
+    "claude-opus-5-5@low": {
+      "calls": 100,
+      "ok": 99,
+      "cost_usd": 0.9494
+    }
+  }
+}

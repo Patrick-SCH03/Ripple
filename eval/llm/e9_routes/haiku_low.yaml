@@ -1,0 +1,18 @@
+# E9 문서 접수 AI 경로 모델 비교용 경로(2026-10-20, docs/evaluation.md 3절) — uv run python scripts/eval_intake.py --llm --count 30 --routes eval/llm/e9_routes/haiku_low.yaml --name haiku_low
+version: test-haiku_low
+routes:
+  rewrite:
+    hedge_after_s: 6
+    budget_s: 12
+    models:
+      - {provider: claude, model: claude-haiku-5-5, effort: low}
+  extract:
+    hedge_after_s: 40
+    budget_s: 60
+    models:
+      - {provider: claude, model: claude-haiku-5-5, effort: low}
+  explain:
+    hedge_after_s: 5
+    budget_s: 10
+    models:
+      - {provider: claude, model: claude-haiku-5-5, effort: low}

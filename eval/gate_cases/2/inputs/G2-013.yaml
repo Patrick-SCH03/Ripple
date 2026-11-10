@@ -1,0 +1,34 @@
+case_id: G2-013
+stage: 2
+title: P11C 화물 스트리핑 스풀 1 교체(같은 규격 새 스풀, 선상 설치, 2026-12-27 확정)
+snapshot:
+  generator_seed: 20261020
+  snapshot_id: G-1fdcbf59d84dcc2d
+request:
+  change:
+    ecn_id: GC2-013
+    title: P11C 화물 스트리핑 스풀 1 교체(같은 규격 새 스풀, 선상 설치, 2026-12-27 확정)
+    ship_ids:
+    - S-001
+    intent: interference
+    ops:
+    - op: reroute_pipe
+      removed_part_ids:
+      - S-001:P11C-SPCS-001
+      added_spool_spec_ids:
+      - SP-DN100-S40
+      crosses_part_ids: []
+    raw_text: null
+    requested_by: null
+    requested_on: null
+    effectivity: null
+    design_status: unknown
+    source: null
+    cause: null
+  as_of: '2026-10-20'
+  confirm_on: '2026-12-27'
+  horizon_days: 90
+  holds: []
+  include_alternatives: false
+  outfit_on_board: true
+focus: '의장품 선상 설치: 선상 설치 수요·탑재 관문에서 빼기·출구 lag와 자재 제약(6-3), 할증 C-03(4-1-3), R-S01 (다), 판정 이유, 되돌리기 선택지(6-8)'

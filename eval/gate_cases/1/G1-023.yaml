@@ -1,0 +1,97 @@
+case_id: G1-023
+stage: 1
+title: E11C 배관 경로 변경(서포트 없음, 다른 블록 판 두 장 관통)
+snapshot:
+  generator_seed: 20261020
+  snapshot_id: G-1fdcbf59d84dcc2d
+request:
+  change:
+    ecn_id: GC-023
+    title: E11C 배관 경로 변경(서포트 없음, 다른 블록 판 두 장 관통)
+    ship_ids:
+    - S-001
+    intent: interference
+    ops:
+    - op: reroute_pipe
+      removed_part_ids:
+      - S-001:E11C-SPBW-101
+      added_spool_spec_ids:
+      - SP-DN200-S40
+      crosses_part_ids:
+      - S-001:B31P-PL-001
+      - S-001:B31S-PL-001
+    raw_text: null
+    requested_by: null
+    requested_on: null
+    effectivity: null
+    design_status: unknown
+    source: null
+    cause: null
+  as_of: '2026-10-20'
+  confirm_on: null
+  horizon_days: 60
+  holds: []
+  include_alternatives: false
+  outfit_on_board: false
+focus: R-P02 판마다, R-P03 없음, 이어서 바뀌는 판의 블록·도면
+expected:
+  impacts:
+  - entity_id: PO-0136#1
+    impact_type: po_change
+    rule_id: R-M02
+  - entity_id: S-001:B31P-PL-001
+    impact_type: modify_part
+    rule_id: R-P02
+  - entity_id: S-001:B31P-PL-001
+    impact_type: collar_resize
+    rule_id: R-P02
+  - entity_id: S-001:B31S-PL-001
+    impact_type: modify_part
+    rule_id: R-P02
+  - entity_id: S-001:B31S-PL-001
+    impact_type: collar_resize
+    rule_id: R-P02
+  - entity_id: S-001:E11C
+    impact_type: rework
+    rule_id: R-B01
+  - entity_id: S-001:B31P
+    impact_type: rework
+    rule_id: R-B01
+  - entity_id: S-001:B31S
+    impact_type: rework
+    rule_id: R-B01
+  - entity_id: DWG-E21C-BW-P01@A
+    impact_type: drawing_revision
+    rule_id: R-D01
+  - entity_id: DWG-B31P-H01@A
+    impact_type: drawing_revision
+    rule_id: R-D01
+  - entity_id: DWG-B31S-H01@A
+    impact_type: drawing_revision
+    rule_id: R-D01
+  forbidden_impacts:
+  - entity_id: PO-0136#1
+    impact_type: reorder
+    rule_id: null
+  - entity_id: S-001:E11C-SPBW-102
+    impact_type: modify_part
+    rule_id: null
+  - entity_id: S-001:E21C-SPBW-015
+    impact_type: modify_part
+    rule_id: null
+  - entity_id: NEW:9f8ca2d5:1
+    impact_type: needs_confirmation
+    rule_id: null
+  - entity_id: S-001:E11C-SPBW-101
+    impact_type: modify_part
+    rule_id: null
+  unresolved: []
+  cost_lines: []
+  total: null
+  timing: null
+  verdict: null
+  alternatives: null
+computed_by: 독립 계산자 A(G1-001~015)·B(G1-016~030) — 엔진 코드를 읽지 않은 AI 에이전트, 2026-10-27
+computed_on: '2026-10-27'
+checked_by: null
+notes: ''

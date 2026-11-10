@@ -1,0 +1,119 @@
+case_id: G2-010
+stage: 2
+title: E11C 기관실 이중저 판 1 길이 변경(탑재 뒤, 2026-11-12 확정)
+snapshot:
+  generator_seed: 20261020
+  snapshot_id: G-1fdcbf59d84dcc2d
+request:
+  change:
+    ecn_id: GC2-010
+    title: E11C 기관실 이중저 판 1 길이 변경(탑재 뒤, 2026-11-12 확정)
+    ship_ids:
+    - S-001
+    intent: interference
+    ops:
+    - op: dimension
+      part_ids:
+      - S-001:E11C-PL-001
+      field: length_mm
+      from_value: 1000.0
+      to_value: 1100.0
+    raw_text: null
+    requested_by: null
+    requested_on: null
+    effectivity: null
+    design_status: unknown
+    source: null
+    cause: null
+  as_of: '2026-10-20'
+  confirm_on: '2026-11-12'
+  horizon_days: 60
+  holds: []
+  include_alternatives: false
+  outfit_on_board: false
+focus: '탑재가 끝난 블록의 선상 재작업(새 자재 없음): 확정 다음 날부터, 구역 출구 관문'
+expected:
+  impacts: []
+  forbidden_impacts: []
+  unresolved: []
+  cost_lines:
+  - line_id: C-04:after_paint:S-001:E11C
+    amount:
+      value_krw: 2400000
+      low_krw: 960000
+      high_krw: 5760000
+    determinacy: known
+    formula: (재도장+족장+화기) × 선행도장 수행 주체(CRW-04) 단가
+  - line_id: R-B01:rework:S-001:E11C
+    amount:
+      value_krw: 2089773
+      low_krw: 371516
+      high_krw: 6965908
+    determinacy: known
+    formula: Σ_k round(W 1.2572 × base_k × mult[erected] × D 1.846937 × 단가) — pre_erection:696591(direct), erection:1393182(direct)
+  - line_id: R-B01:rework:S-001:E11C@CRW-01
+    amount:
+      value_krw: 4876135
+      low_krw: 1114546
+      high_krw: 14628406
+    determinacy: known
+    formula: Σ_k round(W 1.2572 × base_k × mult[erected] × D 1.846937 × 단가) — sub_assembly:2786363(CRW-01), panel:2089772(CRW-01)
+  - line_id: R-B01:rework:S-001:E11C@CRW-02
+    amount:
+      value_krw: 3482954
+      low_krw: 743030
+      high_krw: 10448861
+    determinacy: known
+    formula: Σ_k round(W 1.2572 × base_k × mult[erected] × D 1.846937 × 단가) — assembly:3482954(CRW-02)
+  - line_id: R-B01:rework:S-001:E11C@CRW-03
+    amount:
+      value_krw: 2089772
+      low_krw: 557273
+      high_krw: 6965908
+    determinacy: known
+    formula: Σ_k round(W 1.2572 × base_k × mult[erected] × D 1.846937 × 단가) — pre_outfitting:2089772(CRW-03)
+  - line_id: R-B01:rework:S-001:E11C@CRW-04
+    amount:
+      value_krw: 1044886
+      low_krw: 185758
+      high_krw: 3482954
+    determinacy: known
+    formula: Σ_k round(W 1.2572 × base_k × mult[erected] × D 1.846937 × 단가) — pre_painting:1044886(CRW-04)
+  - line_id: R-D01:drawing_revision:DWG-E11C-H01@A
+    amount:
+      value_krw: 672000
+      low_krw: 304000
+      high_krw: 1840000
+    determinacy: known
+    formula: 16h × 설계 단가
+  total:
+    value_krw: 16655520
+    low_krw: 4236123
+    high_krw: 50092037
+  timing:
+    zone_exit_delays: {}
+    delivery_added_days: 0
+    delivery_exposure: null
+    onboard: null
+    delay_ripple: null
+    deadline:
+      kind: confirm_now
+      last_day: '2026-10-20'
+    deadline_total:
+      value_krw: 5896431
+      low_krw: 1511423
+      high_krw: 14657271
+    next_day_total:
+      value_krw: 10734499
+      low_krw: 3214453
+      high_krw: 28915677
+    holds: []
+  verdict:
+    level: warn
+    reasons:
+    - 대조립 이후 블록 재작업 필요
+  alternatives: null
+computed_by: 독립 계산자 A(G2-001~005)·B(G2-006~009)·C(G2-010~013) — 엔진 코드를 읽지 않은 AI 에이전트, 2026-10-27
+computed_on: '2026-10-27'
+checked_by: null
+notes: ''

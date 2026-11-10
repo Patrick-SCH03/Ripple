@@ -1,0 +1,121 @@
+case_id: G2-006
+stage: 2
+title: F11C 구상선수 보강재 3 삭제 + 구상선수 보강재 14 강종 변경(2026-12-19 확정)
+snapshot:
+  generator_seed: 20261020
+  snapshot_id: G-1fdcbf59d84dcc2d
+request:
+  change:
+    ecn_id: GC2-006
+    title: F11C 구상선수 보강재 3 삭제 + 구상선수 보강재 14 강종 변경(2026-12-19 확정)
+    ship_ids:
+    - S-001
+    intent: weight
+    ops:
+    - op: remove_part
+      part_ids:
+      - S-001:F11C-ST-003
+    - op: grade
+      part_ids:
+      - S-001:F11C-ST-014
+      from_grade: AH36
+      to_grade: DH36
+    raw_text: null
+    requested_by: null
+    requested_on: null
+    effectivity: null
+    design_status: unknown
+    source: null
+    cause: null
+  as_of: '2026-10-20'
+  confirm_on: '2026-12-19'
+  horizon_days: 60
+  holds: []
+  include_alternatives: false
+  outfit_on_board: false
+focus: 같은 품목의 삭제(R-M02)와 규격 변경(R-T01), 같은 곳으로의 전용 취급비 줄 하나
+expected:
+  impacts: []
+  forbidden_impacts: []
+  unresolved: []
+  cost_lines:
+  - line_id: C-01:material:S-001:F11C-ST-003
+    amount:
+      value_krw: -166940
+      low_krw: null
+      high_krw: null
+    determinacy: known
+    formula: − 수량 × 규격 단가 = −0.17 × 982000
+  - line_id: C-01:material:S-001:F11C-ST-014
+    amount:
+      value_krw: 4733
+      low_krw: null
+      high_krw: null
+    determinacy: known
+    formula: q'×P' − q×P = 0.241000×1001640.0000 − 0.241×982000
+  - line_id: R-D01:drawing_revision:DWG-F11C-H01@A
+    amount:
+      value_krw: 672000
+      low_krw: 304000
+      high_krw: 1840000
+    determinacy: known
+    formula: drawing 공수 16h[8,40] × 1 × 단가[design] 42000[38000,46000]
+  - line_id: R-M01:handling:PO-0104#2:PO-0126#1
+    amount:
+      value_krw: 10500
+      low_krw: 6300
+      high_krw: 21000
+    determinacy: known
+    formula: 전용 수량 0.21t(R-M02 0.17 + R-T01 0.04) × 취급비 50000[30000,100000]
+  - line_id: R-M02:po_change:PO-0104#2
+    amount:
+      value_krw: 0
+      low_krw: null
+      high_krw: null
+    determinacy: known
+    formula: 'r[s] × (q 0.17 − 전용 0.17) × 단가 982000; r: received=0.5[0.45,0.6]'
+  - line_id: R-T01:po_change:PO-0104#2
+    amount:
+      value_krw: 98691
+      low_krw: 88822
+      high_krw: 118429
+    determinacy: known
+    formula: 'r[s] × (q 0.241 − 전용 0.04) × 단가 982000; r: received=0.5[0.45,0.6]'
+  - line_id: R-T01:reorder:PO-0104#2
+    amount:
+      value_krw: 48279
+      low_krw: 24140
+      high_krw: 72419
+    determinacy: known
+    formula: '할증률 0.2[0.1,0.3] × Σ(q'' − c)×P'' = 할증률 × 241395.2400 (S-001:F11C-ST-014: (q'' 0.241000 − c 0.0) × P'' 1001640.0000)'
+  total:
+    value_krw: 667263
+    low_krw: 261055
+    high_krw: 1889641
+  timing:
+    zone_exit_delays: {}
+    delivery_added_days: 0
+    delivery_exposure: null
+    onboard: null
+    delay_ripple: null
+    deadline:
+      kind: by_date
+      last_day: '2026-10-30'
+    deadline_total:
+      value_krw: 570180
+      low_krw: 165933
+      high_krw: 1770392
+    next_day_total:
+      value_krw: 679153
+      low_krw: 246653
+      high_krw: 1911653
+    holds: []
+  verdict:
+    level: review
+    reasons:
+    - 발주된 자재 변경·취소 필요
+  alternatives: null
+computed_by: 독립 계산자 A(G2-001~005)·B(G2-006~009)·C(G2-010~013) — 엔진 코드를 읽지 않은 AI 에이전트, 2026-10-27
+computed_on: '2026-10-27'
+checked_by: null
+notes: ''

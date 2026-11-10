@@ -1,0 +1,152 @@
+case_id: G3-002
+stage: 3
+title: F21C 선수 평형수탱크 판 1 두께 15.5→17.5mm(2026-10-30부터 확정 가능)
+snapshot:
+  generator_seed: 20261020
+  snapshot_id: G-1fdcbf59d84dcc2d
+request:
+  change:
+    ecn_id: GC3-002
+    title: F21C 선수 평형수탱크 판 1 두께 15.5→17.5mm(2026-10-30부터 확정 가능)
+    ship_ids:
+    - S-001
+    intent: strength
+    ops:
+    - op: thickness
+      part_ids:
+      - S-001:F21C-PL-001
+      from_mm: 15.5
+      to_mm: 17.5
+    raw_text: null
+    requested_by: null
+    requested_on: null
+    effectivity: null
+    design_status: unknown
+    source: null
+    cause: null
+  as_of: '2026-10-20'
+  confirm_on: '2026-10-30'
+  horizon_days: 60
+  holds: []
+  include_alternatives: true
+  outfit_on_board: false
+focus: '확정 가능일이 기준일 뒤: 최적 조합의 확정일은 그날부터, 발주 보류 권고를 더한 보류 집합, 권고의 보류 행동, 강종 상향안(T2)의 부족 판정'
+expected:
+  impacts: []
+  forbidden_impacts: []
+  unresolved: []
+  cost_lines: []
+  total: null
+  timing: null
+  verdict: null
+  alternatives:
+    alternatives:
+    - alt_id: ALT-REQ
+      ops:
+      - op: thickness
+        part_ids:
+        - S-001:F21C-PL-001
+        from_mm: 15.5
+        to_mm: 17.5
+      scope_reduced: false
+      eligibility:
+        status: meets
+        ratio_vs_request: 1.0
+      total:
+        value_krw: 977045
+        low_krw: 492070
+        high_krw: 2268140
+      max_exit_delay_days: 0
+      deadline:
+        kind: by_date
+        last_day: '2026-10-26'
+      best:
+        confirm_on: '2026-10-30'
+        holds:
+        - po_id: PO-0108
+          hold_days: 18
+        total:
+          value_krw: 788237
+          low_krw: 408737
+          high_krw: 1981237
+      rank: 1
+      formula: 요청안(비교 기준, ρ=1). 확정일 2026-10-30 총액(대표값) = C-01:material 95,237 + R-T01:po_change 22,143 + R-T01:reorder 166,665
+        + R-T03:weld_recheck 21,000 + R-D01:drawing_revision 672,000 = 977,045; 블록 단계 F21C not_started; 품목 단계 PO-0108#1 ordered;
+        출구 지연 0일
+    - alt_id: ALT-T1
+      ops:
+      - op: add_part
+        block_id: S-001:F21C
+        kind: stiffener
+        spec_id: HP280x10-AH32
+        qty: 0.331
+        attach_to_part_id: S-001:F21C-PL-001
+      scope_reduced: false
+      eligibility:
+        status: meets
+        ratio_vs_request: 1.733
+      total:
+        value_krw: 1638520
+        low_krw: 836910
+        high_krw: 3372530
+      max_exit_delay_days: 0
+      deadline:
+        kind: none_in_horizon
+        last_day: '2026-12-19'
+      best:
+        confirm_on: '2026-10-30'
+        holds: []
+        total:
+          value_krw: 1638520
+          low_krw: 836910
+          high_krw: 3372530
+      rank: 2
+      formula: ρ = min_p G_alt/G_req = 1.7333 (G_alt 2.0000 / G_req 1.1538) → meets. 확정일 2026-10-30 총액(대표값) = C-01:material
+        321,070 + C-02:new_work 645,450 + R-D01:drawing_revision 672,000 = 1,638,520; 블록 단계 F21C not_started; 출구 지연 0일
+    - alt_id: ALT-T2
+      ops:
+      - op: grade
+        part_ids:
+        - S-001:F21C-PL-001
+        from_grade: AH32
+        to_grade: AH36
+      scope_reduced: false
+      eligibility:
+        status: short
+        ratio_vs_request: 0.902
+      total:
+        value_krw: 878666
+        low_krw: 411638
+        high_krw: 2138312
+      max_exit_delay_days: 0
+      deadline:
+        kind: by_date
+        last_day: '2026-10-26'
+      best: null
+      rank: null
+      formula: ρ = min_p G_alt/G_req = 0.9021 (G_alt 1.0408 / G_req 1.1538) → short. 확정일 2026-10-30 총액(대표값) = C-01:material
+        30,754 + R-T01:po_change 22,143 + R-T01:reorder 153,769 + R-D01:drawing_revision 672,000 = 878,666; 블록 단계 F21C not_started;
+        품목 단계 PO-0108#1 ordered; 출구 지연 0일
+    recommendation:
+      alt_id: ALT-REQ
+      confirm_on: '2026-10-30'
+      holds:
+      - po_id: PO-0108
+        hold_days: 18
+      total:
+        value_krw: 788237
+        low_krw: 408737
+        high_krw: 1981237
+    cheapest_by_date:
+    - alt_id: ALT-REQ
+      start: '2026-10-20'
+      end: '2026-12-19'
+      total:
+        value_krw: 788237
+        low_krw: 408737
+        high_krw: 1981237
+    omitted: []
+computed_by: 독립 계산자(G3-001~005) — 엔진 코드를 읽지 않은 AI 에이전트, 2026-10-27
+computed_on: '2026-10-27'
+checked_by: null
+notes: ''

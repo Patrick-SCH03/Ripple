@@ -1,0 +1,33 @@
+case_id: G1-013
+stage: 1
+title: B31P No.3 COT 이중저 좌 판 11 두께 15→19mm(이웃 15mm, 차 4)
+snapshot:
+  generator_seed: 20261020
+  snapshot_id: G-1fdcbf59d84dcc2d
+request:
+  change:
+    ecn_id: GC-013
+    title: B31P No.3 COT 이중저 좌 판 11 두께 15→19mm(이웃 15mm, 차 4)
+    ship_ids:
+    - S-001
+    intent: strength
+    ops:
+    - op: thickness
+      part_ids:
+      - S-001:B31P-PL-011
+      from_mm: 15.0
+      to_mm: 19.0
+    raw_text: null
+    requested_by: null
+    requested_on: null
+    effectivity: null
+    design_status: unknown
+    source: null
+    cause: null
+  as_of: '2026-10-20'
+  confirm_on: null
+  horizon_days: 60
+  holds: []
+  include_alternatives: false
+  outfit_on_board: false
+focus: R-T02 문턱 경계(얇은 쪽 10mm 초과 → 4.0)

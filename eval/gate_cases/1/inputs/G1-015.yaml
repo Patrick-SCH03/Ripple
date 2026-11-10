@@ -1,0 +1,33 @@
+case_id: G1-015
+stage: 1
+title: B31S No.3 COT 이중저 우 판 1 두께 14→6mm(이웃 15.5mm의 절반 아래)
+snapshot:
+  generator_seed: 20261020
+  snapshot_id: G-1fdcbf59d84dcc2d
+request:
+  change:
+    ecn_id: GC-015
+    title: B31S No.3 COT 이중저 우 판 1 두께 14→6mm(이웃 15.5mm의 절반 아래)
+    ship_ids:
+    - S-001
+    intent: weight
+    ops:
+    - op: thickness
+      part_ids:
+      - S-001:B31S-PL-001
+      from_mm: 14.0
+      to_mm: 6.0
+    raw_text: null
+    requested_by: null
+    requested_on: null
+    effectivity: null
+    design_status: unknown
+    source: null
+    cause: null
+  as_of: '2026-10-20'
+  confirm_on: null
+  horizon_days: 60
+  holds: []
+  include_alternatives: false
+  outfit_on_board: false
+focus: R-T02 두께 차 > 두꺼운 판의 50%

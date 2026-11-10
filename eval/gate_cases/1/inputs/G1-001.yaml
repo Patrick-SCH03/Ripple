@@ -1,0 +1,33 @@
+case_id: G1-001
+stage: 1
+title: T31C 이음부 판 두께 15→16.5mm(조립 중)
+snapshot:
+  generator_seed: 20261020
+  snapshot_id: G-1fdcbf59d84dcc2d
+request:
+  change:
+    ecn_id: GC-001
+    title: T31C 이음부 판 두께 15→16.5mm(조립 중)
+    ship_ids:
+    - S-001
+    intent: strength
+    ops:
+    - op: thickness
+      part_ids:
+      - S-001:T31C-PL-007
+      from_mm: 15.0
+      to_mm: 16.5
+    raw_text: null
+    requested_by: null
+    requested_on: null
+    effectivity: null
+    design_status: unknown
+    source: null
+    cause: null
+  as_of: '2026-10-20'
+  confirm_on: null
+  horizon_days: 60
+  holds: []
+  include_alternatives: false
+  outfit_on_board: false
+focus: 조립 중 블록의 판, 블록 이음 너머 이웃, 가공 끝난 발주, 같은 규격 재고

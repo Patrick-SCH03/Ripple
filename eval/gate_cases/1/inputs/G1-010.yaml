@@ -1,0 +1,40 @@
+case_id: G1-010
+stage: 1
+title: S31S No.3 COT 선측 우 판 1·No.3 COT 선측 우 판 2 두께 16→20mm, No.3 COT 선측 우 판 1 길이 변경
+snapshot:
+  generator_seed: 20261020
+  snapshot_id: G-1fdcbf59d84dcc2d
+request:
+  change:
+    ecn_id: GC-010
+    title: S31S No.3 COT 선측 우 판 1·No.3 COT 선측 우 판 2 두께 16→20mm, No.3 COT 선측 우 판 1 길이 변경
+    ship_ids:
+    - S-001
+    intent: strength
+    ops:
+    - op: thickness
+      part_ids:
+      - S-001:S31S-PL-001
+      - S-001:S31S-PL-002
+      from_mm: 16.0
+      to_mm: 20.0
+    - op: dimension
+      part_ids:
+      - S-001:S31S-PL-001
+      field: length_mm
+      from_value: 4000.0
+      to_value: 4400.0
+    raw_text: null
+    requested_by: null
+    requested_on: null
+    effectivity: null
+    design_status: unknown
+    source: null
+    cause: null
+  as_of: '2026-10-20'
+  confirm_on: null
+  horizon_days: 60
+  holds: []
+  include_alternatives: false
+  outfit_on_board: false
+focus: 맞댄 두 판 동시 변경(최종 두께), 연산 여러 개

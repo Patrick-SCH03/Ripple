@@ -1,0 +1,33 @@
+case_id: G1-009
+stage: 1
+title: D31C No.3 COT 갑판 판 1 강종 AH32→EH36
+snapshot:
+  generator_seed: 20261020
+  snapshot_id: G-1fdcbf59d84dcc2d
+request:
+  change:
+    ecn_id: GC-009
+    title: D31C No.3 COT 갑판 판 1 강종 AH32→EH36
+    ship_ids:
+    - S-001
+    intent: rule_change
+    ops:
+    - op: grade
+      part_ids:
+      - S-001:D31C-PL-001
+      from_grade: AH32
+      to_grade: EH36
+    raw_text: null
+    requested_by: null
+    requested_on: null
+    effectivity: null
+    design_status: unknown
+    source: null
+    cause: null
+  as_of: '2026-10-20'
+  confirm_on: null
+  horizon_days: 60
+  holds: []
+  include_alternatives: false
+  outfit_on_board: false
+focus: 발주 단계 판단 불가 품목

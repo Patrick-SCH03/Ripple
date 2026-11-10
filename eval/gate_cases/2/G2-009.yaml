@@ -1,0 +1,110 @@
+case_id: G2-009
+stage: 2
+title: P11C 펌프룸 판 1 두께 13.5→16mm(2026-12-19 확정)
+snapshot:
+  generator_seed: 20261020
+  snapshot_id: G-1fdcbf59d84dcc2d
+request:
+  change:
+    ecn_id: GC2-009
+    title: P11C 펌프룸 판 1 두께 13.5→16mm(2026-12-19 확정)
+    ship_ids:
+    - S-001
+    intent: strength
+    ops:
+    - op: thickness
+      part_ids:
+      - S-001:P11C-PL-001
+      from_mm: 13.5
+      to_mm: 16.0
+    raw_text: null
+    requested_by: null
+    requested_on: null
+    effectivity: null
+    design_status: unknown
+    source: null
+    cause: null
+  as_of: '2026-10-20'
+  confirm_on: '2026-12-19'
+  horizon_days: 60
+  holds: []
+  include_alternatives: false
+  outfit_on_board: false
+focus: 늦은 확정의 새 자재 도착과 탑재 관문, 구역 출구·인도 지연, 발주 보류 권고
+expected:
+  impacts: []
+  forbidden_impacts: []
+  unresolved: []
+  cost_lines:
+  - line_id: C-01:material:S-001:P11C-PL-001
+    amount:
+      value_krw: 235508
+      low_krw: null
+      high_krw: null
+    determinacy: known
+    formula: q'×P' − q×P = 1.703111×885000.0000 − 1.437×885000
+  - line_id: R-B01:rework:S-001:P11C
+    amount:
+      value_krw: 180902
+      low_krw: 27135
+      high_krw: 488434
+    determinacy: known
+    formula: 'Σ_k round(W 1.4369t × base_k × 배수[sub_assembly] (0.2, 0.1, 0.3) × D 1.573714 (형상·의장·전장 (1.0, 1.3415, 1.1731))
+      × 단가); 몫: sub_assembly[prime]=180902[27135,488434]'
+  - line_id: R-D01:drawing_revision:DWG-P11C-H01@A
+    amount:
+      value_krw: 672000
+      low_krw: 304000
+      high_krw: 1840000
+    determinacy: known
+    formula: drawing 공수 16h[8,40] × 1 × 단가[design] 42000[38000,46000]
+  - line_id: R-T01:po_change:PO-0017#2
+    amount:
+      value_krw: 635873
+      low_krw: 572285
+      high_krw: 763047
+    determinacy: known
+    formula: 'r[s] × (q 1.437 − 전용 0.0) × 단가 885000; r: processed=0.5[0.45,0.6]'
+  - line_id: R-T01:reorder:PO-0017#2
+    amount:
+      value_krw: 301451
+      low_krw: 150725
+      high_krw: 452176
+    determinacy: known
+    formula: '할증률 0.2[0.1,0.3] × Σ(q'' − c)×P'' = 할증률 × 1507253.3333 (S-001:P11C-PL-001: (q'' 1.703111 − c 0.0) × P'' 885000.0000)'
+  total:
+    value_krw: 2025734
+    low_krw: 1289653
+    high_krw: 3779165
+  timing:
+    zone_exit_delays:
+      S-001:ZER: 4
+    delivery_added_days: 0
+    delivery_exposure: null
+    onboard: null
+    delay_ripple:
+      value_krw: 16000000
+      low_krw: 8000000
+      high_krw: 32000000
+    deadline:
+      kind: by_date
+      last_day: '2026-11-28'
+    deadline_total:
+      value_krw: 1844832
+      low_krw: 1198931
+      high_krw: 3290731
+    next_day_total:
+      value_krw: 1844832
+      low_krw: 1262518
+      high_krw: 3290731
+    holds: []
+  verdict:
+    level: warn
+    reasons:
+    - 구역 출구 일정 지연 가능
+    - 블록 탑재 지연 가능
+  alternatives: null
+computed_by: 독립 계산자 A(G2-001~005)·B(G2-006~009)·C(G2-010~013) — 엔진 코드를 읽지 않은 AI 에이전트, 2026-10-27
+computed_on: '2026-10-27'
+checked_by: null
+notes: ''

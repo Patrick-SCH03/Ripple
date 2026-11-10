@@ -1,0 +1,106 @@
+case_id: G2-008
+stage: 2
+title: D31C No.3 COT 갑판 판 1 강종 AH32→EH36(발주 단계 판단 불가)
+snapshot:
+  generator_seed: 20261020
+  snapshot_id: G-1fdcbf59d84dcc2d
+request:
+  change:
+    ecn_id: GC2-008
+    title: D31C No.3 COT 갑판 판 1 강종 AH32→EH36(발주 단계 판단 불가)
+    ship_ids:
+    - S-001
+    intent: rule_change
+    ops:
+    - op: grade
+      part_ids:
+      - S-001:D31C-PL-001
+      from_grade: AH32
+      to_grade: EH36
+    raw_text: null
+    requested_by: null
+    requested_on: null
+    effectivity: null
+    design_status: unknown
+    source: null
+    cause: null
+  as_of: '2026-10-20'
+  confirm_on: null
+  horizon_days: 60
+  holds: []
+  include_alternatives: false
+  outfit_on_board: false
+focus: 판단 불가 단계의 금액 범위(2절)와 판단 불가 표시, 계산하지 못한 이유, 요약 판정
+expected:
+  impacts: []
+  forbidden_impacts: []
+  unresolved:
+  - kind: po_state
+    entity_id: PO-0087#2
+  cost_lines:
+  - line_id: C-01:material:S-001:D31C-PL-001
+    amount:
+      value_krw: 121885
+      low_krw: null
+      high_krw: null
+    determinacy: known
+    formula: q'×P' − q×P = 1.276000×1012520.8333 − 1.276×917000
+  - line_id: R-D01:drawing_revision:DWG-D31C-H01@A
+    amount:
+      value_krw: 672000
+      low_krw: 304000
+      high_krw: 1840000
+    determinacy: known
+    formula: drawing 공수 16h[8,40] × 1 × 단가[design] 42000[38000,46000]
+  - line_id: R-T01:po_change:PO-0087#2
+    amount:
+      value_krw: 585046
+      low_krw: 0
+      high_krw: 702055
+    determinacy: state_unknown
+    formula: 'r[s] × (q 1.276 − 전용 0.0) × 단가 917000; r: not_ordered=0.0[0.0,0.0], ordered=0.03[0.0,0.05], material_secured=0.3[0.2,0.4],
+      in_fabrication=0.5[0.4,0.6], received=0.5[0.45,0.6]'
+  - line_id: R-T01:reorder:PO-0087#2
+    amount:
+      value_krw: 258395
+      low_krw: 0
+      high_krw: 387593
+    determinacy: state_unknown
+    formula: '할증률 0.2[0.1,0.3] × Σ(q'' − c)×P'' = 할증률 × 1291976.5833 (S-001:D31C-PL-001: (q'' 1.276000 − c 0.0) × P'' 1012520.8333);
+      단계 모름 — 미발주면 0, 발주 이상이면 할증'
+  total:
+    value_krw: 1637326
+    low_krw: 425885
+    high_krw: 3051533
+  timing:
+    zone_exit_delays: {}
+    delivery_added_days: 0
+    delivery_exposure: null
+    onboard: null
+    delay_ripple: null
+    deadline:
+      kind: by_date
+      last_day: '2026-11-07'
+    deadline_total:
+      value_krw: 1637326
+      low_krw: 425885
+      high_krw: 3051533
+    next_day_total:
+      value_krw: 1757827
+      low_krw: 443960
+      high_krw: 3376886
+    holds: []
+  verdict:
+    level: review
+    reasons:
+    - 발주된 자재 변경·취소 필요
+    - 판단 불가 항목 확인 필요
+  alternatives: null
+computed_by: 독립 계산자 A(G2-001~005)·B(G2-006~009)·C(G2-010~013) — 엔진 코드를 읽지 않은 AI 에이전트, 2026-10-27
+computed_on: '2026-10-27'
+checked_by: null
+notes: '2026-10-27 사례 고침(작성 규칙 6): 처음 계산은 마감일 다음 날(11-08) 총액 최소 1,099,699원이었음. 계산자는 domain.md 3절 ''소비
+  공정이 착수했으면 가공''을 2단계 시계(기준 일정 착수일 ES⁰ 11-08)로 읽어 PO-0087#2를 그날부터 가공 확정(판단 불가 해제)으로 보고 발주 변경·재발주
+  줄 최소를 526,541원·129,198원으로 넣었음. 같은 절의 ''입고 전으로 보이는 품목은 소비 공정 착수 예정일이 지나도 가공으로 추정하지 않는다''와 ''가장
+  늦은 단계는 ES⁰부터 가공(가능성)''에 따라 가공 확정은 실제 착수(실적)로만 하고 계획 착수일은 가공 가능성만 연다고 정함 → 단계 모름 그대로라 두
+  줄 최소 0, 다음 날 총액 최소 = 11-07 최소 425,885 + 소조립 재작업 최소 18,075 = 443,960원(대표·최대는 같음). 명세 문장도 ''실제 착수''로 고침.'

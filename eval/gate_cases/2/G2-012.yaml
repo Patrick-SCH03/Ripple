@@ -1,0 +1,170 @@
+case_id: G2-012
+stage: 2
+title: T31C 이음부 판 두께 15→17mm(선주 요청, 2027-01-02 확정)
+snapshot:
+  generator_seed: 20261020
+  snapshot_id: G-1fdcbf59d84dcc2d
+request:
+  change:
+    ecn_id: GC2-012
+    title: T31C 이음부 판 두께 15→17mm(선주 요청, 2027-01-02 확정)
+    ship_ids:
+    - S-001
+    intent: strength
+    ops:
+    - op: thickness
+      part_ids:
+      - S-001:T31C-PL-007
+      from_mm: 15.0
+      to_mm: 17.0
+    raw_text: null
+    requested_by: null
+    requested_on: null
+    effectivity: null
+    design_status: unknown
+    source: null
+    cause: owner_request
+  as_of: '2026-10-20'
+  confirm_on: '2027-01-02'
+  horizon_days: 90
+  holds: []
+  include_alternatives: false
+  outfit_on_board: false
+focus: '선주 요청 변경의 허용 지연: 지체상금 줄 없이 인도일 조정과 노출 금액(4-6), 판정 이유(8-4)'
+expected:
+  impacts: []
+  forbidden_impacts: []
+  unresolved: []
+  cost_lines:
+  - line_id: C-01:material:S-001:T31C-PL-007
+    amount:
+      value_krw: 152993
+      low_krw: null
+      high_krw: null
+    determinacy: known
+    formula: q'×P' − q×P = 1.325×17.0/15.0=1.501667 × 866000 − 1.325 × 866000
+  - line_id: C-04:after_paint:S-001:T31C
+    amount:
+      value_krw: 2400000
+      low_krw: 960000
+      high_krw: 5760000
+    determinacy: known
+    formula: (재도장+족장+화기) × 선행도장 수행 주체(CRW-04) 단가
+  - line_id: R-B01:rework:S-001:T31C
+    amount:
+      value_krw: 5684195
+      low_krw: 1136838
+      high_krw: 17526267
+    determinacy: known
+    formula: Σ_k round(W 1.3249 × base_k × mult[erected] × D 1.191745 × 단가) — sub_assembly:1894732(direct), assembly:2368414(direct),
+      pre_erection:473683(direct), erection:947366(direct)
+  - line_id: R-B01:rework:S-001:T31C@CRW-01
+    amount:
+      value_krw: 1421049
+      low_krw: 378946
+      high_krw: 4263146
+    determinacy: known
+    formula: Σ_k round(W 1.3249 × base_k × mult[erected] × D 1.191745 × 단가) — panel:1421049(CRW-01)
+  - line_id: R-B01:rework:S-001:T31C@CRW-03
+    amount:
+      value_krw: 1421049
+      low_krw: 378946
+      high_krw: 4736829
+    determinacy: known
+    formula: Σ_k round(W 1.3249 × base_k × mult[erected] × D 1.191745 × 단가) — pre_outfitting:1421049(CRW-03)
+  - line_id: R-B01:rework:S-001:T31C@CRW-04
+    amount:
+      value_krw: 710524
+      low_krw: 126315
+      high_krw: 2368414
+    determinacy: known
+    formula: Σ_k round(W 1.3249 × base_k × mult[erected] × D 1.191745 × 단가) — pre_painting:710524(CRW-04)
+  - line_id: R-D01:drawing_revision:DWG-T31C-H01@A
+    amount:
+      value_krw: 672000
+      low_krw: 304000
+      high_krw: 1840000
+    determinacy: known
+    formula: 16h × 설계 단가
+  - line_id: R-T01:po_change:PO-0078#1
+    amount:
+      value_krw: 573725
+      low_krw: 516353
+      high_krw: 688470
+    determinacy: known
+    formula: r[processed](강재 상한 min) × 1.325 × 866000
+  - line_id: R-T01:reorder:PO-0078#1
+    amount:
+      value_krw: 260089
+      low_krw: 130044
+      high_krw: 390133
+    determinacy: known
+    formula: 할증률 × (1.501667 − 0.0) × 866000
+  - line_id: R-T03:weld_recheck:S-001:T31C-BR-002
+    amount:
+      value_krw: 21000
+      low_krw: 9500
+      high_krw: 46000
+    determinacy: known
+    formula: 0.5h × 설계 단가
+  - line_id: R-T03:weld_recheck:S-001:T31C-ST-001
+    amount:
+      value_krw: 21000
+      low_krw: 9500
+      high_krw: 46000
+    determinacy: known
+    formula: 0.5h × 설계 단가
+  - line_id: R-T03:weld_recheck:S-001:T31C-ST-007
+    amount:
+      value_krw: 21000
+      low_krw: 9500
+      high_krw: 46000
+    determinacy: known
+    formula: 0.5h × 설계 단가
+  - line_id: R-T03:weld_recheck:S-001:T31C-ST-010
+    amount:
+      value_krw: 21000
+      low_krw: 9500
+      high_krw: 46000
+    determinacy: known
+    formula: 0.5h × 설계 단가
+  total:
+    value_krw: 13379624
+    low_krw: 4122435
+    high_krw: 37910252
+  timing:
+    zone_exit_delays:
+      S-001:ZCT: 63
+    delivery_added_days: 37
+    delivery_exposure:
+      value_krw: 184800000
+      low_krw: 134400000
+      high_krw: 260400000
+    onboard: null
+    delay_ripple:
+      value_krw: 104000000
+      low_krw: 52000000
+      high_krw: 208000000
+    deadline:
+      kind: by_date
+      last_day: '2026-10-31'
+    deadline_total:
+      value_krw: 4584904
+      low_krw: 1772967
+      high_krw: 10076629
+    next_day_total:
+      value_krw: 5295428
+      low_krw: 1962440
+      high_krw: 11971361
+    holds: []
+  verdict:
+    level: warn
+    reasons:
+    - 구역 출구 일정 지연 가능
+    - 인도일 조정 선주 합의 필요
+    - 대조립 이후 블록 재작업 필요
+  alternatives: null
+computed_by: 독립 계산자 A(G2-001~005)·B(G2-006~009)·C(G2-010~013) — 엔진 코드를 읽지 않은 AI 에이전트, 2026-10-27
+computed_on: '2026-10-27'
+checked_by: null
+notes: ''

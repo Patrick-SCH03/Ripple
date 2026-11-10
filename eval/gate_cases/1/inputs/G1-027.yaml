@@ -1,0 +1,31 @@
+case_id: G1-027
+stage: 1
+title: D31C No.3 COT 갑판 브라켓 1 삭제(발주 단계 모름)
+snapshot:
+  generator_seed: 20261020
+  snapshot_id: G-1fdcbf59d84dcc2d
+request:
+  change:
+    ecn_id: GC-027
+    title: D31C No.3 COT 갑판 브라켓 1 삭제(발주 단계 모름)
+    ship_ids:
+    - S-001
+    intent: weight
+    ops:
+    - op: remove_part
+      part_ids:
+      - S-001:D31C-BR-001
+    raw_text: null
+    requested_by: null
+    requested_on: null
+    effectivity: null
+    design_status: unknown
+    source: null
+    cause: null
+  as_of: '2026-10-20'
+  confirm_on: null
+  horizon_days: 60
+  holds: []
+  include_alternatives: false
+  outfit_on_board: false
+focus: R-M02 단계 모름(영향 + 이유), R-M01 (나) 찾지 않음

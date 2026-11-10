@@ -1,0 +1,36 @@
+case_id: G1-023
+stage: 1
+title: E11C 배관 경로 변경(서포트 없음, 다른 블록 판 두 장 관통)
+snapshot:
+  generator_seed: 20261020
+  snapshot_id: G-1fdcbf59d84dcc2d
+request:
+  change:
+    ecn_id: GC-023
+    title: E11C 배관 경로 변경(서포트 없음, 다른 블록 판 두 장 관통)
+    ship_ids:
+    - S-001
+    intent: interference
+    ops:
+    - op: reroute_pipe
+      removed_part_ids:
+      - S-001:E11C-SPBW-101
+      added_spool_spec_ids:
+      - SP-DN200-S40
+      crosses_part_ids:
+      - S-001:B31P-PL-001
+      - S-001:B31S-PL-001
+    raw_text: null
+    requested_by: null
+    requested_on: null
+    effectivity: null
+    design_status: unknown
+    source: null
+    cause: null
+  as_of: '2026-10-20'
+  confirm_on: null
+  horizon_days: 60
+  holds: []
+  include_alternatives: false
+  outfit_on_board: false
+focus: R-P02 판마다, R-P03 없음, 이어서 바뀌는 판의 블록·도면

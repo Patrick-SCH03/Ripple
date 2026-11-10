@@ -1,0 +1,151 @@
+case_id: G2-001
+stage: 2
+title: T31C 이음부 판 두께 15→16.5mm(재고 충당, 기준일 확정)
+snapshot:
+  generator_seed: 20261020
+  snapshot_id: G-1fdcbf59d84dcc2d
+request:
+  change:
+    ecn_id: GC2-001
+    title: T31C 이음부 판 두께 15→16.5mm(재고 충당, 기준일 확정)
+    ship_ids:
+    - S-001
+    intent: strength
+    ops:
+    - op: thickness
+      part_ids:
+      - S-001:T31C-PL-007
+      from_mm: 15.0
+      to_mm: 16.5
+    raw_text: null
+    requested_by: null
+    requested_on: null
+    effectivity: null
+    design_status: unknown
+    source: null
+    cause: null
+  as_of: '2026-10-20'
+  confirm_on: null
+  horizon_days: 60
+  holds: []
+  include_alternatives: false
+  outfit_on_board: false
+focus: 같은 규격 재고 충당(4-7 가), 가공 끝난 발주의 변경·할증, 조립 중 재작업과 탑재 관문
+expected:
+  impacts: []
+  forbidden_impacts: []
+  unresolved: []
+  cost_lines:
+  - line_id: C-01:material:S-001:T31C-PL-007
+    amount:
+      value_krw: 114745
+      low_krw: null
+      high_krw: null
+    determinacy: known
+    formula: q'×P' − q×P = (1.325×16.5/15=1.4575 t)×866,000 − 1.325×866,000 = 1,262,195 − 1,147,450 = 114,745 (4-1, 단가는 PO-0078#1
+      866,000원/t, 두께 변경은 단가 그대로)
+  - line_id: R-B01:rework:S-001:T31C
+    amount:
+      value_krw: 2131573
+      low_krw: 442104
+      high_krw: 5115775
+    determinacy: known
+    formula: '직영 묶음(소조립 8h/t + 대조립 10h/t): Σ round(W=1.3249 t × base_k × 배수[대조립]=1.5(1.0~2.0) × D_B=1.191745 × 직영 단가 50,000(40,000~60,000))
+      = 947,366 + 1,184,207 (4-4, 4-4-1)'
+  - line_id: R-B01:rework:S-001:T31C@CRW-01
+    amount:
+      value_krw: 710524
+      low_krw: 189473
+      high_krw: 1705258
+    determinacy: known
+    formula: '한빛 작업반(판넬조립 6h/t): round(1.3249 × 6 × 1.5 × 1.191745 × 50,000) = 710,524 (4-4-1, 작업반 단가 = 직영과 같음)'
+  - line_id: R-D01:drawing_revision:DWG-T31C-H01@A
+    amount:
+      value_krw: 672000
+      low_krw: 304000
+      high_krw: 1840000
+    determinacy: known
+    formula: 도면 개정 16h(8~40) × 설계 단가 42,000(38,000~46,000) (4-5)
+  - line_id: R-M01:stock:LOT-04:S-001:T31C-PL-007
+    amount:
+      value_krw: -1189320
+      low_krw: -1218470
+      high_krw: -1116445
+    determinacy: known
+    formula: 재고 충당 c=1.4575 t(LOT-04 PL-AH36-16.5 4.12 t, 예약 없음) × 취급비 50,000(30,000~100,000) − c × P'=866,000 = 72,875 −
+      1,262,195 (4-7 가)
+  - line_id: R-T01:po_change:PO-0078#1
+    amount:
+      value_krw: 573725
+      low_krw: 516353
+      high_krw: 688470
+    determinacy: known
+    formula: r[가공]=min(0.8(0.55~1.0), 강재 상한 0.5(0.45~0.6)) = 0.5(0.45~0.6) × (q=1.325 − 전용 0) × 866,000 = 573,725 (4-2, 소비
+      공정 T31C 소조립 9-14 착수 → 가공)
+  - line_id: R-T01:reorder:PO-0078#1
+    amount:
+      value_krw: 0
+      low_krw: null
+      high_krw: null
+    determinacy: known
+    formula: 할증률 0.2(0.1~0.3) × (q'=1.4575 − c=1.4575 = 0) × 866,000 = 0 (4-3, 전량 재고 충당이라 0원 줄)
+  - line_id: R-T03:weld_recheck:S-001:T31C-BR-002
+    amount:
+      value_krw: 21000
+      low_krw: 9500
+      high_krw: 46000
+    determinacy: known
+    formula: 용접 재검토 0.5h(0.25~1) × 설계 단가 42,000(38,000~46,000) (4-5, 필릿 용접 이웃)
+  - line_id: R-T03:weld_recheck:S-001:T31C-ST-001
+    amount:
+      value_krw: 21000
+      low_krw: 9500
+      high_krw: 46000
+    determinacy: known
+    formula: 용접 재검토 0.5h(0.25~1) × 설계 단가 42,000(38,000~46,000) (4-5, 필릿 용접 이웃)
+  - line_id: R-T03:weld_recheck:S-001:T31C-ST-007
+    amount:
+      value_krw: 21000
+      low_krw: 9500
+      high_krw: 46000
+    determinacy: known
+    formula: 용접 재검토 0.5h(0.25~1) × 설계 단가 42,000(38,000~46,000) (4-5, 필릿 용접 이웃)
+  - line_id: R-T03:weld_recheck:S-001:T31C-ST-010
+    amount:
+      value_krw: 21000
+      low_krw: 9500
+      high_krw: 46000
+    determinacy: known
+    formula: 용접 재검토 0.5h(0.25~1) × 설계 단가 42,000(38,000~46,000) (4-5, 필릿 용접 이웃)
+  total:
+    value_krw: 3097247
+    low_krw: 386205
+    high_krw: 8531803
+  timing:
+    zone_exit_delays: {}
+    delivery_added_days: 0
+    delivery_exposure: null
+    onboard: null
+    delay_ripple: null
+    deadline:
+      kind: by_date
+      last_day: '2026-10-31'
+    deadline_total:
+      value_krw: 3097247
+      low_krw: 386205
+      high_krw: 8531803
+    next_day_total:
+      value_krw: 3807771
+      low_krw: 575678
+      high_krw: 10426535
+    holds: []
+  verdict:
+    level: warn
+    reasons:
+    - 블록 탑재 지연 가능
+    - 대조립 이후 블록 재작업 필요
+  alternatives: null
+computed_by: 독립 계산자 A(G2-001~005)·B(G2-006~009)·C(G2-010~013) — 엔진 코드를 읽지 않은 AI 에이전트, 2026-10-27
+computed_on: '2026-10-27'
+checked_by: null
+notes: ''

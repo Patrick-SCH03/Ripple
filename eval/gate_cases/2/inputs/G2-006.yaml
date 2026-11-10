@@ -1,0 +1,36 @@
+case_id: G2-006
+stage: 2
+title: F11C 구상선수 보강재 3 삭제 + 구상선수 보강재 14 강종 변경(2026-12-19 확정)
+snapshot:
+  generator_seed: 20261020
+  snapshot_id: G-1fdcbf59d84dcc2d
+request:
+  change:
+    ecn_id: GC2-006
+    title: F11C 구상선수 보강재 3 삭제 + 구상선수 보강재 14 강종 변경(2026-12-19 확정)
+    ship_ids:
+    - S-001
+    intent: weight
+    ops:
+    - op: remove_part
+      part_ids:
+      - S-001:F11C-ST-003
+    - op: grade
+      part_ids:
+      - S-001:F11C-ST-014
+      from_grade: AH36
+      to_grade: DH36
+    raw_text: null
+    requested_by: null
+    requested_on: null
+    effectivity: null
+    design_status: unknown
+    source: null
+    cause: null
+  as_of: '2026-10-20'
+  confirm_on: '2026-12-19'
+  horizon_days: 60
+  holds: []
+  include_alternatives: false
+  outfit_on_board: false
+focus: 같은 품목의 삭제(R-M02)와 규격 변경(R-T01), 같은 곳으로의 전용 취급비 줄 하나

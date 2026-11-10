@@ -1,0 +1,70 @@
+case_id: G1-011
+stage: 1
+title: D31C No.3 COT 갑판 판 11 두께 14→10mm(차 3.0 = 문턱)
+snapshot:
+  generator_seed: 20261020
+  snapshot_id: G-1fdcbf59d84dcc2d
+request:
+  change:
+    ecn_id: GC-011
+    title: D31C No.3 COT 갑판 판 11 두께 14→10mm(차 3.0 = 문턱)
+    ship_ids:
+    - S-001
+    intent: weight
+    ops:
+    - op: thickness
+      part_ids:
+      - S-001:D31C-PL-011
+      from_mm: 14.0
+      to_mm: 10.0
+    raw_text: null
+    requested_by: null
+    requested_on: null
+    effectivity: null
+    design_status: unknown
+    source: null
+    cause: null
+  as_of: '2026-10-20'
+  confirm_on: null
+  horizon_days: 60
+  holds: []
+  include_alternatives: false
+  outfit_on_board: false
+focus: 'R-T02 문턱 경계: 얇은 쪽 판 10mm 이하 여부와 ''이상'''
+expected:
+  impacts:
+  - entity_id: PO-0089#1
+    impact_type: po_change
+    rule_id: R-T01
+  - entity_id: PO-0089#1
+    impact_type: reorder
+    rule_id: R-T01
+  - entity_id: S-001:D31C-PL-006
+    impact_type: taper
+    rule_id: R-T02
+  - entity_id: S-001:D31C-PL-012
+    impact_type: taper
+    rule_id: R-T02
+  - entity_id: S-001:D31C-PL-016
+    impact_type: taper
+    rule_id: R-T02
+  - entity_id: DWG-D31C-H01@A
+    impact_type: drawing_revision
+    rule_id: R-D01
+  forbidden_impacts:
+  - entity_id: S-001:D31C
+    impact_type: rework
+    rule_id: null
+  - entity_id: S-001:D31C-PL-011
+    impact_type: needs_confirmation
+    rule_id: null
+  unresolved: []
+  cost_lines: []
+  total: null
+  timing: null
+  verdict: null
+  alternatives: null
+computed_by: 독립 계산자 A(G1-001~015)·B(G1-016~030) — 엔진 코드를 읽지 않은 AI 에이전트, 2026-10-27
+computed_on: '2026-10-27'
+checked_by: null
+notes: ''

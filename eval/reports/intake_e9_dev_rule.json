@@ -1,0 +1,370 @@
+{
+  "split": "dev",
+  "path": "rule",
+  "seed": 20261020,
+  "docs": 120,
+  "extractors": {
+    "rule": 120
+  },
+  "outcomes": {
+    "change": {
+      "wrong_blocked": 19,
+      "exact_ready": 391,
+      "wrong_warned": 2
+    },
+    "duplicate": {
+      "exact_flagged": 11,
+      "wrong_blocked": 4
+    },
+    "missing_target": {
+      "safe": 15
+    },
+    "unsupported": {
+      "safe": 58
+    }
+  },
+  "expected_flags": {
+    "duplicate": [
+      15,
+      15
+    ],
+    "from_mismatch": [
+      18,
+      20
+    ],
+    "revision_mismatch": [
+      57,
+      57
+    ]
+  },
+  "items": 502,
+  "stray_items": 0,
+  "stray_blocking": 0,
+  "by_tag": {
+    "abbreviation": {
+      "exact_ready": 173,
+      "wrong_blocked": 12,
+      "safe": 4,
+      "wrong_warned": 2
+    },
+    "case": {
+      "exact_ready": 24
+    },
+    "duplicate": {
+      "exact_flagged": 11,
+      "wrong_blocked": 4
+    },
+    "joined": {
+      "exact_ready": 81,
+      "safe": 4,
+      "wrong_blocked": 1
+    },
+    "order": {
+      "exact_ready": 65,
+      "safe": 5,
+      "wrong_blocked": 1
+    },
+    "plain": {
+      "exact_ready": 53,
+      "safe": 1,
+      "wrong_blocked": 2
+    },
+    "revision": {
+      "exact_ready": 52,
+      "safe": 3,
+      "wrong_blocked": 1,
+      "wrong_warned": 1
+    },
+    "spacing": {
+      "wrong_blocked": 5,
+      "exact_ready": 123,
+      "safe": 4
+    },
+    "stale_before": {
+      "exact_ready": 18,
+      "safe": 1,
+      "wrong_blocked": 1
+    },
+    "typo": {
+      "wrong_blocked": 10,
+      "exact_ready": 39,
+      "wrong_warned": 2,
+      "safe": 2
+    },
+    "unsupported": {
+      "safe": 58
+    },
+    "wrapped": {
+      "exact_ready": 24,
+      "safe": 1,
+      "wrong_blocked": 1
+    }
+  },
+  "by_style": {
+    "form": {
+      "wrong_blocked": 6,
+      "exact_ready": 138,
+      "safe": 20,
+      "exact_flagged": 5
+    },
+    "mail": {
+      "exact_ready": 113,
+      "safe": 30,
+      "exact_flagged": 5,
+      "wrong_blocked": 5,
+      "wrong_warned": 1
+    },
+    "table": {
+      "exact_ready": 140,
+      "safe": 23,
+      "wrong_blocked": 12,
+      "exact_flagged": 1,
+      "wrong_warned": 1
+    }
+  },
+  "criteria": [
+    {
+      "name": "사람에게 보이지 않은 정답 0건",
+      "ok": true,
+      "value": "0건"
+    },
+    {
+      "name": "문제 표시 재현율(지금 값·개정) ≥ 0.95",
+      "ok": true,
+      "value": "75/77 (97.4%)"
+    },
+    {
+      "name": "지원 안 함이 경고 없이 8종으로 0건",
+      "ok": true,
+      "value": "0건"
+    }
+  ],
+  "failures": [
+    {
+      "doc": "E9-dev-0022",
+      "style": "mail",
+      "kind": "duplicate",
+      "outcome": "exact_flagged",
+      "tags": [
+        "duplicate"
+      ],
+      "missed_flags": [],
+      "codes": [
+        "duplicate"
+      ],
+      "text": "6000mm에서 약 14.3% 줄여 5140mm로 B31P 철판 002 길이 변경 (클래시 해소) 부탁드립니다"
+    },
+    {
+      "doc": "E9-dev-0028",
+      "style": "mail",
+      "kind": "duplicate",
+      "outcome": "exact_flagged",
+      "tags": [
+        "duplicate"
+      ],
+      "missed_flags": [],
+      "codes": [
+        "duplicate"
+      ],
+      "text": "1mm 증가 E/R 이중저 플레이트 007, 기관실 더블바텀 철판 8번 (선급 코멘트)"
+    },
+    {
+      "doc": "E9-dev-0036",
+      "style": "form",
+      "kind": "duplicate",
+      "outcome": "exact_flagged",
+      "tags": [
+        "duplicate"
+      ],
+      "missed_flags": [],
+      "codes": [
+        "duplicate"
+      ],
+      "text": "장비 변경 때문에 No.3 COT 사이드 쉘 좌 플레이트 009 / 배관 P11C C/S 파이프 013 관통부 추가 지름 150"
+    },
+    {
+      "doc": "E9-dev-0044",
+      "style": "table",
+      "kind": "duplicate",
+      "outcome": "exact_flagged",
+      "tags": [
+        "duplicate"
+      ],
+      "missed_flags": [],
+      "codes": [
+        "duplicate"
+      ],
+      "text": "AH36으로 3번 탱크 D/B 우현 철판 3번재질 변경 변경 바랍니다"
+    },
+    {
+      "doc": "E9-dev-0060",
+      "style": "form",
+      "kind": "duplicate",
+      "outcome": "exact_flagged",
+      "tags": [
+        "duplicate"
+      ],
+      "missed_flags": [],
+      "codes": [
+        "duplicate"
+      ],
+      "text": "클래시 해소 때문에  기관실 측부·플랫 B/W 파이프 #5 / 관통 판 S31S 강판 3번 재배치 SP-DN200-S40 1EA 요청"
+    },
+    {
+      "doc": "E9-dev-0063",
+      "style": "form",
+      "kind": "duplicate",
+      "outcome": "exact_flagged",
+      "tags": [
+        "duplicate"
+      ],
+      "missed_flags": [],
+      "codes": [
+        "duplicate"
+      ],
+      "text": "E21C 론지 (기관실 측부·플랫 강판 006에 부착) 신설 HP280x10-AH36 124kg  강도 보강 사유로 검토 바람"
+    },
+    {
+      "doc": "E9-dev-0064",
+      "style": "mail",
+      "kind": "change",
+      "outcome": "wrong_warned",
+      "tags": [
+        "abbreviation",
+        "typo"
+      ],
+      "missed_flags": [],
+      "codes": [
+        "text_leftover"
+      ],
+      "text": "E/R 측부·플랫 B/W 파이프프 005 / 관통 판 F21C 플레이트 008 경로 변경 SP-DN200-S40 1EA (간섭 해소) 변경 바랍니다"
+    },
+    {
+      "doc": "E9-dev-0064",
+      "style": "mail",
+      "kind": "duplicate",
+      "outcome": "exact_flagged",
+      "tags": [
+        "duplicate"
+      ],
+      "missed_flags": [],
+      "codes": [
+        "duplicate"
+      ],
+      "text": "A11C-PL-010  증후 17T에서 21T로"
+    },
+    {
+      "doc": "E9-dev-0083",
+      "style": "table",
+      "kind": "change",
+      "outcome": "wrong_warned",
+      "tags": [
+        "abbreviation",
+        "typo",
+        "revision"
+      ],
+      "missed_flags": [],
+      "codes": [
+        "revision_mismatch",
+        "text_leftover"
+      ],
+      "text": "P/R 화물 스트리핑 스풀 3번 / 통 판 선수 평형수탱크 PL 5번 재배치 SP-DN100-S40 1EA 요청 (도면 DWG-E21C-H01 Rev.C)"
+    },
+    {
+      "doc": "E9-dev-0084",
+      "style": "form",
+      "kind": "duplicate",
+      "outcome": "exact_flagged",
+      "tags": [
+        "duplicate"
+      ],
+      "missed_flags": [],
+      "codes": [
+        "duplicate"
+      ],
+      "text": "간섭 해소 때문에 E21C B/W 관배 스풀 #5, 엔진룸 측부·플랫 밸러스트 파이프 006 / 관통 판 E/R 측부·플랫 판 3번 재배치 SP-DN200-S40 x 2 해 주세요"
+    },
+    {
+      "doc": "E9-dev-0085",
+      "style": "mail",
+      "kind": "change",
+      "outcome": "safe",
+      "tags": [
+        "order",
+        "stale_before"
+      ],
+      "missed_flags": [
+        "from_mismatch"
+      ],
+      "codes": [
+        "target_ambiguous",
+        "value_missing",
+        "value_uncertain"
+      ],
+      "text": "16mm에서 약 20.0% 증가, 18mm로 좌굴 방지 때문에 L31C 강판 1번, L31C 철판 13번, 중심선 종격벽 강판 010 두께 변경 검토 바람"
+    },
+    {
+      "doc": "E9-dev-0088",
+      "style": "mail",
+      "kind": "change",
+      "outcome": "wrong_blocked",
+      "tags": [
+        "abbreviation",
+        "order",
+        "typo",
+        "stale_before"
+      ],
+      "missed_flags": [
+        "from_mismatch"
+      ],
+      "codes": [
+        "target_ambiguous",
+        "value_missing",
+        "value_uncertain"
+      ],
+      "text": "18.5mm에서 약 17.1% 증가, 20.5mm로 NO.3 C.O.T 이사드 쉘 우현 판 #5, No.3 COT 선측 우 PL #10 두께 변경"
+    },
+    {
+      "doc": "E9-dev-0091",
+      "style": "mail",
+      "kind": "duplicate",
+      "outcome": "exact_flagged",
+      "tags": [
+        "duplicate"
+      ],
+      "missed_flags": [],
+      "codes": [
+        "duplicate"
+      ],
+      "text": "D31C-PL-006, 3번 화물탱크 데크 PL 14번 증후 3mm 증가 변경 바랍니다"
+    },
+    {
+      "doc": "E9-dev-0106",
+      "style": "mail",
+      "kind": "duplicate",
+      "outcome": "exact_flagged",
+      "tags": [
+        "duplicate"
+      ],
+      "missed_flags": [],
+      "codes": [
+        "duplicate"
+      ],
+      "text": "SP-DN100-S40 1EA P11C 화물 스트리핑 파이프 11번 / 관통 판 선수루 갑판 판 6 리라우팅 간섭 해소 사유로 변경 바랍니다"
+    },
+    {
+      "doc": "E9-dev-0111",
+      "style": "form",
+      "kind": "duplicate",
+      "outcome": "exact_flagged",
+      "tags": [
+        "duplicate"
+      ],
+      "missed_flags": [],
+      "codes": [
+        "duplicate"
+      ],
+      "text": "SP-DN200-S40 2개  E21C 밸러스트 파이프 013, E/R 측부·플랫 B/W 스풀 #14 리라우팅 (간섭 해소)"
+    }
+  ]
+}

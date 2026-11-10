@@ -1,0 +1,76 @@
+case_id: G1-007
+stage: 1
+title: T31C No.3 COT 횡격벽 판 1에 보강재 추가, F11C에 브라켓 추가(위치 미정)
+snapshot:
+  generator_seed: 20261020
+  snapshot_id: G-1fdcbf59d84dcc2d
+request:
+  change:
+    ecn_id: GC-007
+    title: T31C No.3 COT 횡격벽 판 1에 보강재 추가, F11C에 브라켓 추가(위치 미정)
+    ship_ids:
+    - S-001
+    intent: strength
+    ops:
+    - op: add_part
+      block_id: S-001:T31C
+      kind: stiffener
+      spec_id: HP200x10-A
+      qty: 0.2
+      attach_to_part_id: S-001:T31C-PL-001
+    - op: add_part
+      block_id: S-001:F11C
+      kind: bracket
+      spec_id: HP200x10-A
+      qty: 0.05
+      attach_to_part_id: null
+    raw_text: null
+    requested_by: null
+    requested_on: null
+    effectivity: null
+    design_status: unknown
+    source: null
+    cause: null
+  as_of: '2026-10-20'
+  confirm_on: null
+  horizon_days: 60
+  holds: []
+  include_alternatives: false
+  outfit_on_board: false
+focus: 새 부재(붙는 위치 있음·없음), 연산 두 개
+expected:
+  impacts:
+  - entity_id: S-001:T31C
+    impact_type: rework
+    rule_id: R-B01
+  - entity_id: DWG-T31C-H01@A
+    impact_type: drawing_revision
+    rule_id: R-D01
+  - entity_id: NEW:0f8331bd:1
+    impact_type: needs_confirmation
+    rule_id: R-X01
+  forbidden_impacts:
+  - entity_id: S-001:F11C
+    impact_type: rework
+    rule_id: null
+  - entity_id: S-001:T31C-PL-001
+    impact_type: weld_recheck
+    rule_id: null
+  - entity_id: NEW:6c9bb878:1
+    impact_type: needs_confirmation
+    rule_id: null
+  - entity_id: PO-0078#2
+    impact_type: po_change
+    rule_id: null
+  unresolved:
+  - kind: connection
+    entity_id: NEW:0f8331bd:1
+  cost_lines: []
+  total: null
+  timing: null
+  verdict: null
+  alternatives: null
+computed_by: 독립 계산자 A(G1-001~015)·B(G1-016~030) — 엔진 코드를 읽지 않은 AI 에이전트, 2026-10-27
+computed_on: '2026-10-27'
+checked_by: null
+notes: ''

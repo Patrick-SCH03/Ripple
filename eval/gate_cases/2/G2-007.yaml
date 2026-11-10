@@ -1,0 +1,181 @@
+case_id: G2-007
+stage: 2
+title: E21C 배관 경로 변경(스풀 1개 → 2개, 판 관통)
+snapshot:
+  generator_seed: 20261020
+  snapshot_id: G-1fdcbf59d84dcc2d
+request:
+  change:
+    ecn_id: GC2-007
+    title: E21C 배관 경로 변경(스풀 1개 → 2개, 판 관통)
+    ship_ids:
+    - S-001
+    intent: interference
+    ops:
+    - op: reroute_pipe
+      removed_part_ids:
+      - S-001:E21C-SPBW-005
+      added_spool_spec_ids:
+      - SP-DN200-S40
+      - SP-DN200-S40
+      crosses_part_ids:
+      - S-001:B31P-PL-001
+    raw_text: null
+    requested_by: null
+    requested_on: null
+    effectivity: null
+    design_status: unknown
+    source: null
+    cause: null
+  as_of: '2026-10-20'
+  confirm_on: null
+  horizon_days: 60
+  holds: []
+  include_alternatives: false
+  outfit_on_board: false
+focus: 빼는 스풀의 발주 감축, 새 스풀(임시 ID)의 자재비·리드타임, 관통 판·서포트 수정과 칼라, 두 블록 재작업
+expected:
+  impacts: []
+  forbidden_impacts: []
+  unresolved: []
+  cost_lines:
+  - line_id: C-01:material:NEW:833e44f2:1
+    amount:
+      value_krw: 635500
+      low_krw: null
+      high_krw: null
+    determinacy: known
+    formula: 새 스풀 수량 4.1 m(빼는 스풀 수량 평균) × SP-DN200-S40 단가 155,000원/m = 635,500
+  - line_id: C-01:material:NEW:833e44f2:2
+    amount:
+      value_krw: 635500
+      low_krw: null
+      high_krw: null
+    determinacy: known
+    formula: 새 스풀 수량 4.1 m(빼는 스풀 수량 평균) × SP-DN200-S40 단가 155,000원/m = 635,500
+  - line_id: C-01:material:S-001:E21C-SPBW-005
+    amount:
+      value_krw: -635500
+      low_krw: null
+      high_krw: null
+    determinacy: known
+    formula: − 빼는 스풀 수량 4.1 m × SP-DN200-S40 단가 155,000원/m = −635,500
+  - line_id: R-M02:po_change:PO-0131#1
+    amount:
+      value_krw: 381300
+      low_krw: 254200
+      high_krw: 508400
+    determinacy: known
+    formula: 취소·변경률[제작 0.6, 0.4~0.8] × 빼는 스풀 수량 4.1 m × 품목 단가 155,000 (배관재라 강재 상한 없음)
+  - line_id: R-P02:modify_part:S-001:B31P-PL-001
+    amount:
+      value_krw: 200000
+      low_krw: 80000
+      high_krw: 480000
+    determinacy: known
+    formula: 부재 수정 4h[2~8] × 생산 단가(블록 B31P 사외 협력사 없음 → 직영 50,000[40,000~60,000])
+  - line_id: R-P02:collar_resize:S-001:B31P-PL-001
+    amount:
+      value_krw: 75000
+      low_krw: 40000
+      high_krw: 180000
+    determinacy: known
+    formula: 칼라 치수 변경 1.5h[1~3] × 생산 단가 50,000[40,000~60,000]
+  - line_id: R-P03:modify_part:S-001:E21C-PSBW-005
+    amount:
+      value_krw: 200000
+      low_krw: 80000
+      high_krw: 480000
+    determinacy: known
+    formula: 부재 수정 4h[2~8] × 생산 단가(블록 E21C → 직영 50,000[40,000~60,000])
+  - line_id: R-B01:rework:S-001:B31P
+    amount:
+      value_krw: 1754955
+      low_krw: 389990
+      high_krw: 4211892
+    determinacy: known
+    formula: 직영 몫 Σ_k round(0.725 t × base_k × 배수[선행의장 1.5, 1.0~2.0] × D_B 1.344793 × 직영 단가 50,000[40,000~60,000]), k = 소조립
+      8h/t·판넬조립 6h/t·대조립 10h/t = 584,985 + 438,739 + 731,231
+  - line_id: R-B01:rework:S-001:B31P@CRW-03
+    amount:
+      value_krw: 438739
+      low_krw: 116997
+      high_krw: 1169970
+    determinacy: known
+    formula: 해송 작업반(선행의장) 몫 round(0.725 t × 6h/t[3~10] × 1.5[1.0~2.0] × 1.344793 × 작업반 단가 50,000[40,000~60,000])
+  - line_id: R-B01:rework:S-001:E21C
+    amount:
+      value_krw: 0
+      low_krw: 0
+      high_krw: 0
+    determinacy: known
+    formula: 블록 단계 대조립, 바뀌는 부재가 의장품뿐(O_B 0.47 t, H_B 0) → 다시 할 공정(소조립·판넬조립·대조립)의 중량 0 → 0원
+  - line_id: R-D01:drawing_revision:DWG-B31P-H01@A
+    amount:
+      value_krw: 672000
+      low_krw: 304000
+      high_krw: 1840000
+    determinacy: known
+    formula: 선체 도면 개정 16h[8~40] × 설계 단가 42,000[38,000~46,000]
+  - line_id: R-D01:drawing_revision:DWG-E21C-BW-P01@A
+    amount:
+      value_krw: 126000
+      low_krw: 76000
+      high_krw: 368000
+    determinacy: known
+    formula: 배관 도면 개정 3h[2~8] × 설계 단가 42,000[38,000~46,000]
+  total:
+    value_krw: 4483494
+    low_krw: 1976687
+    high_krw: 9873762
+  timing:
+    zone_exit_delays: {}
+    delivery_added_days: 0
+    delivery_exposure: null
+    onboard:
+      direction: to_on_board
+      block_ids:
+      - S-001:E21C
+      part_ids:
+      - NEW:833e44f2:1
+      - NEW:833e44f2:2
+      on_board_days: 1
+      total_change:
+        value_krw: 153000
+        low_krw: 21600
+        high_krw: 360000
+      erection_delay_now_days: 13
+      erection_delay_then_days: 0
+      exit_delay_now_days: 0
+      exit_delay_then_days: 0
+      delivery_added_now_days: 0
+      delivery_added_then_days: 0
+    delay_ripple: null
+    deadline:
+      kind: by_date
+      last_day: '2026-10-27'
+    deadline_total:
+      value_krw: 4483494
+      low_krw: 1976687
+      high_krw: 9873762
+    next_day_total:
+      value_krw: 7907217
+      low_krw: 3248677
+      high_krw: 19202169
+    holds:
+    - po_id: PO-0131
+      max_hold_days: 13
+      hold_until: '2026-11-02'
+      deadline_after:
+        kind: by_date
+        last_day: '2026-10-27'
+  verdict:
+    level: warn
+    reasons:
+    - 블록 탑재 지연 가능
+    - 대조립 이후 블록 재작업 필요
+  alternatives: null
+computed_by: 독립 계산자 E(G2-007·013) — 엔진 코드를 읽지 않은 AI 에이전트, 2026-10-31 (엔진 0.12.0·cost-v8 재계산)
+computed_on: '2026-10-31'
+checked_by: null
+notes: ''

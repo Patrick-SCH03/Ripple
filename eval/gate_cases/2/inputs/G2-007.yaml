@@ -1,0 +1,36 @@
+case_id: G2-007
+stage: 2
+title: E21C 배관 경로 변경(스풀 1개 → 2개, 판 관통)
+snapshot:
+  generator_seed: 20261020
+  snapshot_id: G-1fdcbf59d84dcc2d
+request:
+  change:
+    ecn_id: GC2-007
+    title: E21C 배관 경로 변경(스풀 1개 → 2개, 판 관통)
+    ship_ids:
+    - S-001
+    intent: interference
+    ops:
+    - op: reroute_pipe
+      removed_part_ids:
+      - S-001:E21C-SPBW-005
+      added_spool_spec_ids:
+      - SP-DN200-S40
+      - SP-DN200-S40
+      crosses_part_ids:
+      - S-001:B31P-PL-001
+    raw_text: null
+    requested_by: null
+    requested_on: null
+    effectivity: null
+    design_status: unknown
+    source: null
+    cause: null
+  as_of: '2026-10-20'
+  confirm_on: null
+  horizon_days: 60
+  holds: []
+  include_alternatives: false
+  outfit_on_board: false
+focus: 빼는 스풀의 발주 감축, 새 스풀(임시 ID)의 자재비·리드타임, 관통 판·서포트 수정과 칼라, 두 블록 재작업

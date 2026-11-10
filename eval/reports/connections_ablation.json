@@ -1,0 +1,1068 @@
+{
+ "maps": {
+  "with": "G-1fdcbf59d84dcc2d",
+  "without": "G-68153df09bb42aee"
+ },
+ "connections_removed": {
+  "butt_weld": 290,
+  "fillet_weld": 388,
+  "pipe_joint": 45,
+  "support": 14,
+  "penetration": 4
+ },
+ "with_connections": {
+  "recall": 1.0,
+  "precision": 1.0,
+  "precision_without_needs_confirmation": 1.0,
+  "impacts_expected_matched_produced": [
+   136,
+   136,
+   136
+  ],
+  "entity_recall": 1.0,
+  "second_order_expected_found": [
+   51,
+   51
+  ],
+  "cases_recall_1": 30,
+  "cases_unresolved_ok": 30,
+  "connection_unresolved_cases_entities": [
+   1,
+   1
+  ],
+  "forbidden_hits": [],
+  "gate_passed": true
+ },
+ "without_connections": {
+  "recall": 0.7721,
+  "precision": 0.875,
+  "precision_without_needs_confirmation": 1.0,
+  "impacts_expected_matched_produced": [
+   136,
+   105,
+   120
+  ],
+  "entity_recall": 0.735,
+  "second_order_expected_found": [
+   51,
+   20
+  ],
+  "cases_recall_1": 19,
+  "cases_unresolved_ok": 16,
+  "connection_unresolved_cases_entities": [
+   15,
+   16
+  ],
+  "forbidden_hits": [
+   [
+    "G1-002",
+    "S-001:P11C-VLCS-001"
+   ],
+   [
+    "G1-003",
+    "S-001:P11C-VLCS-001"
+   ],
+   [
+    "G1-004",
+    "S-001:E21C-VLBW-001"
+   ],
+   [
+    "G1-011",
+    "S-001:D31C-PL-011"
+   ],
+   [
+    "G1-013",
+    "S-001:B31P-PL-011"
+   ],
+   [
+    "G1-015",
+    "S-001:B31S-PL-001"
+   ],
+   [
+    "G1-022",
+    "S-001:E21C-VLBW-001"
+   ]
+  ],
+  "gate_passed": false
+ },
+ "by_impact_type_expected_with_without": {
+  "collar_resize": [
+   5,
+   5,
+   4
+  ],
+  "drawing_revision": [
+   36,
+   36,
+   35
+  ],
+  "modify_part": [
+   6,
+   6,
+   3
+  ],
+  "needs_confirmation": [
+   1,
+   1,
+   1
+  ],
+  "po_change": [
+   22,
+   22,
+   22
+  ],
+  "reallocate_stock": [
+   3,
+   3,
+   3
+  ],
+  "reorder": [
+   16,
+   16,
+   16
+  ],
+  "rework": [
+   21,
+   21,
+   21
+  ],
+  "taper": [
+   8,
+   8,
+   0
+  ],
+  "weld_recheck": [
+   18,
+   18,
+   0
+  ]
+ },
+ "second_order_without_connections": {
+  "kept": {
+   "stock": 2,
+   "drawing": 7,
+   "block": 5,
+   "part/plate": 3,
+   "new_part": 1,
+   "part/pipe_spool": 1,
+   "po_line": 1
+  },
+  "lost": {
+   "part/bracket": 4,
+   "part/stiffener": 13,
+   "part/pipe_spool": 3,
+   "part/pipe_support": 1,
+   "part/plate": 8,
+   "drawing": 1,
+   "part/collar": 1
+  }
+ },
+ "cases_without_connections": [
+  {
+   "case_id": "G1-001",
+   "expected": 9,
+   "matched": 5,
+   "produced": 6,
+   "matched_wo_confirm": 5,
+   "produced_wo_confirm": 5,
+   "entities_expected": 8,
+   "entities_matched": 4,
+   "second_order_expected": [
+    "LOT-04",
+    "S-001:T31C-BR-002",
+    "S-001:T31C-ST-001",
+    "S-001:T31C-ST-007",
+    "S-001:T31C-ST-010"
+   ],
+   "second_order_found": [
+    "LOT-04"
+   ],
+   "missed": [
+    [
+     "S-001:T31C-BR-002",
+     "weld_recheck",
+     "R-T03"
+    ],
+    [
+     "S-001:T31C-ST-001",
+     "weld_recheck",
+     "R-T03"
+    ],
+    [
+     "S-001:T31C-ST-007",
+     "weld_recheck",
+     "R-T03"
+    ],
+    [
+     "S-001:T31C-ST-010",
+     "weld_recheck",
+     "R-T03"
+    ]
+   ],
+   "extra": [
+    [
+     "S-001:T31C-PL-007",
+     "needs_confirmation",
+     "R-X01"
+    ]
+   ],
+   "forbidden_hits": [],
+   "unresolved_ok": false,
+   "connection_unresolved": [
+    "S-001:T31C-PL-007"
+   ]
+  },
+  {
+   "case_id": "G1-002",
+   "expected": 1,
+   "matched": 1,
+   "produced": 2,
+   "matched_wo_confirm": 1,
+   "produced_wo_confirm": 1,
+   "entities_expected": 1,
+   "entities_matched": 1,
+   "second_order_expected": [],
+   "second_order_found": [],
+   "missed": [],
+   "extra": [
+    [
+     "S-001:P11C-VLCS-001",
+     "needs_confirmation",
+     "R-X01"
+    ]
+   ],
+   "forbidden_hits": [
+    "S-001:P11C-VLCS-001"
+   ],
+   "unresolved_ok": false,
+   "connection_unresolved": [
+    "S-001:P11C-VLCS-001"
+   ]
+  },
+  {
+   "case_id": "G1-003",
+   "expected": 3,
+   "matched": 3,
+   "produced": 4,
+   "matched_wo_confirm": 3,
+   "produced_wo_confirm": 3,
+   "entities_expected": 2,
+   "entities_matched": 2,
+   "second_order_expected": [],
+   "second_order_found": [],
+   "missed": [],
+   "extra": [
+    [
+     "S-001:P11C-VLCS-001",
+     "needs_confirmation",
+     "R-X01"
+    ]
+   ],
+   "forbidden_hits": [
+    "S-001:P11C-VLCS-001"
+   ],
+   "unresolved_ok": false,
+   "connection_unresolved": [
+    "S-001:P11C-VLCS-001"
+   ]
+  },
+  {
+   "case_id": "G1-004",
+   "expected": 6,
+   "matched": 4,
+   "produced": 5,
+   "matched_wo_confirm": 4,
+   "produced_wo_confirm": 4,
+   "entities_expected": 5,
+   "entities_matched": 3,
+   "second_order_expected": [
+    "S-001:E21C-SPBW-001",
+    "S-001:E21C-SPBW-002"
+   ],
+   "second_order_found": [],
+   "missed": [
+    [
+     "S-001:E21C-SPBW-001",
+     "modify_part",
+     "R-P01"
+    ],
+    [
+     "S-001:E21C-SPBW-002",
+     "modify_part",
+     "R-P01"
+    ]
+   ],
+   "extra": [
+    [
+     "S-001:E21C-VLBW-001",
+     "needs_confirmation",
+     "R-X01"
+    ]
+   ],
+   "forbidden_hits": [
+    "S-001:E21C-VLBW-001"
+   ],
+   "unresolved_ok": false,
+   "connection_unresolved": [
+    "S-001:E21C-VLBW-001"
+   ]
+  },
+  {
+   "case_id": "G1-005",
+   "expected": 8,
+   "matched": 7,
+   "produced": 7,
+   "matched_wo_confirm": 7,
+   "produced_wo_confirm": 7,
+   "entities_expected": 7,
+   "entities_matched": 6,
+   "second_order_expected": [
+    "DWG-B31P-H01@A",
+    "S-001:B31P",
+    "S-001:B31P-PL-001",
+    "S-001:E21C-PSBW-005"
+   ],
+   "second_order_found": [
+    "DWG-B31P-H01@A",
+    "S-001:B31P",
+    "S-001:B31P-PL-001"
+   ],
+   "missed": [
+    [
+     "S-001:E21C-PSBW-005",
+     "modify_part",
+     "R-P03"
+    ]
+   ],
+   "extra": [],
+   "forbidden_hits": [],
+   "unresolved_ok": true,
+   "connection_unresolved": []
+  },
+  {
+   "case_id": "G1-006",
+   "expected": 3,
+   "matched": 3,
+   "produced": 3,
+   "matched_wo_confirm": 3,
+   "produced_wo_confirm": 3,
+   "entities_expected": 3,
+   "entities_matched": 3,
+   "second_order_expected": [],
+   "second_order_found": [],
+   "missed": [],
+   "extra": [],
+   "forbidden_hits": [],
+   "unresolved_ok": true,
+   "connection_unresolved": []
+  },
+  {
+   "case_id": "G1-007",
+   "expected": 3,
+   "matched": 3,
+   "produced": 3,
+   "matched_wo_confirm": 2,
+   "produced_wo_confirm": 2,
+   "entities_expected": 3,
+   "entities_matched": 3,
+   "second_order_expected": [
+    "DWG-T31C-H01@A",
+    "NEW:0f8331bd:1",
+    "S-001:T31C"
+   ],
+   "second_order_found": [
+    "DWG-T31C-H01@A",
+    "NEW:0f8331bd:1",
+    "S-001:T31C"
+   ],
+   "missed": [],
+   "extra": [],
+   "forbidden_hits": [],
+   "unresolved_ok": true,
+   "connection_unresolved": [
+    "NEW:0f8331bd:1"
+   ]
+  },
+  {
+   "case_id": "G1-008",
+   "expected": 4,
+   "matched": 4,
+   "produced": 4,
+   "matched_wo_confirm": 4,
+   "produced_wo_confirm": 4,
+   "entities_expected": 4,
+   "entities_matched": 4,
+   "second_order_expected": [
+    "DWG-P11C-CS-P01@A",
+    "S-001:P11C-SPCS-001"
+   ],
+   "second_order_found": [
+    "DWG-P11C-CS-P01@A",
+    "S-001:P11C-SPCS-001"
+   ],
+   "missed": [],
+   "extra": [],
+   "forbidden_hits": [],
+   "unresolved_ok": true,
+   "connection_unresolved": []
+  },
+  {
+   "case_id": "G1-009",
+   "expected": 3,
+   "matched": 3,
+   "produced": 3,
+   "matched_wo_confirm": 3,
+   "produced_wo_confirm": 3,
+   "entities_expected": 2,
+   "entities_matched": 2,
+   "second_order_expected": [],
+   "second_order_found": [],
+   "missed": [],
+   "extra": [],
+   "forbidden_hits": [],
+   "unresolved_ok": true,
+   "connection_unresolved": []
+  },
+  {
+   "case_id": "G1-010",
+   "expected": 8,
+   "matched": 4,
+   "produced": 6,
+   "matched_wo_confirm": 4,
+   "produced_wo_confirm": 4,
+   "entities_expected": 7,
+   "entities_matched": 3,
+   "second_order_expected": [
+    "S-001:S31S-PL-006",
+    "S-001:S31S-ST-002",
+    "S-001:S31S-ST-004",
+    "S-001:S31S-ST-015"
+   ],
+   "second_order_found": [],
+   "missed": [
+    [
+     "S-001:S31S-PL-006",
+     "taper",
+     "R-T02"
+    ],
+    [
+     "S-001:S31S-ST-002",
+     "weld_recheck",
+     "R-T03"
+    ],
+    [
+     "S-001:S31S-ST-004",
+     "weld_recheck",
+     "R-T03"
+    ],
+    [
+     "S-001:S31S-ST-015",
+     "weld_recheck",
+     "R-T03"
+    ]
+   ],
+   "extra": [
+    [
+     "S-001:S31S-PL-001",
+     "needs_confirmation",
+     "R-X01"
+    ],
+    [
+     "S-001:S31S-PL-002",
+     "needs_confirmation",
+     "R-X01"
+    ]
+   ],
+   "forbidden_hits": [],
+   "unresolved_ok": false,
+   "connection_unresolved": [
+    "S-001:S31S-PL-001",
+    "S-001:S31S-PL-002"
+   ]
+  },
+  {
+   "case_id": "G1-011",
+   "expected": 6,
+   "matched": 3,
+   "produced": 4,
+   "matched_wo_confirm": 3,
+   "produced_wo_confirm": 3,
+   "entities_expected": 5,
+   "entities_matched": 2,
+   "second_order_expected": [
+    "S-001:D31C-PL-006",
+    "S-001:D31C-PL-012",
+    "S-001:D31C-PL-016"
+   ],
+   "second_order_found": [],
+   "missed": [
+    [
+     "S-001:D31C-PL-006",
+     "taper",
+     "R-T02"
+    ],
+    [
+     "S-001:D31C-PL-012",
+     "taper",
+     "R-T02"
+    ],
+    [
+     "S-001:D31C-PL-016",
+     "taper",
+     "R-T02"
+    ]
+   ],
+   "extra": [
+    [
+     "S-001:D31C-PL-011",
+     "needs_confirmation",
+     "R-X01"
+    ]
+   ],
+   "forbidden_hits": [
+    "S-001:D31C-PL-011"
+   ],
+   "unresolved_ok": false,
+   "connection_unresolved": [
+    "S-001:D31C-PL-011"
+   ]
+  },
+  {
+   "case_id": "G1-012",
+   "expected": 3,
+   "matched": 3,
+   "produced": 4,
+   "matched_wo_confirm": 3,
+   "produced_wo_confirm": 3,
+   "entities_expected": 2,
+   "entities_matched": 2,
+   "second_order_expected": [],
+   "second_order_found": [],
+   "missed": [],
+   "extra": [
+    [
+     "S-001:D31C-PL-011",
+     "needs_confirmation",
+     "R-X01"
+    ]
+   ],
+   "forbidden_hits": [],
+   "unresolved_ok": false,
+   "connection_unresolved": [
+    "S-001:D31C-PL-011"
+   ]
+  },
+  {
+   "case_id": "G1-013",
+   "expected": 8,
+   "matched": 4,
+   "produced": 5,
+   "matched_wo_confirm": 4,
+   "produced_wo_confirm": 4,
+   "entities_expected": 7,
+   "entities_matched": 3,
+   "second_order_expected": [
+    "S-001:B31P-BR-006",
+    "S-001:B31P-PL-006",
+    "S-001:B31P-ST-004",
+    "S-001:B31P-ST-018"
+   ],
+   "second_order_found": [],
+   "missed": [
+    [
+     "S-001:B31P-BR-006",
+     "weld_recheck",
+     "R-T03"
+    ],
+    [
+     "S-001:B31P-PL-006",
+     "taper",
+     "R-T02"
+    ],
+    [
+     "S-001:B31P-ST-004",
+     "weld_recheck",
+     "R-T03"
+    ],
+    [
+     "S-001:B31P-ST-018",
+     "weld_recheck",
+     "R-T03"
+    ]
+   ],
+   "extra": [
+    [
+     "S-001:B31P-PL-011",
+     "needs_confirmation",
+     "R-X01"
+    ]
+   ],
+   "forbidden_hits": [
+    "S-001:B31P-PL-011"
+   ],
+   "unresolved_ok": false,
+   "connection_unresolved": [
+    "S-001:B31P-PL-011"
+   ]
+  },
+  {
+   "case_id": "G1-014",
+   "expected": 7,
+   "matched": 4,
+   "produced": 5,
+   "matched_wo_confirm": 4,
+   "produced_wo_confirm": 4,
+   "entities_expected": 6,
+   "entities_matched": 3,
+   "second_order_expected": [
+    "S-001:B31P-BR-006",
+    "S-001:B31P-ST-004",
+    "S-001:B31P-ST-018"
+   ],
+   "second_order_found": [],
+   "missed": [
+    [
+     "S-001:B31P-BR-006",
+     "weld_recheck",
+     "R-T03"
+    ],
+    [
+     "S-001:B31P-ST-004",
+     "weld_recheck",
+     "R-T03"
+    ],
+    [
+     "S-001:B31P-ST-018",
+     "weld_recheck",
+     "R-T03"
+    ]
+   ],
+   "extra": [
+    [
+     "S-001:B31P-PL-011",
+     "needs_confirmation",
+     "R-X01"
+    ]
+   ],
+   "forbidden_hits": [],
+   "unresolved_ok": false,
+   "connection_unresolved": [
+    "S-001:B31P-PL-011"
+   ]
+  },
+  {
+   "case_id": "G1-015",
+   "expected": 6,
+   "matched": 4,
+   "produced": 5,
+   "matched_wo_confirm": 4,
+   "produced_wo_confirm": 4,
+   "entities_expected": 5,
+   "entities_matched": 3,
+   "second_order_expected": [
+    "S-001:B31S-PL-002",
+    "S-001:B31S-PL-004"
+   ],
+   "second_order_found": [],
+   "missed": [
+    [
+     "S-001:B31S-PL-002",
+     "taper",
+     "R-T02"
+    ],
+    [
+     "S-001:B31S-PL-004",
+     "taper",
+     "R-T02"
+    ]
+   ],
+   "extra": [
+    [
+     "S-001:B31S-PL-001",
+     "needs_confirmation",
+     "R-X01"
+    ]
+   ],
+   "forbidden_hits": [
+    "S-001:B31S-PL-001"
+   ],
+   "unresolved_ok": false,
+   "connection_unresolved": [
+    "S-001:B31S-PL-001"
+   ]
+  },
+  {
+   "case_id": "G1-016",
+   "expected": 1,
+   "matched": 1,
+   "produced": 1,
+   "matched_wo_confirm": 1,
+   "produced_wo_confirm": 1,
+   "entities_expected": 1,
+   "entities_matched": 1,
+   "second_order_expected": [],
+   "second_order_found": [],
+   "missed": [],
+   "extra": [],
+   "forbidden_hits": [],
+   "unresolved_ok": true,
+   "connection_unresolved": []
+  },
+  {
+   "case_id": "G1-017",
+   "expected": 3,
+   "matched": 3,
+   "produced": 3,
+   "matched_wo_confirm": 3,
+   "produced_wo_confirm": 3,
+   "entities_expected": 2,
+   "entities_matched": 2,
+   "second_order_expected": [],
+   "second_order_found": [],
+   "missed": [],
+   "extra": [],
+   "forbidden_hits": [],
+   "unresolved_ok": true,
+   "connection_unresolved": []
+  },
+  {
+   "case_id": "G1-018",
+   "expected": 1,
+   "matched": 1,
+   "produced": 1,
+   "matched_wo_confirm": 1,
+   "produced_wo_confirm": 1,
+   "entities_expected": 1,
+   "entities_matched": 1,
+   "second_order_expected": [],
+   "second_order_found": [],
+   "missed": [],
+   "extra": [],
+   "forbidden_hits": [],
+   "unresolved_ok": true,
+   "connection_unresolved": []
+  },
+  {
+   "case_id": "G1-019",
+   "expected": 2,
+   "matched": 2,
+   "produced": 2,
+   "matched_wo_confirm": 2,
+   "produced_wo_confirm": 2,
+   "entities_expected": 2,
+   "entities_matched": 2,
+   "second_order_expected": [],
+   "second_order_found": [],
+   "missed": [],
+   "extra": [],
+   "forbidden_hits": [],
+   "unresolved_ok": true,
+   "connection_unresolved": []
+  },
+  {
+   "case_id": "G1-020",
+   "expected": 2,
+   "matched": 2,
+   "produced": 2,
+   "matched_wo_confirm": 2,
+   "produced_wo_confirm": 2,
+   "entities_expected": 2,
+   "entities_matched": 2,
+   "second_order_expected": [],
+   "second_order_found": [],
+   "missed": [],
+   "extra": [],
+   "forbidden_hits": [],
+   "unresolved_ok": true,
+   "connection_unresolved": []
+  },
+  {
+   "case_id": "G1-021",
+   "expected": 2,
+   "matched": 2,
+   "produced": 2,
+   "matched_wo_confirm": 2,
+   "produced_wo_confirm": 2,
+   "entities_expected": 2,
+   "entities_matched": 2,
+   "second_order_expected": [
+    "LOT-04"
+   ],
+   "second_order_found": [
+    "LOT-04"
+   ],
+   "missed": [],
+   "extra": [],
+   "forbidden_hits": [],
+   "unresolved_ok": true,
+   "connection_unresolved": []
+  },
+  {
+   "case_id": "G1-022",
+   "expected": 4,
+   "matched": 4,
+   "produced": 5,
+   "matched_wo_confirm": 4,
+   "produced_wo_confirm": 4,
+   "entities_expected": 3,
+   "entities_matched": 3,
+   "second_order_expected": [],
+   "second_order_found": [],
+   "missed": [],
+   "extra": [
+    [
+     "S-001:E21C-VLBW-001",
+     "needs_confirmation",
+     "R-X01"
+    ]
+   ],
+   "forbidden_hits": [
+    "S-001:E21C-VLBW-001"
+   ],
+   "unresolved_ok": false,
+   "connection_unresolved": [
+    "S-001:E21C-VLBW-001"
+   ]
+  },
+  {
+   "case_id": "G1-023",
+   "expected": 11,
+   "matched": 11,
+   "produced": 11,
+   "matched_wo_confirm": 11,
+   "produced_wo_confirm": 11,
+   "entities_expected": 9,
+   "entities_matched": 9,
+   "second_order_expected": [
+    "DWG-B31P-H01@A",
+    "DWG-B31S-H01@A",
+    "S-001:B31P",
+    "S-001:B31P-PL-001",
+    "S-001:B31S",
+    "S-001:B31S-PL-001"
+   ],
+   "second_order_found": [
+    "DWG-B31P-H01@A",
+    "DWG-B31S-H01@A",
+    "S-001:B31P",
+    "S-001:B31P-PL-001",
+    "S-001:B31S",
+    "S-001:B31S-PL-001"
+   ],
+   "missed": [],
+   "extra": [],
+   "forbidden_hits": [],
+   "unresolved_ok": true,
+   "connection_unresolved": []
+  },
+  {
+   "case_id": "G1-024",
+   "expected": 7,
+   "matched": 4,
+   "produced": 5,
+   "matched_wo_confirm": 4,
+   "produced_wo_confirm": 4,
+   "entities_expected": 6,
+   "entities_matched": 3,
+   "second_order_expected": [
+    "DWG-P11C-CS-P01@A",
+    "S-001:P11C-SPCS-010",
+    "S-001:T31C-CL-002"
+   ],
+   "second_order_found": [],
+   "missed": [
+    [
+     "DWG-P11C-CS-P01@A",
+     "drawing_revision",
+     "R-D01"
+    ],
+    [
+     "S-001:P11C-SPCS-010",
+     "collar_resize",
+     "R-T04"
+    ],
+    [
+     "S-001:T31C-CL-002",
+     "weld_recheck",
+     "R-T03"
+    ]
+   ],
+   "extra": [
+    [
+     "S-001:T31C-PL-004",
+     "needs_confirmation",
+     "R-X01"
+    ]
+   ],
+   "forbidden_hits": [],
+   "unresolved_ok": false,
+   "connection_unresolved": [
+    "S-001:T31C-PL-004"
+   ]
+  },
+  {
+   "case_id": "G1-025",
+   "expected": 6,
+   "matched": 4,
+   "produced": 5,
+   "matched_wo_confirm": 4,
+   "produced_wo_confirm": 4,
+   "entities_expected": 5,
+   "entities_matched": 3,
+   "second_order_expected": [
+    "S-001:S31P-ST-003",
+    "S-001:S31P-ST-007"
+   ],
+   "second_order_found": [],
+   "missed": [
+    [
+     "S-001:S31P-ST-003",
+     "weld_recheck",
+     "R-T03"
+    ],
+    [
+     "S-001:S31P-ST-007",
+     "weld_recheck",
+     "R-T03"
+    ]
+   ],
+   "extra": [
+    [
+     "S-001:S31P-PL-001",
+     "needs_confirmation",
+     "R-X01"
+    ]
+   ],
+   "forbidden_hits": [],
+   "unresolved_ok": false,
+   "connection_unresolved": [
+    "S-001:S31P-PL-001"
+   ]
+  },
+  {
+   "case_id": "G1-026",
+   "expected": 3,
+   "matched": 3,
+   "produced": 3,
+   "matched_wo_confirm": 3,
+   "produced_wo_confirm": 3,
+   "entities_expected": 3,
+   "entities_matched": 3,
+   "second_order_expected": [
+    "DWG-A11C-H01@A",
+    "DWG-S31S-H01@A",
+    "S-001:S31S"
+   ],
+   "second_order_found": [
+    "DWG-A11C-H01@A",
+    "DWG-S31S-H01@A",
+    "S-001:S31S"
+   ],
+   "missed": [],
+   "extra": [],
+   "forbidden_hits": [],
+   "unresolved_ok": true,
+   "connection_unresolved": []
+  },
+  {
+   "case_id": "G1-027",
+   "expected": 2,
+   "matched": 2,
+   "produced": 2,
+   "matched_wo_confirm": 2,
+   "produced_wo_confirm": 2,
+   "entities_expected": 2,
+   "entities_matched": 2,
+   "second_order_expected": [],
+   "second_order_found": [],
+   "missed": [],
+   "extra": [],
+   "forbidden_hits": [],
+   "unresolved_ok": true,
+   "connection_unresolved": []
+  },
+  {
+   "case_id": "G1-028",
+   "expected": 4,
+   "matched": 4,
+   "produced": 4,
+   "matched_wo_confirm": 4,
+   "produced_wo_confirm": 4,
+   "entities_expected": 3,
+   "entities_matched": 3,
+   "second_order_expected": [],
+   "second_order_found": [],
+   "missed": [],
+   "extra": [],
+   "forbidden_hits": [],
+   "unresolved_ok": true,
+   "connection_unresolved": []
+  },
+  {
+   "case_id": "G1-029",
+   "expected": 7,
+   "matched": 4,
+   "produced": 5,
+   "matched_wo_confirm": 4,
+   "produced_wo_confirm": 4,
+   "entities_expected": 6,
+   "entities_matched": 3,
+   "second_order_expected": [
+    "S-001:B31S-BR-004",
+    "S-001:B31S-PL-013",
+    "S-001:B31S-ST-010"
+   ],
+   "second_order_found": [],
+   "missed": [
+    [
+     "S-001:B31S-BR-004",
+     "weld_recheck",
+     "R-T03"
+    ],
+    [
+     "S-001:B31S-PL-013",
+     "taper",
+     "R-T02"
+    ],
+    [
+     "S-001:B31S-ST-010",
+     "weld_recheck",
+     "R-T03"
+    ]
+   ],
+   "extra": [
+    [
+     "S-001:B31S-PL-016",
+     "needs_confirmation",
+     "R-X01"
+    ]
+   ],
+   "forbidden_hits": [],
+   "unresolved_ok": false,
+   "connection_unresolved": [
+    "S-001:B31S-PL-016"
+   ]
+  },
+  {
+   "case_id": "G1-030",
+   "expected": 3,
+   "matched": 3,
+   "produced": 3,
+   "matched_wo_confirm": 3,
+   "produced_wo_confirm": 3,
+   "entities_expected": 3,
+   "entities_matched": 3,
+   "second_order_expected": [
+    "PO-0126#1"
+   ],
+   "second_order_found": [
+    "PO-0126#1"
+   ],
+   "missed": [],
+   "extra": [],
+   "forbidden_hits": [],
+   "unresolved_ok": true,
+   "connection_unresolved": []
+  }
+ ]
+}

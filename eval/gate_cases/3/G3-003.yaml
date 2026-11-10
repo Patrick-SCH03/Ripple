@@ -1,0 +1,132 @@
+case_id: G3-003
+stage: 3
+title: B31S No.3 COT 이중저 우 판 1·No.3 COT 이중저 우 판 2 강종 AH32→AH36(조립 중)
+snapshot:
+  generator_seed: 20261020
+  snapshot_id: G-1fdcbf59d84dcc2d
+request:
+  change:
+    ecn_id: GC3-003
+    title: B31S No.3 COT 이중저 우 판 1·No.3 COT 이중저 우 판 2 강종 AH32→AH36(조립 중)
+    ship_ids:
+    - S-001
+    intent: strength
+    ops:
+    - op: grade
+      part_ids:
+      - S-001:B31S-PL-001
+      - S-001:B31S-PL-002
+      from_grade: AH32
+      to_grade: AH36
+    raw_text: null
+    requested_by: null
+    requested_on: null
+    effectivity: null
+    design_status: unknown
+    source: null
+    cause: null
+  as_of: '2026-10-20'
+  confirm_on: null
+  horizon_days: 60
+  holds: []
+  include_alternatives: true
+  outfit_on_board: false
+focus: '판 강종 상향(나): 강종 대신 두께안 T3의 두께(0.5mm 올림, 판 두께별 연산)와 판정 비율, 조립 중 블록의 재작업'
+expected:
+  impacts: []
+  forbidden_impacts: []
+  unresolved: []
+  cost_lines: []
+  total: null
+  timing: null
+  verdict: null
+  alternatives:
+    alternatives:
+    - alt_id: ALT-REQ
+      ops:
+      - op: grade
+        part_ids:
+        - S-001:B31S-PL-001
+        - S-001:B31S-PL-002
+        from_grade: AH32
+        to_grade: AH36
+      scope_reduced: false
+      eligibility:
+        status: meets
+        ratio_vs_request: 1.0
+      total:
+        value_krw: 9240714
+        low_krw: 3268314
+        high_krw: 20315487
+      max_exit_delay_days: 0
+      deadline:
+        kind: by_date
+        last_day: '2026-10-21'
+      best:
+        confirm_on: '2026-10-20'
+        holds: []
+        total:
+          value_krw: 9240714
+          low_krw: 3268314
+          high_krw: 20315487
+      rank: 1
+      formula: 요청안(비교 기준, ρ=1). 확정일 2026-10-20 총액(대표값) = C-01:material×2 102,927 + R-T01:po_change×2 1,235,130 + R-T01:reorder×2
+        514,637 + R-B01:rework×2 6,716,020 + R-D01:drawing_revision 672,000 = 9,240,714; 블록 단계 B31S assembly; 품목 단계 PO-0045#1
+        processed, PO-0046#1 processed; 출구 지연 0일
+    - alt_id: ALT-T3
+      ops:
+      - op: thickness
+        part_ids:
+        - S-001:B31S-PL-001
+        from_mm: 14.0
+        to_mm: 14.5
+      - op: thickness
+        part_ids:
+        - S-001:B31S-PL-002
+        from_mm: 15.5
+        to_mm: 16.5
+      scope_reduced: false
+      eligibility:
+        status: meets
+        ratio_vs_request: 1.003
+      total:
+        value_krw: 9287321
+        low_krw: 3301286
+        high_krw: 20389227
+      max_exit_delay_days: 0
+      deadline:
+        kind: by_date
+        last_day: '2026-10-21'
+      best:
+        confirm_on: '2026-10-20'
+        holds: []
+        total:
+          value_krw: 9287321
+          low_krw: 3301286
+          high_krw: 20389227
+      rank: 2
+      formula: ρ = min_p G_alt/G_req = 1.0025 (G_alt 1.0435 / G_req 1.0408) → meets. 확정일 2026-10-20 총액(대표값) = C-01:material×2
+        124,266 + R-T01:po_change×2 1,235,130 + R-T01:reorder×2 518,905 + R-B01:rework×2 6,716,020 + R-T03:weld_recheck 21,000
+        + R-D01:drawing_revision 672,000 = 9,287,321; 블록 단계 B31S assembly; 품목 단계 PO-0045#1 processed, PO-0046#1 processed;
+        출구 지연 0일
+    recommendation:
+      alt_id: ALT-REQ
+      confirm_on: '2026-10-20'
+      holds: []
+      total:
+        value_krw: 9240714
+        low_krw: 3268314
+        high_krw: 20315487
+    cheapest_by_date:
+    - alt_id: ALT-REQ
+      start: '2026-10-20'
+      end: '2026-12-19'
+      total:
+        value_krw: 9240714
+        low_krw: 3268314
+        high_krw: 20315487
+    omitted: []
+computed_by: 독립 계산자(G3-001~005) — 엔진 코드를 읽지 않은 AI 에이전트, 2026-10-27
+computed_on: '2026-10-27'
+checked_by: null
+notes: ''

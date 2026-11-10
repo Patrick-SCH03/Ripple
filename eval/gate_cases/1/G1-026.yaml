@@ -1,0 +1,77 @@
+case_id: G1-026
+stage: 1
+title: S31S No.3 COT 선측 우 판 1에 새 판, A11C 선미(프로펠러 보스·러더) 판 1에 새 보강재
+snapshot:
+  generator_seed: 20261020
+  snapshot_id: G-1fdcbf59d84dcc2d
+request:
+  change:
+    ecn_id: GC-026
+    title: S31S No.3 COT 선측 우 판 1에 새 판, A11C 선미(프로펠러 보스·러더) 판 1에 새 보강재
+    ship_ids:
+    - S-001
+    intent: strength
+    ops:
+    - op: add_part
+      block_id: S-001:S31S
+      kind: plate
+      spec_id: PL-AH36-16.0
+      qty: 0.3
+      attach_to_part_id: S-001:S31S-PL-001
+    - op: add_part
+      block_id: S-001:A11C
+      kind: stiffener
+      spec_id: HP200x10-A
+      qty: 0.1
+      attach_to_part_id: S-001:A11C-PL-001
+    raw_text: null
+    requested_by: null
+    requested_on: null
+    effectivity: null
+    design_status: unknown
+    source: null
+    cause: null
+  as_of: '2026-10-20'
+  confirm_on: null
+  horizon_days: 60
+  holds: []
+  include_alternatives: false
+  outfit_on_board: false
+focus: 새 부재 연결 종류(맞대기·필릿), 착수/미착수 블록, 도면 이어받기
+expected:
+  impacts:
+  - entity_id: S-001:S31S
+    impact_type: rework
+    rule_id: R-B01
+  - entity_id: DWG-S31S-H01@A
+    impact_type: drawing_revision
+    rule_id: R-D01
+  - entity_id: DWG-A11C-H01@A
+    impact_type: drawing_revision
+    rule_id: R-D01
+  forbidden_impacts:
+  - entity_id: S-001:A11C
+    impact_type: rework
+    rule_id: null
+  - entity_id: NEW:b9c9a428:1
+    impact_type: needs_confirmation
+    rule_id: null
+  - entity_id: NEW:0867426f:1
+    impact_type: needs_confirmation
+    rule_id: null
+  - entity_id: PO-0059#1
+    impact_type: po_change
+    rule_id: null
+  - entity_id: PO-0027#1
+    impact_type: po_change
+    rule_id: null
+  unresolved: []
+  cost_lines: []
+  total: null
+  timing: null
+  verdict: null
+  alternatives: null
+computed_by: 독립 계산자 A(G1-001~015)·B(G1-016~030) — 엔진 코드를 읽지 않은 AI 에이전트, 2026-10-27
+computed_on: '2026-10-27'
+checked_by: null
+notes: ''

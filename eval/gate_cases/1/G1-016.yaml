@@ -1,0 +1,58 @@
+case_id: G1-016
+stage: 1
+title: F11C 구상선수 판 3 강종 AH36→EH36(발주 전날 2026-10-21 확정)
+snapshot:
+  generator_seed: 20261020
+  snapshot_id: G-1fdcbf59d84dcc2d
+request:
+  change:
+    ecn_id: GC-016
+    title: F11C 구상선수 판 3 강종 AH36→EH36(발주 전날 2026-10-21 확정)
+    ship_ids:
+    - S-001
+    intent: rule_change
+    ops:
+    - op: grade
+      part_ids:
+      - S-001:F11C-PL-003
+      from_grade: AH36
+      to_grade: EH36
+    raw_text: null
+    requested_by: null
+    requested_on: null
+    effectivity: null
+    design_status: unknown
+    source: null
+    cause: null
+  as_of: '2026-10-20'
+  confirm_on: '2026-10-21'
+  horizon_days: 60
+  holds: []
+  include_alternatives: false
+  outfit_on_board: false
+focus: R-T01 판정일 발주 단계 경계
+expected:
+  impacts:
+  - entity_id: DWG-F11C-H01@A
+    impact_type: drawing_revision
+    rule_id: R-D01
+  forbidden_impacts:
+  - entity_id: PO-0097#1
+    impact_type: po_change
+    rule_id: null
+  - entity_id: PO-0097#1
+    impact_type: reorder
+    rule_id: null
+  - entity_id: S-001:F11C
+    impact_type: rework
+    rule_id: null
+  unresolved: []
+  cost_lines: []
+  total: null
+  timing: null
+  verdict: null
+  alternatives: null
+computed_by: 독립 계산자 A(G1-001~015)·B(G1-016~030) — 엔진 코드를 읽지 않은 AI 에이전트, 2026-10-27
+computed_on: '2026-10-27'
+checked_by: null
+notes: ''

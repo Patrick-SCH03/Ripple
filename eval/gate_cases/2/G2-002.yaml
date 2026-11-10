@@ -1,0 +1,176 @@
+case_id: G2-002
+stage: 2
+title: T31C 이음부 판 두께 15→17mm(재고 없음, 2027-01-02 확정)
+snapshot:
+  generator_seed: 20261020
+  snapshot_id: G-1fdcbf59d84dcc2d
+request:
+  change:
+    ecn_id: GC2-002
+    title: T31C 이음부 판 두께 15→17mm(재고 없음, 2027-01-02 확정)
+    ship_ids:
+    - S-001
+    intent: strength
+    ops:
+    - op: thickness
+      part_ids:
+      - S-001:T31C-PL-007
+      from_mm: 15.0
+      to_mm: 17.0
+    raw_text: null
+    requested_by: null
+    requested_on: null
+    effectivity: null
+    design_status: unknown
+    source: null
+    cause: null
+  as_of: '2026-10-20'
+  confirm_on: '2027-01-02'
+  horizon_days: 90
+  holds: []
+  include_alternatives: false
+  outfit_on_board: false
+focus: '탑재 뒤 확정: 새 자재를 기다리는 선상 재작업, 구역 출구·인도 지연과 지체상금, 탐색 기간 90일'
+expected:
+  impacts: []
+  forbidden_impacts: []
+  unresolved: []
+  cost_lines:
+  - line_id: C-01:material:S-001:T31C-PL-007
+    amount:
+      value_krw: 152993
+      low_krw: null
+      high_krw: null
+    determinacy: known
+    formula: q'×P' − q×P = (1.325×17/15=1.501667 t)×866,000 − 1.325×866,000 = 1,300,443.33 − 1,147,450 = 152,993 (4-1)
+  - line_id: C-04:after_paint:S-001:T31C
+    amount:
+      value_krw: 2400000
+      low_krw: 960000
+      high_krw: 5760000
+    determinacy: known
+    formula: (재도장 16 + 족장 24 + 화기 8 = 48h, 24~96h) × 선행도장 수행 주체(동진 작업반 CRW-04) 단가 50,000(40,000~60,000) (4-4-2, 판정일 단계 탑재
+      ≥ 선행도장)
+  - line_id: R-B01:rework:S-001:T31C
+    amount:
+      value_krw: 5684195
+      low_krw: 1136838
+      high_krw: 17526267
+    determinacy: known
+    formula: '직영 묶음(소조립 8 + 대조립 10 + PE 2 + 탑재 4 h/t): Σ round(W=1.3249 t × base_k × 배수[탑재]=3.0(2.0~5.0) × D_B=1.191745 ×
+      50,000(40,000~60,000)) = 1,894,732 + 2,368,414 + 473,683 + 947,366 (4-4, 4-4-1)'
+  - line_id: R-B01:rework:S-001:T31C@CRW-01
+    amount:
+      value_krw: 1421049
+      low_krw: 378946
+      high_krw: 4263146
+    determinacy: known
+    formula: '한빛 작업반(판넬조립 6h/t): round(1.3249 × 6 × 3.0 × 1.191745 × 50,000) = 1,421,049 (4-4-1)'
+  - line_id: R-B01:rework:S-001:T31C@CRW-03
+    amount:
+      value_krw: 1421049
+      low_krw: 378946
+      high_krw: 4736829
+    determinacy: known
+    formula: '해송 작업반(선행의장 6h/t, 3~10): round(1.3249 × 6 × 3.0 × 1.191745 × 50,000) = 1,421,049 (4-4-1)'
+  - line_id: R-B01:rework:S-001:T31C@CRW-04
+    amount:
+      value_krw: 710524
+      low_krw: 126315
+      high_krw: 2368414
+    determinacy: known
+    formula: '동진 작업반(선행도장 3h/t, 1~5): round(1.3249 × 3 × 3.0 × 1.191745 × 50,000) = 710,524 (4-4-1)'
+  - line_id: R-D01:drawing_revision:DWG-T31C-H01@A
+    amount:
+      value_krw: 672000
+      low_krw: 304000
+      high_krw: 1840000
+    determinacy: known
+    formula: 도면 개정 16h(8~40) × 설계 단가 42,000(38,000~46,000) (4-5)
+  - line_id: R-L01:ld:S-001
+    amount:
+      value_krw: 184800000
+      low_krw: 134400000
+      high_krw: 260400000
+    determinacy: known
+    formula: '선가 1,200억 × 일당 비율 0.00022(0.00016~0.00031) × (L(37) − L(0)) = 1,200억 × 0.00022 × 7일, L(x)=min(max(x−30,0),180)
+      (4-6, 6-4: 구역 ZCT 출구 63일 늦음 − 여유 26일 = 37일)'
+  - line_id: R-T01:po_change:PO-0078#1
+    amount:
+      value_krw: 573725
+      low_krw: 516353
+      high_krw: 688470
+    determinacy: known
+    formula: r[가공]=min(0.8(0.55~1.0), 강재 상한 0.5(0.45~0.6)) = 0.5(0.45~0.6) × 1.325 × 866,000 = 573,725 (4-2)
+  - line_id: R-T01:reorder:PO-0078#1
+    amount:
+      value_krw: 260089
+      low_krw: 130044
+      high_krw: 390133
+    determinacy: known
+    formula: 할증률 0.2(0.1~0.3) × (q'=1.501667 − c=0) × 866,000 = 260,088.67 (4-3, 17.0mm 재고 로트 없음)
+  - line_id: R-T03:weld_recheck:S-001:T31C-BR-002
+    amount:
+      value_krw: 21000
+      low_krw: 9500
+      high_krw: 46000
+    determinacy: known
+    formula: 용접 재검토 0.5h(0.25~1) × 설계 단가 42,000(38,000~46,000) (4-5)
+  - line_id: R-T03:weld_recheck:S-001:T31C-ST-001
+    amount:
+      value_krw: 21000
+      low_krw: 9500
+      high_krw: 46000
+    determinacy: known
+    formula: 용접 재검토 0.5h(0.25~1) × 설계 단가 42,000(38,000~46,000) (4-5)
+  - line_id: R-T03:weld_recheck:S-001:T31C-ST-007
+    amount:
+      value_krw: 21000
+      low_krw: 9500
+      high_krw: 46000
+    determinacy: known
+    formula: 용접 재검토 0.5h(0.25~1) × 설계 단가 42,000(38,000~46,000) (4-5)
+  - line_id: R-T03:weld_recheck:S-001:T31C-ST-010
+    amount:
+      value_krw: 21000
+      low_krw: 9500
+      high_krw: 46000
+    determinacy: known
+    formula: 용접 재검토 0.5h(0.25~1) × 설계 단가 42,000(38,000~46,000) (4-5)
+  total:
+    value_krw: 198179624
+    low_krw: 138522435
+    high_krw: 298310252
+  timing:
+    zone_exit_delays:
+      S-001:ZCT: 63
+    delivery_added_days: 37
+    delivery_exposure: null
+    onboard: null
+    delay_ripple:
+      value_krw: 104000000
+      low_krw: 52000000
+      high_krw: 208000000
+    deadline:
+      kind: by_date
+      last_day: '2026-10-31'
+    deadline_total:
+      value_krw: 4584904
+      low_krw: 1772967
+      high_krw: 10076629
+    next_day_total:
+      value_krw: 5295428
+      low_krw: 1962440
+      high_krw: 11971361
+    holds: []
+  verdict:
+    level: warn
+    reasons:
+    - 구역 출구 일정 지연 가능
+    - 인도 지연 · 지체상금 발생 가능
+    - 대조립 이후 블록 재작업 필요
+  alternatives: null
+computed_by: 독립 계산자 A(G2-001~005)·B(G2-006~009)·C(G2-010~013) — 엔진 코드를 읽지 않은 AI 에이전트, 2026-10-27
+computed_on: '2026-10-27'
+checked_by: null
+notes: ''

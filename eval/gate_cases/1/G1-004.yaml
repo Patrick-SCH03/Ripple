@@ -1,0 +1,70 @@
+case_id: G1-004
+stage: 1
+title: E21C 평형수 버터플라이 밸브 1 사양 변경(연결 규격 다름)
+snapshot:
+  generator_seed: 20261020
+  snapshot_id: G-1fdcbf59d84dcc2d
+request:
+  change:
+    ecn_id: GC-004
+    title: E21C 평형수 버터플라이 밸브 1 사양 변경(연결 규격 다름)
+    ship_ids:
+    - S-001
+    intent: equipment
+    ops:
+    - op: equipment_spec
+      part_ids:
+      - S-001:E21C-VLBW-001
+      from_spec_id: VL-BUTTERFLY-DN200-10K
+      to_spec_id: VL-BALL-DN100-16K
+    raw_text: null
+    requested_by: null
+    requested_on: null
+    effectivity: null
+    design_status: unknown
+    source: null
+    cause: null
+  as_of: '2026-10-20'
+  confirm_on: null
+  horizon_days: 60
+  holds: []
+  include_alternatives: false
+  outfit_on_board: false
+focus: 착수한 블록의 장비, 연결 규격이 다른 새 사양
+expected:
+  impacts:
+  - entity_id: PO-0133#1
+    impact_type: po_change
+    rule_id: R-T01
+  - entity_id: PO-0133#1
+    impact_type: reorder
+    rule_id: R-T01
+  - entity_id: S-001:E21C-SPBW-001
+    impact_type: modify_part
+    rule_id: R-P01
+  - entity_id: S-001:E21C-SPBW-002
+    impact_type: modify_part
+    rule_id: R-P01
+  - entity_id: S-001:E21C
+    impact_type: rework
+    rule_id: R-B01
+  - entity_id: DWG-E21C-BW-P01@A
+    impact_type: drawing_revision
+    rule_id: R-D01
+  forbidden_impacts:
+  - entity_id: S-001:E21C-VLBW-001
+    impact_type: needs_confirmation
+    rule_id: null
+  - entity_id: PO-0131#1
+    impact_type: po_change
+    rule_id: null
+  unresolved: []
+  cost_lines: []
+  total: null
+  timing: null
+  verdict: null
+  alternatives: null
+computed_by: 독립 계산자 A(G1-001~015)·B(G1-016~030) — 엔진 코드를 읽지 않은 AI 에이전트, 2026-10-27
+computed_on: '2026-10-27'
+checked_by: null
+notes: ''

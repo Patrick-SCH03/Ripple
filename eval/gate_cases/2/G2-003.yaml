@@ -1,0 +1,90 @@
+case_id: G2-003
+stage: 2
+title: P11C 화물 스트리핑 글로브 밸브 1 사양 변경(기준일 확정)
+snapshot:
+  generator_seed: 20261020
+  snapshot_id: G-1fdcbf59d84dcc2d
+request:
+  change:
+    ecn_id: GC2-003
+    title: P11C 화물 스트리핑 글로브 밸브 1 사양 변경(기준일 확정)
+    ship_ids:
+    - S-001
+    intent: equipment
+    ops:
+    - op: equipment_spec
+      part_ids:
+      - S-001:P11C-VLCS-001
+      from_spec_id: VL-GLOBE-DN100-16K
+      to_spec_id: VL-BALL-DN100-16K
+    raw_text: null
+    requested_by: null
+    requested_on: null
+    effectivity: null
+    design_status: unknown
+    source: null
+    cause: null
+  as_of: '2026-10-20'
+  confirm_on: null
+  horizon_days: 60
+  holds: []
+  include_alternatives: false
+  outfit_on_board: false
+focus: '미발주 품목의 사양 변경: 자재비 차이·도면, 발주 예정일 전 마감일, 발주 보류 권고(8-3)'
+expected:
+  impacts: []
+  forbidden_impacts: []
+  unresolved: []
+  cost_lines:
+  - line_id: C-01:material:S-001:P11C-VLCS-001
+    amount:
+      value_krw: 3109000
+      low_krw: null
+      high_krw: null
+    determinacy: known
+    formula: q'×P' − q×P = 1 × 10,968,000(VL-BALL-DN100-16K 규격 단가) − 1 × 7,859,000(PO-0130#3 단가) = 3,109,000 (지도 값이라 범위 없음)
+  - line_id: R-D01:drawing_revision:DWG-P11C-CS-P01@A
+    amount:
+      value_krw: 126000
+      low_krw: 76000
+      high_krw: 368000
+    determinacy: known
+    formula: 배관도(discipline piping) 개정 공수 drawing_revision_piping 3h(2~8) × 설계 단가 42,000(38,000~46,000) = 126,000 (76,000
+      / 368,000)
+  total:
+    value_krw: 3235000
+    low_krw: 3185000
+    high_krw: 3477000
+  timing:
+    zone_exit_delays: {}
+    delivery_added_days: 0
+    delivery_exposure: null
+    onboard: null
+    delay_ripple: null
+    deadline:
+      kind: by_date
+      last_day: '2026-11-29'
+    deadline_total:
+      value_krw: 3235000
+      low_krw: 3185000
+      high_krw: 3477000
+    next_day_total:
+      value_krw: 5664370
+      low_krw: 4281800
+      high_krw: 7160350
+    holds:
+    - po_id: PO-0130
+      max_hold_days: 24
+      hold_until: '2026-11-13'
+      deadline_after:
+        kind: none_in_horizon
+        last_day: '2026-12-19'
+  verdict:
+    level: review
+    reasons:
+    - 자재 납기 지연 시 구역 출구 지연 가능
+  alternatives: null
+computed_by: 독립 계산자 D(G2-003·004) — 엔진 코드를 읽지 않은 AI 에이전트, 2026-10-31 (엔진 0.12.0·cost-v8 재계산)
+computed_on: '2026-10-31'
+checked_by: null
+notes: ''

@@ -1,0 +1,33 @@
+case_id: G2-005
+stage: 2
+title: F11C 구상선수 보강재 3 강종 변경(2026-12-19 확정)
+snapshot:
+  generator_seed: 20261020
+  snapshot_id: G-1fdcbf59d84dcc2d
+request:
+  change:
+    ecn_id: GC2-005
+    title: F11C 구상선수 보강재 3 강종 변경(2026-12-19 확정)
+    ship_ids:
+    - S-001
+    intent: rule_change
+    ops:
+    - op: grade
+      part_ids:
+      - S-001:F11C-ST-003
+      from_grade: AH36
+      to_grade: DH36
+    raw_text: null
+    requested_by: null
+    requested_on: null
+    effectivity: null
+    design_status: unknown
+    source: null
+    cause: null
+  as_of: '2026-10-20'
+  confirm_on: '2026-12-19'
+  horizon_days: 60
+  holds: []
+  include_alternatives: false
+  outfit_on_board: false
+focus: 발주한 품목의 규격 변경과 남는 자재의 다른 블록 전용(취급비), 발주 보류 권고
