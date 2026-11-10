@@ -1,0 +1,260 @@
+/* 설계변경 검토서(DESIGN.md 14절): A4 세로 · 여백 위 16 · 좌우 15 · 아래 18mm(쪽 번호 자리) · 밝은 색만(흰 종이).
+   흑백 인쇄에서도 갈리게 색 대신 선 굵기·이중선·회색 음영으로 나눈다: 절 제목 = 굵은 아래 선, 칸 머리·합계 = 회색 바탕,
+   합계 = 위 2px 선. 표 머리는 쪽마다 반복, 줄·작은 표·절 제목 바로 뒤에서 쪽을 나누지 않는다. 붙임은 새 쪽부터.
+   쪽 머리·꼬리(쪽 번호)는 Report.tsx가 @page 여백 상자로 넣는다(sheet.ts pageCss). */
+@page {
+  size: A4 portrait;
+  margin: 16mm 15mm 18mm;
+}
+
+/* 화면 미리보기: A4 종이(210 × 297mm, 여백 15mm), 좁은 화면은 폭에 맞춤 */
+.report-sheet {
+  width: 210mm;
+  max-width: 100%;
+  min-height: 297mm;
+  padding: 15mm;
+  border: 1px solid var(--border-strong);
+  box-shadow: 0 1px 3px rgb(0 0 0 / 0.12);
+  box-sizing: border-box;
+}
+
+@media (max-width: 640px) {
+  .report-sheet {
+    min-height: 0;
+    padding: 16px;
+  }
+
+  .report-sheet .doc-table th[scope='row'] {
+    width: 5.5rem;
+    white-space: normal;
+  }
+
+  /* 문서 머리 칸 표(이름·값 두 쌍): 좁은 화면에서는 한 줄에 한 쌍씩 */
+  .report-sheet .facts-table tr {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .report-sheet .facts-table th,
+  .report-sheet .facts-table td {
+    display: block;
+  }
+
+  .report-sheet .facts-table th {
+    flex: 0 0 5.5rem;
+  }
+
+  .report-sheet .facts-table td {
+    flex: 1 1 calc(100% - 5.5rem);
+  }
+
+  /* 핵심 수치 표(이름 · 값 · 설명): 좁은 화면에서는 이름 · 값 한 줄, 설명은 그 아래 한 줄 전체 */
+  .report-sheet .figures-table tr {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .report-sheet .figures-table th,
+  .report-sheet .figures-table td {
+    display: block;
+  }
+
+  /* 비용 내역(항목 · 금액 · 범위): 좁은 화면에서는 항목 한 줄 전체, 금액 · 범위는 그 아래 */
+  .report-sheet .cost-table thead {
+    display: none;
+  }
+
+  .report-sheet .cost-table tbody tr {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .report-sheet .cost-table tbody td {
+    display: block;
+  }
+
+  .report-sheet .cost-table tbody td:first-child {
+    flex: 1 1 100%;
+  }
+
+  .report-sheet .cost-table tbody td:not(:first-child) {
+    flex: 0 0 auto;
+    padding-top: 0;
+  }
+
+  .report-sheet .cost-table .cost-meta {
+    display: block;
+    font-size: var(--text-xs);
+  }
+
+  /* 아래 넓은 화면 규칙(같은 우선순위, 뒤에 있음)보다 앞서게 두 클래스로 */
+  .report-sheet .doc-table.cost-table .cost-meta::before {
+    content: none;
+  }
+
+  /* .doc-table 행 머리 규칙(아래, 같은 우선순위)보다 앞서게 두 클래스로 */
+  .report-sheet .doc-table.figures-table th[scope='row'] {
+    flex: 0 0 5.5rem;
+    min-width: 0;
+    white-space: normal;
+  }
+
+  .report-sheet .figures-table td {
+    flex: 1 1 calc(100% - 5.5rem);
+  }
+
+  .report-sheet .figures-table td + td {
+    flex-basis: 100%;
+  }
+}
+
+.report-sheet table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.report-sheet thead {
+  display: table-header-group;
+}
+
+.report-sheet thead th {
+  background: var(--muted);
+}
+
+/* 칸 표(문서 머리·변경 내용·핵심 수치·영향 범위·결재란): 모든 칸에 선, 행 머리는 회색 바탕 */
+.report-sheet .doc-table th,
+.report-sheet .doc-table td {
+  border: 1px solid var(--border-strong);
+  padding: 3px 8px;
+  text-align: inherit;
+  vertical-align: top;
+}
+
+.report-sheet .doc-table th {
+  background: var(--muted);
+  font-weight: 600;
+}
+
+.report-sheet .doc-table th[scope='row'] {
+  width: 7.5rem;
+  white-space: nowrap;
+}
+
+.report-sheet .doc-table.text-center th,
+.report-sheet .doc-table.text-center td {
+  text-align: center;
+}
+
+/* 비용 내역 줄의 짧은 근거(MH·작업반, 수량·단가): 넓으면 이름 뒤 ' · '로 한 줄(쪽 수가 늘지 않게), 좁으면 아래 줄 */
+.report-sheet .cost-table .cost-meta::before {
+  content: ' · ';
+}
+
+/* 목록 표(비용 내역): 줄 선만, 합계 줄은 위 2px 선 + 회색 바탕 */
+.report-sheet .doc-list td {
+  border-width: 0 0 1px;
+}
+
+.report-sheet .doc-list th {
+  border-width: 0 0 2px;
+  text-align: left;
+}
+
+.report-sheet .doc-list th:not(:first-child) {
+  text-align: right;
+}
+
+.report-sheet .doc-total td {
+  border-top: 2px solid var(--foreground);
+  background: var(--muted);
+}
+
+/* 결재란: 서명 칸 높이 */
+.report-sheet .sign-table .sign-row td {
+  height: 15mm;
+  vertical-align: middle;
+}
+
+.report-sheet tr,
+.report-keep,
+.report-sheet .doc-table:not(.doc-list),
+.report-sheet .weight-change {
+  break-inside: avoid;
+}
+
+.report-sheet h2,
+.report-annex-title {
+  break-after: avoid;
+}
+
+@media print {
+  html,
+  body,
+  .report-page {
+    background: #ffffff !important;
+  }
+
+  .report-toolbar {
+    display: none !important;
+  }
+
+  .report-page > div {
+    padding: 0 !important;
+  }
+
+  .report-sheet {
+    width: auto !important;
+    min-height: 0 !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    box-shadow: none !important;
+    font-size: 9.5pt;
+  }
+
+  /* 인쇄 글자 크기: 본문 9.5pt 기준으로 화면 토큰을 다시 맞춘다(화면 14px 보조 글이 본문보다 커지지 않게) */
+  .report-sheet .text-xs {
+    font-size: 8pt;
+  }
+
+  .report-sheet .text-sm {
+    font-size: inherit;
+  }
+
+  .report-sheet .text-base,
+  .report-sheet .text-md {
+    font-size: 11pt;
+  }
+
+  .report-sheet .text-lg {
+    font-size: 15pt;
+  }
+
+  /* 흑백에서도 선이 보이게 진하게 */
+  .report-sheet .doc-table th,
+  .report-sheet .doc-table td {
+    border-color: #555555;
+  }
+
+  .report-sheet thead th,
+  .report-sheet .doc-table th,
+  .report-sheet .doc-total td,
+  .report-sheet tfoot tr {
+    background: #e6e6e6 !important;
+  }
+
+  .report-annex {
+    break-before: page;
+  }
+
+  .report-annex-title {
+    margin-top: 0 !important;
+  }
+
+  /* 판정 배지·상태 칩의 옅은 바탕을 인쇄에서 지우지 않게 */
+  .report-sheet * {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+}

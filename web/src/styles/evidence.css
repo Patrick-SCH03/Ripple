@@ -1,0 +1,233 @@
+/* 근거 패널(components/EvidencePanel.tsx) 스타일.
+   색·크기는 DESIGN.md 토큰만 쓴다(글자 크기는 --text-* 변수). */
+@layer components {
+  .mono {
+    font-family: var(--font-mono);
+  }
+
+  /* ---------- 근거 ---------- */
+  .evidence {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 16px;
+  }
+
+  .headline .eyebrow {
+    font-size: var(--text-sm);
+    color: var(--text-secondary);
+    font-weight: 500;
+  }
+
+  .big-number {
+    font-size: var(--text-key);
+    font-weight: 600;
+    line-height: 1.3;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .big-number span {
+    font-size: var(--text-md);
+    margin-left: 2px;
+    color: var(--text-secondary);
+  }
+
+  .headline .sub {
+    font-size: var(--text-sm);
+    color: var(--text-secondary);
+  }
+
+  .node-title {
+    font-size: var(--text-lg);
+    font-weight: 600;
+    line-height: 1.3;
+  }
+
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .chip {
+    font-size: var(--text-xs);
+    padding: 2px 8px;
+    border-radius: 4px;
+    background: var(--muted);
+    border: 1px solid var(--border-subtle);
+    color: var(--text-secondary);
+  }
+
+  .chip b {
+    color: var(--text-primary);
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .card {
+    border: 1px solid var(--border-subtle);
+    border-radius: 6px;
+    padding: 16px;
+    background: var(--surface);
+  }
+
+  .card h3 {
+    font-size: var(--text-md);
+    font-weight: 600;
+  }
+
+  .card.warn {
+    border-color: color-mix(in oklab, var(--warning) 45%, var(--border-subtle));
+    background: color-mix(in oklab, var(--warning) 6%, var(--surface));
+  }
+
+  .card.warn ul {
+    margin: 8px 0 0;
+    display: grid;
+    gap: 8px;
+  }
+
+  .card.warn p {
+    font-size: var(--text-sm);
+    color: var(--text-secondary);
+  }
+
+  .card-head {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .link {
+    border: 0;
+    background: none;
+    padding: 0;
+    font-weight: 600;
+    font-size: var(--text-sm);
+    text-align: left;
+    color: var(--text-primary);
+  }
+
+  .link:hover {
+    color: var(--primary);
+    text-decoration: underline;
+  }
+
+  .impact-list {
+    margin: 8px 0 0;
+    display: grid;
+  }
+
+  .impact-row {
+    width: 100%;
+    min-height: 36px;
+    display: grid;
+    grid-template-columns: auto auto minmax(0, 1fr);
+    align-items: center;
+    gap: 8px;
+    padding: 6px 8px;
+    border: 0;
+    border-radius: 4px;
+    background: none;
+    text-align: left;
+    font-size: var(--text-sm);
+  }
+
+  .impact-row:hover {
+    background: var(--hover);
+  }
+
+  .impact-name {
+    font-weight: 600;
+  }
+
+  .impact-entity {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: var(--text-secondary);
+  }
+
+  .rule-line {
+    margin-top: 6px;
+    font-size: var(--text-sm);
+  }
+
+  .note {
+    margin-top: 6px;
+    font-size: var(--text-sm);
+    color: var(--text-secondary);
+  }
+
+  .path {
+    margin: 10px 0 0;
+    display: grid;
+    gap: 4px;
+    font-size: var(--text-sm);
+  }
+
+  .path li {
+    padding-left: 12px;
+    border-left: 2px solid var(--primary);
+  }
+
+  .path .hop {
+    display: block;
+    font-size: var(--text-xs);
+    color: var(--text-secondary);
+  }
+
+  .attrs {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 8px;
+    margin: 0;
+  }
+
+  .attrs div {
+    background: var(--muted);
+    border-radius: 4px;
+    padding: 6px 10px;
+  }
+
+  .attrs dt {
+    font-size: var(--text-xs);
+    color: var(--text-secondary);
+  }
+
+  .attrs dd {
+    margin: 0;
+    font-size: var(--text-sm);
+    font-variant-numeric: tabular-nums;
+    overflow-wrap: anywhere;
+  }
+
+  .back {
+    align-self: flex-start;
+    border: 0;
+    background: none;
+    color: var(--primary);
+    font-weight: 600;
+    font-size: var(--text-sm);
+    padding: 0;
+  }
+
+  .details {
+    font-size: var(--text-sm);
+    color: var(--text-secondary);
+  }
+
+  .details summary {
+    width: fit-content;
+    font-weight: 500;
+    color: var(--text-secondary);
+  }
+
+  .details[open] summary {
+    margin-bottom: 6px;
+  }
+
+  .details p + p {
+    margin-top: 4px;
+  }
+}

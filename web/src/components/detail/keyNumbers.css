@@ -1,0 +1,17 @@
+/* 핵심 수치 둘째 줄 배치(DESIGN.md 6절 — 컨테이너 폭, section.@container 기준).
+   좁으면 결정 기한 카드가 맨 위 한 줄 전체이고 나머지 카드는 그 아래에서 폭대로 나눈다(휴대폰 두 칸).
+   72rem 이상이면 결정 기한 2fr : 나머지 카드 수 fr, 나머지 묶음 안은 카드 수만큼 같은 폭.
+   큰 글자 기본(11-03)에서 60~72rem에 나란히 두면 '결재 올릴 기한 …' · '자재가 늦게 오면 최대 n일(…)' 보조 줄이
+   두 줄로 접혀(1440px 화면 = 약 62rem) 나란히 두는 기준을 60rem → 72rem으로 올렸다. */
+.kn-rest {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 9.5rem), 1fr));
+}
+
+@container (min-width: 72rem) {
+  .kn-row {
+    grid-template-columns: minmax(0, 2fr) minmax(0, var(--rest));
+  }
+  .kn-rest {
+    grid-template-columns: repeat(var(--n), minmax(0, 1fr));
+  }
+}

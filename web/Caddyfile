@@ -1,0 +1,55 @@
+# Ripple 화면 서버(docs/operations.md(배포)): 정적 화면 + /api → API 서비스. https는 앞단(Railway 에지·노트북은 http)이 맡는다.
+# 포트는 PORT(Railway가 줌, 기본 8080), API 주소는 RIPPLE_API_UPSTREAM(Dockerfile 기본 api:8000).
+{
+	admin off
+	auto_https off
+}
+
+:{$PORT:8080} {
+	encode zstd gzip
+
+	header {
+		X-Content-Type-Options nosniff
+		Referrer-Policy strict-origin-when-cross-origin
+		Permissions-Policy "camera=(), microphone=(), geolocation=()"
+		# 스크립트는 같은 출처 파일만(밝기 첫 그림 스크립트도 public/theme-init.js), 스타일은 라이브러리가 넣는 style 때문에 inline 허용
+		Content-Security-Policy "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'"
+		-Server
+	}
+
+	handle /healthz {
+		respond "ok" 200
+	}
+
+	handle /api/* {
+		# 본문 상한: 엑셀 올리기(API가 20MB까지 셈)보다 조금 크게. 길이를 밝히지 않은 큰 본문도 여기서 끊는다
+		request_body {
+			max_size 25MB
+		}
+		reverse_proxy {$RIPPLE_API_UPSTREAM} {
+			# 로그인·작업 공간 응답이 브라우저나 중간 캐시에 남지 않게
+			header_down Cache-Control "no-store"
+		}
+	}
+
+	# 해시 붙은 묶음: 있으면 오래 캐시, 없으면 404(index.html로 돌리지 않음). 배포 뒤 옛 화면이 사라진 묶음을 찾을 때
+	# HTML이 JS 자리에 오래 캐시되어 흰 화면이 되던 것을 막는다 — 화면은 404를 받고 한 번 새로 고친다.
+	handle /assets/* {
+		root * /srv
+		@found file
+		header @found Cache-Control "public, max-age=31536000, immutable"
+		@missing not file
+		respond @missing 404
+		file_server
+	}
+
+	handle {
+		root * /srv
+		@pictures path /landing/*
+		header @pictures Cache-Control "public, max-age=86400"
+		@documents not path /landing/*
+		header @documents Cache-Control "no-cache"
+		try_files {path} /index.html
+		file_server
+	}
+}

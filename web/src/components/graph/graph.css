@@ -1,0 +1,54 @@
+/* 파급 그래프(React Flow base.css 위): 단계별 나타나기와 초점 표시. 색은 DESIGN.md 토큰. */
+@keyframes ripple-appear {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.ripple-appear {
+  animation: ripple-appear 380ms ease-out both;
+}
+
+/* 주요 경로: 가장 심각한 영향 카드는 테두리 바깥으로 맥동, 그 경로의 간선은 흐르는 점선. 위 막대 '움직임 멈춤'으로 끈다 */
+@keyframes rp-pulse {
+  0% {
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--rp-pulse, var(--danger)) 55%, transparent);
+  }
+  70% {
+    box-shadow: 0 0 0 12px color-mix(in srgb, var(--rp-pulse, var(--danger)) 0%, transparent);
+  }
+  100% {
+    box-shadow: 0 0 0 0 transparent;
+  }
+}
+
+.ripple-appear.rp-pulse {
+  animation:
+    ripple-appear 380ms ease-out both,
+    rp-pulse 2.2s ease-out infinite;
+}
+
+@keyframes rp-flow {
+  to {
+    stroke-dashoffset: -24;
+  }
+}
+
+.react-flow__node:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+.react-flow__node {
+  cursor: pointer;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .react-flow * {
+    animation: none !important;
+  }
+}

@@ -1,0 +1,190 @@
+{
+  "source": "합성 지도 G-a285ba6d06008948 · 샘플 ECN-D-0119을 기준일에 확정한 분석(scripts/export_showcase.py)",
+  "ecn_id": "ECN-D-0119",
+  "title": "B31P 판 두께 17.0→20.0mm (3장)",
+  "as_of": "2026-10-20",
+  "change": {
+    "op": "thickness",
+    "block": "B31P",
+    "block_name": "No.3 COT 이중저 좌",
+    "part_count": 3,
+    "from_mm": 17.0,
+    "to_mm": 20.0,
+    "amount": 632961
+  },
+  "verdict": {
+    "level": "warn",
+    "reasons": [
+      "구역 출구 일정 지연 가능",
+      "블록 탑재 지연 가능",
+      "대조립 이후 블록 재작업 필요"
+    ]
+  },
+  "total": {
+    "value": 43337303,
+    "low": 12358477,
+    "high": 102504106
+  },
+  "deadline": "2026-10-27",
+  "impact_count": 24,
+  "cost_line_count": 24,
+  "zone_exit": {
+    "name": "화물탱크 구역",
+    "delay_days": 9
+  },
+  "deadline_exit_days": 16,
+  "delay": {
+    "on": "2026-10-28",
+    "loss": 18674523
+  },
+  "step_up": {
+    "on": "2026-10-28",
+    "entity_id": "S-001:B31P",
+    "before": 27899184,
+    "after": 37198911,
+    "note": "단계 선행의장 → 선행도장"
+  },
+  "horizon_end": "2026-12-19",
+  "nodes": [
+    {
+      "key": "DWG-B31P-H01@A",
+      "parent": null,
+      "relation": "drawn_in",
+      "entity_type": "drawing",
+      "impacts": [
+        "drawing_revision"
+      ],
+      "severity": "low",
+      "count": 1,
+      "amount": 672000,
+      "name": "DWG-B31P-H01"
+    },
+    {
+      "key": "PO-0037#1",
+      "parent": null,
+      "relation": "supplied_by",
+      "entity_type": "po_line",
+      "impacts": [
+        "po_change",
+        "reorder"
+      ],
+      "severity": "high",
+      "count": 1,
+      "amount": 2637337,
+      "name": "PO-0037 #1",
+      "stage": "processed"
+    },
+    {
+      "key": "S-001:B31P",
+      "parent": null,
+      "relation": "part_of",
+      "entity_type": "block",
+      "impacts": [
+        "rework"
+      ],
+      "severity": "high",
+      "count": 1,
+      "amount": 34873980,
+      "name": "B31P",
+      "full_name": "No.3 COT 이중저 좌",
+      "stage": "pre_outfitting"
+    },
+    {
+      "key": "weld_recheck",
+      "parent": null,
+      "relation": "fillet_weld",
+      "entity_type": "part",
+      "impacts": [
+        "weld_recheck"
+      ],
+      "severity": "low",
+      "count": 5,
+      "amount": 105000,
+      "kinds": {
+        "bracket": 1,
+        "stiffener": 4
+      }
+    },
+    {
+      "key": "taper",
+      "parent": null,
+      "relation": "butt_weld",
+      "entity_type": "part",
+      "impacts": [
+        "taper"
+      ],
+      "severity": "medium",
+      "count": 8,
+      "amount": 800000,
+      "kinds": {
+        "plate": 8
+      }
+    },
+    {
+      "key": "DWG-L31C-H01@A",
+      "parent": "taper",
+      "relation": "butt_weld",
+      "entity_type": "drawing",
+      "impacts": [
+        "drawing_revision"
+      ],
+      "severity": "low",
+      "count": 1,
+      "amount": 672000,
+      "name": "DWG-L31C-H01"
+    },
+    {
+      "key": "S-001:L31C",
+      "parent": "taper",
+      "relation": "butt_weld",
+      "entity_type": "block",
+      "impacts": [
+        "rework"
+      ],
+      "severity": "high",
+      "count": 1,
+      "amount": 2944025,
+      "name": "L31C",
+      "full_name": "중심선 종격벽",
+      "stage": "assembly"
+    }
+  ],
+  "cost": {
+    "labor_hours": {
+      "value": 806.861,
+      "low": 243.099,
+      "high": 1660.719
+    },
+    "labor": {
+      "value": 40067005,
+      "low": 9689492,
+      "high": 98453156
+    },
+    "works": [
+      "rework",
+      "weld",
+      "machining",
+      "drawing"
+    ],
+    "material": {
+      "value": 3270298,
+      "low": 2668985,
+      "high": 4050950
+    },
+    "material_diff": 632961,
+    "purchase": 2637337,
+    "purchases": [
+      "po_change",
+      "reorder"
+    ],
+    "damages": 0,
+    "ordered": 1
+  },
+  "weight": {
+    "before_t": 3.886,
+    "after_t": 4.571764,
+    "delta_t": 0.685764,
+    "blocks": 1,
+    "counted": 3
+  }
+}
