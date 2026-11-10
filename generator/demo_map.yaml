@@ -1,0 +1,17 @@
+# 시연 합성 지도 설정 — 기본 설정(config.yaml) + 블록 사이 관계 보강. 형식: ripple/generator/config.py RelationsConfig,
+# 명세: docs/data.md(생성기) 12절. 시연 영상 전용 가상 지도다(실제 회사·호선 자료 아님).
+# 기본 지도·평가 관문·소개 화면 숫자는 config.yaml 그대로이고, 이 파일은 RIPPLE_SYNTHETIC_MAP=demo일 때만 쓴다.
+# 부재·발주·공정 날짜·설계변경(ECN-D-0119 포함)은 기본 지도와 같고, 관계만 더한다(난수를 쓰지 않음).
+extends: config.yaml
+
+relations:
+  name: 시연 합성 지도
+  # 탑재 순서(No.3 COT 화물창 링): 후행 블록 → 먼저 탑재를 끝내야 하는 블록(lag 0).
+  # 이중저(B31P·B31S)를 먼저 앉히고 그 위에 횡격벽(T31C)·중심선 종격벽(L31C)·선측(S31P·S31S)을 세운 뒤
+  # 갑판(D31C)으로 덮는다. 계획 날짜는 기본 지도 그대로이고 이 순서와 맞는다(어긋나면 생성기가 멈춤).
+  erection_after:
+    T31C: [B31P, B31S]
+    L31C: [B31P, B31S]
+    S31P: [B31P]
+    S31S: [B31S]
+    D31C: [T31C, L31C, S31P, S31S]

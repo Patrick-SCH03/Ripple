@@ -1,0 +1,209 @@
+# 엑셀 흔한 변형 생성기 어휘 excel-variants-v1 — 형식: ripple/ingest/variants.py, 설계: docs/input.md(엑셀 양식) 4절
+# 회사마다 다른 엑셀(머리글 이름·영어·약어, 시트 이름, 단위, 두 줄 머리글 묶음, 덧붙인 열, 제목·메모 행)을 흉내 내는
+# 합성 어휘다. 가져오기 판단의 필드 사전(rules/excel_fields.yaml)과 따로 썼다 — 평가에서 사전에 없는 머리글의 비율과
+# 정확도를 따로 본다. 실제 회사 양식을 옮긴 것이 아니다(현업 머리글은 현장 의견으로 받는다).
+version: excel-variants-v1
+
+# 양식 시트 키 → 파일 시트 이름 후보
+sheets:
+  ships: [호선 정보, 선박 목록, Hull List, SHIP]
+  zones: [구역 목록, 구획, Zone List, ZONE]
+  boundaries: [구역 출구, 구역경계, Zone Exit]
+  blocks: [블록 목록, 블록 리스트, Block List, BLK]
+  specs: [자재 규격, 자재 마스터, Material Master, SPEC]
+  parts: [부재 목록, BOM, 자재 명세서, Part List]
+  suppliers: [협력업체, 업체 목록, Vendor List]
+  purchase_orders: [발주 대장, 구매 발주, PO List, PO]
+  po_lines: [발주 상세, 발주 품목 상세, PO Items, PO_LINE]
+  observations: [발주 현황, 진행 현황, PO Status]
+  activities: [공정표, 일정, Schedule, ACT]
+  activity_checks: [공정 점검, 현장 확인, Activity Check]
+  precedences: [선후행 관계, 공정 관계, Dependencies]
+  connections: [접합 목록, 용접 연결, Joints]
+  stock: [재고 현황, 잉여 자재, Inventory]
+  drawings: [도면 목록, 도면 대장, DWG List]
+  pipe_systems: [배관 계통 목록, 계통, Pipe Systems]
+  crews: [작업반 목록, 사내 협력사, Crews]  # 1.32.0
+
+# 양식 시트 키 → 열 키 → 머리글 후보(단위 꼬리는 생성기가 붙인다)
+columns:
+  ships:
+    ship_id: [호선 No, HULL NO., Hull Number, 선번]
+    ship_type: [선형, 선박 종류, Ship Type, TYPE]
+    dwt: [재화 중량, DWT, D.W.T, Deadweight]
+    contract_price_krw: [계약 금액, 선가, Contract Price, CONTRACT_AMT]
+    delivery_date: [인도일, 계약인도일, Delivery Date, DLV_DATE]
+    ld_grace_days: [지체상금 면제일, LD 유예, LD Grace Period]
+    ld_rate_per_day_of_price: [지체상금 요율, LD율, LD Rate]
+    ld_max_days: [지체상금 한도일, LD 최대일, LD Cap]
+  zones:
+    zone_id: [구역 코드, 구역번호, Zone No, ZONE_CD]
+    ship_id: [호선, 호선 No, Hull No.]
+    name: [구역 이름, 구역명칭, Zone Name, ZONE_NM]
+  boundaries:
+    zone_id: [구역, 구역 코드, Zone]
+    exit_activity_id: [출구 공정, 구역 마지막 공정, Exit Activity, EXIT_ACT]
+    float_to_delivery_days: [인도 여유, 인도까지 여유일, Float to Delivery, TF]
+    forecast_delivery_delay_days: [예상 지연, 인도 지연 예측, Delay Forecast]
+  blocks:
+    block_id: [블록 No, 블록번호, BLOCK NO, BLK_NO]
+    ship_id: [호선, Hull, HULL_NO]
+    zone_id: [구역, 구역 코드, ZONE]
+    name: [블록 이름, 블록 명칭, Block Name, BLK_NM]
+    steel_weight_t: [강재중량, 블록 중량, Steel Wt, 중량]
+    fabricator_id: [제작사, 제작 업체, Fabricator, MAKER]
+    # 1.32.0 새 열: 현업 머리글을 받기 전이라 필드 사전과 같은 어휘만 쓴다(사전 밖 머리글 비율에 넣지 않음)
+    shape: [블록형상, 형상, Block Shape]
+    outfit_items: [의장품수, 의장 수량, Outfit Items]
+    electric_items: [전장품수, 전장 수량, Electrical Items]
+  specs:
+    spec_id: [규격 코드, 자재 코드, Spec Code, MAT_CD]
+    category: [자재 분류, 분류 코드, Category, CAT]
+    description: [규격명, 규격 내용, Spec Description, DESC]
+    grade: [재질, 강재 등급, Material, GRADE]
+    thickness_mm: [판 두께, THK, Thickness, T]
+    unit: [UOM, 수량 단위, Unit of Measure]
+    unit_price_krw: [자재 단가, 단가, Unit Price, U/P]
+    std_lead_time_days: [리드타임, 조달 기간, L/T, Lead Time]
+    nominal_diameter_dn: [구경, 호칭경, Nominal Size, SIZE]
+    pressure_class: [압력, 압력 등급, Rating, CLASS]
+    # 1.33.0 새 열: 현업 머리글을 받기 전이라 필드 사전과 같은 어휘만 쓴다(사전 밖 머리글 비율에 넣지 않음)
+    origin: [내외자 구분, 원산지, Origin]
+    transport: [운송 수단, 운송방식, Transport]
+  parts:
+    part_id: [부재 번호, 부재 No, Piece No, PART_NO]
+    ship_id: [호선, Hull No, HULL]
+    block_id: [블록, 블록 No, Block, BLK_NO]
+    kind: [부재 구분, 종류, Part Type, TYPE]
+    name: [부재 이름, 품명, Part Name, DESCRIPTION]
+    spec_id: [규격, 자재 코드, Material Code, MAT_CD]
+    qty: [소요량, Q'ty, QTY, 수량]
+    drawing_no: [도면 No, 도번, DWG NO, DRAWING]
+    revision: [Rev., 개정 번호, REV, 리비전]
+    system: [계통, 배관 시스템, SYS]
+    pid_class: [P&ID 구분, 배관 부품 구분, PID Class]
+    thickness_mm: [판 두께, 두께, THK, Thickness]
+    grade: [재질, 강재 등급, Grade, MAT]
+    stiffener_spacing_m: [보강재 간격, 론지 간격, Spacing, STIFF_SP]
+    span_m: [스팬, 지간, Span, SPAN_L]
+    head_m: [설계 수두, 수두, Design Head, HEAD]
+    weight_kg: [중량, 단중, Weight, WT]
+    secondary_drawing_ids: [타 분야 도면, 관련 도면, Related Drawings]  # 1.32.0
+  suppliers:
+    supplier_id: [업체 코드, 협력사 코드, Vendor Code, VENDOR_CD]
+    name: [업체명, 협력사 이름, Vendor Name, VENDOR_NM]
+    kind: [업종, 업체 구분, Vendor Type, TYPE]
+  purchase_orders:
+    po_id: [발주 No, P/O No., PO Number, PO_NO]
+    ship_id: [호선, Hull No, HULL]
+    supplier_id: [업체, 업체 코드, Vendor, VENDOR_CD]
+    planned_order_date: [발주 예정일, 발주계획일, Planned PO Date, PLAN_PO_DT]
+    material_secured_days: [자재 확보 일수, 자재확보 L/T, Material L/T]
+    fabrication_start_days: [제작 착수 일수, 제작착수 L/T, Fab Start L/T]
+    lead_time_days: [입고 일수, 입고 L/T, Delivery L/T, 총 리드타임]
+    entered_ordered: [실발주일, 발주일, PO Date, PO_DT]
+    entered_material_secured: [자재 확보일, 자재확보 완료일, Material Ready]
+    entered_in_fabrication: [제작 착수일, 제작착수 실적, Fab Start, FAB_ST_DT]
+    entered_received: [입고일, 입고 일자, Receipt Date, RCV_DT]
+    entered_processed: [가공일, 가공 착수일, Processing Date]
+  po_lines:
+    po_id: [발주 No, P/O No., PO Number, PO_NO]
+    line_no: [항번, 품목 No, Item No, LINE]
+    spec_id: [자재 코드, 규격, Material Code, MAT_CD]
+    qty: [발주 수량, 수량, Q'ty, ORDER_QTY]
+    unit_price_krw: [발주 단가, 단가, Unit Price, U/P]
+    part_ids: [대상 부재, 공급 부재 목록, Parts, PART_LIST]
+    consumed_by_activity_id: [사용 공정, 투입 공정, Consuming Activity, USE_ACT]
+  observations:
+    po_id: [발주 No, P/O No., PO_NO]
+    status: [진행 상태, 발주 상태, Status, STS]
+    observed_on: [확인일, 기준일, As Of, CHK_DT]
+  activities:
+    activity_id: [공정 코드, 작업 번호, Activity ID, ACT_ID]
+    ship_id: [호선, Hull No, HULL]
+    block_id: [블록, 블록 No, Block, BLK_NO]
+    kind: [공종, 작업 종류, Activity Type, ACT_TYPE]
+    duration_days: [공기, 작업 일수, Duration, DUR]
+    planned_start: [착수 예정일, 계획착수일, Planned Start, PLAN_ST]
+    actual_start: [실착수일, 착수일(실적), Actual Start, ACT_ST]
+    actual_finish: [실완료일, 완료일(실적), Actual Finish, ACT_FIN]
+    performer: [수행 작업반, 수행, Performer]  # 1.32.0
+  activity_checks:
+    activity_id: [공정 코드, 작업 번호, Activity ID, ACT_ID]
+    state: [확인 결과, 진행 여부, Check Status, CHK_STS]
+    confirmed_on: [점검일, 확인 날짜, Check Date, CHK_DT]
+  precedences:
+    activity_id: [후행 공정, 후행 공정 코드, Successor, SUCC]
+    predecessor_id: [선행 공정, 선행 공정 코드, Predecessor, PRED]
+    lag_days: [래그, 지연 일수, Lag, LAG]
+  connections:
+    a: [부재1, 부재 A측, Part A, PART_A]
+    b: [부재2, 부재 B측, Part B, PART_B]
+    kind: [접합 종류, 연결 방식, Joint Type, JOINT]
+    length_m: [용접 길이, 연결 길이, Weld Length, LEN]
+  stock:
+    lot_id: [로트 No, 로트번호, Lot No, LOT_NO]
+    spec_id: [자재 코드, 규격, Material Code, MAT_CD]
+    qty: [재고 수량, 수량, Q'ty, STOCK_QTY]
+    received_date: [입고일, 입고 일자, Receipt Date, RCV_DT]
+    processed: [가공 여부, 가공, Processed, PROC_YN]
+    reserved_block_id: [예약 블록, 배정 블록, Reserved Block, RSV_BLK]
+  drawings:
+    drawing_no: [도면 No, 도번, DWG NO, DRAWING]
+    revision: [Rev., 개정 번호, REV, 리비전]
+    discipline: [설계 분야, 공종, Discipline, DISC]
+    title: [도면 제목, 도면 이름, Drawing Title, DWG_TITLE]
+  crews:  # 1.32.0(필드 사전과 같은 어휘)
+    crew_id: [작업반 코드, 작업반 번호, Crew ID]
+    name: [작업반 이름, Crew Name, 작업반명]
+    processes: [담당 공종, Processes, 담당 공정]
+    contact: [연락처, Contact, 작업반 연락처]
+  pipe_systems:
+    system: [계통 코드, 계통코드, System Code, SYS_CD]
+    name: [계통 이름, 계통명칭, System Name, SYS_NM]
+
+# 양식 단위 → 원본 단위 후보와 배율(원본 값 = 양식 값 × 배율, 십진수 그대로)
+units:
+  mm: {m: "0.001", cm: "0.1"}
+  m: {mm: "1000", cm: "100"}
+  t: {kg: "1000", 톤: "1", ton: "1"}
+  kg: {t: "0.001"}
+  원: {천원: "0.001", 만원: "0.0001", 백만원: "0.000001", KRW: "1"}
+  일: {days: "1", day: "1"}
+  DN: {}
+
+# 머리글 단위 꼬리 모양
+unit_styles: ["{name}({unit})", "{name} ({unit})", "{name}[{unit}]", "{name} [{unit}]", "{name}_{unit}", "{name} {unit}"]
+# 관문 변형에 쓰는 꼬리(괄호류만 — 한 글자 단위도 모호하지 않음)
+gate_unit_styles: ["{name}({unit})", "{name} ({unit})", "{name} [{unit}]"]
+
+# 덧붙인 열: 머리글 → 값 모양(text 짧은 글 · seq 1부터 순번 · date 날짜 · mark O 표시 · person 담당자)
+extra_columns:
+  비고: text
+  Remark: text
+  No.: seq
+  순번: seq
+  수정일: date
+  확인: mark
+  담당자: person
+extra_text: [확인 필요, 협의 중, 도면 변경 반영, 재검토, 단가 협의]
+people: [담당 A, 담당 B, 담당 C]
+
+# 두 줄 머리글의 묶음(위 줄). 묶음에 없는 열은 위·아래 두 행을 합친 칸에 이름을 적는다.
+groups:
+  ships: {계약: [contract_price_krw, delivery_date], 지체상금: [ld_grace_days, ld_rate_per_day_of_price, ld_max_days]}
+  blocks: {구분: [ship_id, zone_id], 물량: [steel_weight_t]}
+  specs: {규격 치수: [grade, thickness_mm, nominal_diameter_dn, pressure_class], 구매: [unit, unit_price_krw, std_lead_time_days]}
+  parts: {자재: [spec_id, qty, grade, thickness_mm], 도면: [drawing_no, revision], 배관: [system, pid_class], 강도 계산: [stiffener_spacing_m, span_m, head_m]}
+  purchase_orders: {리드타임: [material_secured_days, fabrication_start_days, lead_time_days], 실적일: [entered_ordered, entered_material_secured, entered_in_fabrication, entered_received, entered_processed]}
+  po_lines: {품목: [spec_id, qty, unit_price_krw]}
+  activities: {일정: [duration_days, planned_start], 실적: [actual_start, actual_finish]}
+  connections: {부재: [a, b]}
+  stock: {재고: [qty, received_date, processed]}
+
+# 양식과 상관없는 시트(읽지 않음이 정답)
+extra_sheets: [표지, 변경 이력, Cover]
+
+# 시트 맨 위 제목 줄과 메모 줄
+titles: ["{sheet} 목록", "{sheet} 현황 ({date} 기준)", "■ {sheet}"]
+memos: ["※ 단위는 머리글을 따릅니다", "* 수정 시 담당자에게 알려 주세요", "비고: 협력사 회신 대기", "※ 회색 칸은 확정 전 값"]

@@ -1,0 +1,145 @@
+# 합성 데이터 생성기 설정 — 형식: ripple/generator/config.py, 명세: docs/data.md(생성기)
+# 가상 호선이다. 실제 회사·호선의 데이터를 흉내 내지 않는다. 값을 바꾸면 version을 올린다.
+# 만드는 것: PE 공정·시운전 이정표, 블록 형상·의장·전장 밀도, 사내 협력사 작업반(공정 수행 주체), 사외 협력사 단품
+#   (브라켓·서포트·칼라), 블록 경계 배관·관통 칼라·계통 장비·다른 분야 도면(docs/data.md(생성기) 10절), 외자재 규격(imports —
+#   평형수 밸브·두 계통 펌프 규격만 원산지 외자재·운송 방식·생산 표준 리드타임, 11절). 배관 계통·밸브 종류는 현장 이름.
+version: generator-v4
+scenario_date: 2026-10-20  # 시나리오 기준일
+seed: 20261020  # 기본 시드
+
+ship:
+  ship_id: S-001
+  ship_type: suezmax_crude_oil_tanker
+  dwt: 158000
+  contract_price_krw: 120000000000  # 약 1,200억 원. 공시 비교: 국내 조선소 공시 157,000 DWT 원유운반선 척당 1,223억(2025-09)·1,259억(2026-01)·1,357억(2026-07)
+  delivery_offset_days: 420  # 계약 인도일 = 기준일 + 420일
+  sea_trial_before_delivery_days: 30  # v3 시운전 이정표 = 인도일 − 30일(가정)
+
+zones:  # post_exit_days: 구역 탑재 완료 뒤 인도까지 모델 밖 공정 기간(경계 조건의 여유 계산에 씀)
+  - {code: ZCT, name: 화물탱크 구역, post_exit_days: 300, forecast_delay_days: 0}
+  - {code: ZER, name: 기관실·펌프룸, post_exit_days: 270, forecast_delay_days: 0}
+  - {code: ZFO, name: 선수부, post_exit_days: 200, forecast_delay_days: 0}
+
+# pe_offset: 기준일 대비 PE 착수 계획일(일, v2의 탑재 착수일 자리). 소조립~선행도장은 이 날에서 거꾸로, 탑재는 PE 뒤로
+# shape: 블록 형상(flat 평 · curved 곡 · bow_stern 선수미), density: 의장·전장 밀도 수준(아래 density) — 난이도 계수 입력(가정)
+blocks:
+  - {code: E11C, zone: ZER, name: 기관실 이중저, weight_t: 420, pe_offset: 10, shape: curved, density: high}
+  - {code: E21C, zone: ZER, name: 기관실 측부·플랫, weight_t: 380, pe_offset: 40, shape: flat, density: high}
+  - {code: P11C, zone: ZER, name: 펌프룸, weight_t: 260, pe_offset: 120, shape: flat, density: high}
+  - {code: A11C, zone: ZER, name: 선미(프로펠러 보스·러더), weight_t: 300, pe_offset: 90, shape: bow_stern, density: mid}
+  - {code: B31P, zone: ZCT, name: No.3 COT 이중저 좌, weight_t: 450, pe_offset: 20, shape: curved, density: low}
+  - {code: B31S, zone: ZCT, name: No.3 COT 이중저 우, weight_t: 450, pe_offset: 22, shape: curved, density: low}
+  - {code: S31P, zone: ZCT, name: No.3 COT 선측 좌, weight_t: 350, pe_offset: 45, shape: flat, density: low}
+  - {code: S31S, zone: ZCT, name: No.3 COT 선측 우, weight_t: 350, pe_offset: 47, shape: flat, density: low}
+  - {code: L31C, zone: ZCT, name: 중심선 종격벽, weight_t: 300, pe_offset: 35, shape: flat, density: low}
+  - {code: T31C, zone: ZCT, name: No.3 COT 횡격벽, weight_t: 280, pe_offset: 30, shape: flat, density: mid}
+  - {code: D31C, zone: ZCT, name: No.3 COT 갑판, weight_t: 330, pe_offset: 85, shape: flat, density: mid}
+  - {code: F11C, zone: ZFO, name: 구상선수, weight_t: 250, pe_offset: 150, shape: bow_stern, density: low}
+  - {code: F21C, zone: ZFO, name: 선수 평형수탱크, weight_t: 280, pe_offset: 160, shape: bow_stern, density: mid}
+  - {code: F31C, zone: ZFO, name: 선수루 갑판, weight_t: 220, pe_offset: 170, shape: bow_stern, density: mid}
+
+density:  # v3 블록 강재 t당 의장품·전장품 수 범위(가정, 현업 확인 예정)
+  low: {outfit: [0.02, 0.08], electric: [0.0, 0.02]}
+  mid: {outfit: [0.10, 0.25], electric: [0.03, 0.08]}
+  high: {outfit: [0.30, 0.60], electric: [0.10, 0.25]}
+
+crews:  # v3 사내 협력사 작업반(가상 이름·'.example' 가상 연락처). 탑재는 직영, 그 밖의 블록 공정은 share 확률로 작업반
+  share: 0.6
+  teams:
+    - {code: CRW-01, name: 한빛 작업반, processes: [sub_assembly, panel], contact: hanbit-crew@yard.example}
+    - {code: CRW-02, name: 대성 작업반, processes: [assembly], contact: daesung-crew@yard.example}
+    - {code: CRW-03, name: 해송 작업반, processes: [pre_outfitting], contact: haesong-crew@yard.example}
+    - {code: CRW-04, name: 동진 작업반, processes: [pre_painting, pre_erection], contact: dongjin-crew@yard.example}
+
+adjacency:  # 블록 이음: 가장자리 판끼리 맞대기 용접으로 이어지는 블록 쌍
+  - [B31P, B31S]
+  - [B31P, S31P]
+  - [B31S, S31S]
+  - [S31P, D31C]
+  - [S31S, D31C]
+  - [L31C, B31P]
+  - [L31C, D31C]
+  - [T31C, B31P]
+  - [T31C, L31C]
+  - [E11C, E21C]
+  - [E21C, P11C]
+  - [P11C, T31C]
+  - [A11C, E11C]
+  - [F11C, F21C]
+  - [F21C, F31C]
+
+activities:  # 블록 공정 기간(일) = base + 중량 100t당 per_100t, 둘 다 범위에서 뽑는다
+  sub_assembly: {base: [8, 12], per_100t: [1.0, 2.0]}
+  panel: {base: [5, 8], per_100t: [1.0, 1.5]}
+  assembly: {base: [12, 18], per_100t: [2.0, 3.0]}
+  pre_outfitting: {base: [6, 10], per_100t: [0.5, 1.0]}
+  pre_painting: {base: [4, 6], per_100t: [0.5, 1.0]}
+  pre_erection: {base: [3, 5], per_100t: [0.5, 1.0]}  # v3 PE(그랜드 블록 세팅·취부·용접·사상, 가정)
+  erection: {base: [2, 3], per_100t: [0.0, 0.5]}
+  gap_days: [0, 2]  # 공정 사이 간격
+  actual_delay_days: [0, 3]  # 기준일 이전 공정의 실제 착수 지연 잡음
+
+parts:
+  plates_per_block: [10, 16]
+  plate_grid_cols: [3, 5]
+  plate_area_m2: [6.0, 15.0]
+  base_thickness_mm: [11.0, 18.0]  # 블록 기본 두께, 판마다 ±1mm 안에서 0.5mm 단위로 흔든다
+  stiffeners_per_block: [12, 18]
+  brackets_per_block: [4, 8]
+  joint_plates: [2, 3]  # 블록 이음마다 맞대기 용접할 가장자리 판 쌍 수
+  grades: {AH36: 0.75, AH32: 0.15, A: 0.10}
+  stiffener_spacing_m: [0.6, 0.9]
+  span_m: [2.5, 5.0]
+  head_m: [8.0, 25.0]
+
+piping:
+  # name은 키, label은 현장 이름, block은 주 블록. v3: extends_to = 블록 경계를 넘어 이어지는 블록, equipment = 계통 장비
+  systems:
+    - {code: CS, name: cargo_stripping, label: 화물 스트리핑, block: P11C, extends_to: T31C, equipment: 화물 스트리핑 펌프}
+    - {code: BW, name: ballast, label: 평형수, block: E21C, extends_to: E11C, equipment: 평형수 펌프}
+  spools_per_system: [10, 18]
+  valves_per_system: [5, 9]
+  supports_per_system: [5, 9]
+  penetrations: {system: CS, through_block: T31C, count: [2, 3]}  # v3: 관통마다 칼라 부재 하나
+  cross_block_spools: [2, 3]
+
+procurement:
+  plate_lead_days: [56, 84]
+  pipe_lead_days: [30, 60]
+  valve_lead_days: [30, 45]
+  equipment_lead_days: [150, 210]  # v3 계통 장비(펌프)
+  parts_lead_days: [20, 40]  # v3 사외 단품(관통 칼라)
+  material_secured_ratio: [0.15, 0.30]  # 리드타임 대비 자재 확보까지
+  fabrication_start_ratio: [0.35, 0.55]  # 리드타임 대비 제작 착수까지
+  order_slack_days: [7, 21]
+  specs_per_steel_po: [1, 3]  # 강재 발주 하나에 담는 규격 수(블록 × 자재군마다 나눈다)
+  evidence: {entered_on: 0.7, observations_only: 0.2, unknown: 0.1}  # 기준일 이전 단계 정보의 형태
+  stock_lots: [3, 5]
+
+prices:  # 규격 단가(원). 비용 엔진의 파라미터가 아니라 발주서에 적히는 가격이다
+  plate_per_t: [850000, 950000]
+  section_per_t: [950000, 1050000]
+  pipe_per_m: [120000, 380000]
+  valve_each: [1500000, 15000000]
+  support_each: [80000, 200000]
+  equipment_each: [60000000, 150000000]  # v3 펌프
+  collar_each: [50000, 150000]  # v3 관통 칼라
+
+ecn:
+  dev: 200
+  eval: 100
+  op_mix: {thickness: 0.25, grade: 0.10, dimension: 0.15, add_part: 0.15, remove_part: 0.05, reroute_pipe: 0.10, equipment_spec: 0.15, add_penetration: 0.05}
+  request_window_days: [-30, 30]  # 기준일 대비 요청일
+
+imports:  # v4 외자재(가정): 규격 단위. 원래 발주의 리드타임은 이미 운송 포함 — 엔진은 새로 발주할 때만 운송 일수를 더함
+  std_lead_days: {valve: 45, equipment: 180}  # 생산 표준 리드타임(운송 제외): 밸브 = 발주 리드타임 범위 끝, 장비 = 범위 가운데
+  specs:
+    - {system: BW, kind: valve, transport: sea}  # 평형수 밸브(E21C, 기준 시드 PO-0133): 선박
+    - {system: CS, kind: equipment, transport: air}  # 화물 스트리핑 펌프(P11C, PO-0135, DN100 소형): 항공
+    - {system: BW, kind: equipment, transport: sea}  # 평형수 펌프(E21C, PO-0137): 선박
+  # 화물 스트리핑 밸브(P11C, PO-0130)는 국산 그대로 — 관문 2단계 사례(G2-003·004)와 시연 1(승인 가능)이 쓴다
+
+demo:  # 데모 고정점: 생성 뒤 이 조건이 성립하지 않으면 생성기가 멈춘다
+  assembly_block: T31C  # 기준일에 조립 중, 판 발주는 입고·가공 끝 → 데모 2
+  not_started_block: P11C  # 기준일에 미착수, 밸브 발주는 미발주 → 데모 1
+  control_zone: ZFO  # 영향이 닿지 않는 대조 구역, 모두 미착수
